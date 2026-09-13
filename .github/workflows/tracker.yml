@@ -56,6 +56,7 @@ jobs:
           git add sessions docs/data.json
           if ! git diff --cached --quiet; then
             git commit -m "Automated tracker update"
+            git pull --rebase origin main
             git push
           else
             echo "No changes to commit."
