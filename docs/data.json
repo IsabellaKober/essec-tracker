@@ -1,0 +1,306 @@
+{
+  "generated_at": "2026-09-13T04:22:16Z",
+  "courses": [
+    {
+      "id": "business-law",
+      "name": "Business Law",
+      "total_sessions": 10,
+      "done_sessions": 0,
+      "pending_count": 0,
+      "next_up": null,
+      "sessions": [
+        {
+          "number": 1,
+          "chapter": "TODO: fill in from syllabus",
+          "status": "not_started"
+        },
+        {
+          "number": 2,
+          "chapter": "TODO: fill in from syllabus",
+          "status": "not_started"
+        },
+        {
+          "number": 3,
+          "chapter": "TODO: fill in from syllabus",
+          "status": "not_started"
+        },
+        {
+          "number": 4,
+          "chapter": "TODO: fill in from syllabus",
+          "status": "not_started"
+        },
+        {
+          "number": 5,
+          "chapter": "TODO: fill in from syllabus",
+          "status": "not_started"
+        },
+        {
+          "number": 6,
+          "chapter": "TODO: fill in from syllabus",
+          "status": "not_started"
+        },
+        {
+          "number": 7,
+          "chapter": "TODO: fill in from syllabus",
+          "status": "not_started"
+        },
+        {
+          "number": 8,
+          "chapter": "TODO: fill in from syllabus",
+          "status": "not_started"
+        },
+        {
+          "number": 9,
+          "chapter": "TODO: fill in from syllabus",
+          "status": "not_started"
+        },
+        {
+          "number": 10,
+          "chapter": "TODO: fill in from syllabus",
+          "status": "not_started"
+        }
+      ]
+    },
+    {
+      "id": "finance",
+      "name": "Finance",
+      "total_sessions": 10,
+      "done_sessions": 0,
+      "pending_count": 0,
+      "next_up": null,
+      "sessions": [
+        {
+          "number": 1,
+          "chapter": "TODO: fill in from syllabus",
+          "status": "not_started"
+        },
+        {
+          "number": 2,
+          "chapter": "TODO: fill in from syllabus",
+          "status": "not_started"
+        },
+        {
+          "number": 3,
+          "chapter": "TODO: fill in from syllabus",
+          "status": "not_started"
+        },
+        {
+          "number": 4,
+          "chapter": "TODO: fill in from syllabus",
+          "status": "not_started"
+        },
+        {
+          "number": 5,
+          "chapter": "TODO: fill in from syllabus",
+          "status": "not_started"
+        },
+        {
+          "number": 6,
+          "chapter": "TODO: fill in from syllabus",
+          "status": "not_started"
+        },
+        {
+          "number": 7,
+          "chapter": "TODO: fill in from syllabus",
+          "status": "not_started"
+        },
+        {
+          "number": 8,
+          "chapter": "TODO: fill in from syllabus",
+          "status": "not_started"
+        },
+        {
+          "number": 9,
+          "chapter": "TODO: fill in from syllabus",
+          "status": "not_started"
+        },
+        {
+          "number": 10,
+          "chapter": "TODO: fill in from syllabus",
+          "status": "not_started"
+        }
+      ]
+    },
+    {
+      "id": "cost-budgets",
+      "name": "Cost & Budgets",
+      "total_sessions": 10,
+      "done_sessions": 0,
+      "pending_count": 0,
+      "next_up": null,
+      "sessions": [
+        {
+          "number": 1,
+          "chapter": "TODO: fill in from syllabus",
+          "status": "not_started"
+        },
+        {
+          "number": 2,
+          "chapter": "TODO: fill in from syllabus",
+          "status": "not_started"
+        },
+        {
+          "number": 3,
+          "chapter": "TODO: fill in from syllabus",
+          "status": "not_started"
+        },
+        {
+          "number": 4,
+          "chapter": "TODO: fill in from syllabus",
+          "status": "not_started"
+        },
+        {
+          "number": 5,
+          "chapter": "TODO: fill in from syllabus",
+          "status": "not_started"
+        },
+        {
+          "number": 6,
+          "chapter": "TODO: fill in from syllabus",
+          "status": "not_started"
+        },
+        {
+          "number": 7,
+          "chapter": "TODO: fill in from syllabus",
+          "status": "not_started"
+        },
+        {
+          "number": 8,
+          "chapter": "TODO: fill in from syllabus",
+          "status": "not_started"
+        },
+        {
+          "number": 9,
+          "chapter": "TODO: fill in from syllabus",
+          "status": "not_started"
+        },
+        {
+          "number": 10,
+          "chapter": "TODO: fill in from syllabus",
+          "status": "not_started"
+        }
+      ]
+    },
+    {
+      "id": "international-economics",
+      "name": "International Economics",
+      "total_sessions": 10,
+      "done_sessions": 0,
+      "pending_count": 0,
+      "next_up": null,
+      "sessions": [
+        {
+          "number": 1,
+          "chapter": "TODO: fill in from syllabus",
+          "status": "not_started"
+        },
+        {
+          "number": 2,
+          "chapter": "TODO: fill in from syllabus",
+          "status": "not_started"
+        },
+        {
+          "number": 3,
+          "chapter": "TODO: fill in from syllabus",
+          "status": "not_started"
+        },
+        {
+          "number": 4,
+          "chapter": "TODO: fill in from syllabus",
+          "status": "not_started"
+        },
+        {
+          "number": 5,
+          "chapter": "TODO: fill in from syllabus",
+          "status": "not_started"
+        },
+        {
+          "number": 6,
+          "chapter": "TODO: fill in from syllabus",
+          "status": "not_started"
+        },
+        {
+          "number": 7,
+          "chapter": "TODO: fill in from syllabus",
+          "status": "not_started"
+        },
+        {
+          "number": 8,
+          "chapter": "TODO: fill in from syllabus",
+          "status": "not_started"
+        },
+        {
+          "number": 9,
+          "chapter": "TODO: fill in from syllabus",
+          "status": "not_started"
+        },
+        {
+          "number": 10,
+          "chapter": "TODO: fill in from syllabus",
+          "status": "not_started"
+        }
+      ]
+    },
+    {
+      "id": "marketing-research",
+      "name": "Marketing Research",
+      "total_sessions": 10,
+      "done_sessions": 0,
+      "pending_count": 0,
+      "next_up": null,
+      "sessions": [
+        {
+          "number": 1,
+          "chapter": "TODO: fill in from syllabus",
+          "status": "not_started"
+        },
+        {
+          "number": 2,
+          "chapter": "TODO: fill in from syllabus",
+          "status": "not_started"
+        },
+        {
+          "number": 3,
+          "chapter": "TODO: fill in from syllabus",
+          "status": "not_started"
+        },
+        {
+          "number": 4,
+          "chapter": "TODO: fill in from syllabus",
+          "status": "not_started"
+        },
+        {
+          "number": 5,
+          "chapter": "TODO: fill in from syllabus",
+          "status": "not_started"
+        },
+        {
+          "number": 6,
+          "chapter": "TODO: fill in from syllabus",
+          "status": "not_started"
+        },
+        {
+          "number": 7,
+          "chapter": "TODO: fill in from syllabus",
+          "status": "not_started"
+        },
+        {
+          "number": 8,
+          "chapter": "TODO: fill in from syllabus",
+          "status": "not_started"
+        },
+        {
+          "number": 9,
+          "chapter": "TODO: fill in from syllabus",
+          "status": "not_started"
+        },
+        {
+          "number": 10,
+          "chapter": "TODO: fill in from syllabus",
+          "status": "not_started"
+        }
+      ]
+    }
+  ],
+  "deadlines": []
+}

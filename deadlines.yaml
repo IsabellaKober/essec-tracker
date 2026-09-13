@@ -1,0 +1,14 @@
+# Assignments / exams. Add one entry per deadline, entered once by hand.
+# `weight_pct` = % of the course's final grade this item counts for.
+# Urgency (days remaining) is computed automatically from `due_date` on every
+# run; you never need to update urgency or color yourself.
+#
+# Example (delete or edit once you have real deadlines):
+# deadlines:
+#   - id: finance-midterm
+#     course: finance
+#     name: "Finance Midterm Exam"
+#     due_date: "2026-10-15"
+#     weight_pct: 30
+
+deadlines: []

@@ -1,0 +1,143 @@
+# Master course + syllabus definitions.
+# Fill in `chapter` under each session with the real topic from your syllabus.
+# `calendar_match`: lowercase substrings used to match this course against your
+# ICS calendar event titles (SUMMARY field). Add/adjust to match how ESSEC
+# actually labels these sessions in your calendar export.
+
+courses:
+  - id: business-law
+    name: Business Law
+    total_sessions: 10
+    calendar_match:
+      - "business law"
+    sessions:
+      - number: 1
+        chapter: "TODO: fill in from syllabus"
+      - number: 2
+        chapter: "TODO: fill in from syllabus"
+      - number: 3
+        chapter: "TODO: fill in from syllabus"
+      - number: 4
+        chapter: "TODO: fill in from syllabus"
+      - number: 5
+        chapter: "TODO: fill in from syllabus"
+      - number: 6
+        chapter: "TODO: fill in from syllabus"
+      - number: 7
+        chapter: "TODO: fill in from syllabus"
+      - number: 8
+        chapter: "TODO: fill in from syllabus"
+      - number: 9
+        chapter: "TODO: fill in from syllabus"
+      - number: 10
+        chapter: "TODO: fill in from syllabus"
+
+  - id: finance
+    name: Finance
+    total_sessions: 10
+    calendar_match:
+      - "finance"
+    sessions:
+      - number: 1
+        chapter: "TODO: fill in from syllabus"
+      - number: 2
+        chapter: "TODO: fill in from syllabus"
+      - number: 3
+        chapter: "TODO: fill in from syllabus"
+      - number: 4
+        chapter: "TODO: fill in from syllabus"
+      - number: 5
+        chapter: "TODO: fill in from syllabus"
+      - number: 6
+        chapter: "TODO: fill in from syllabus"
+      - number: 7
+        chapter: "TODO: fill in from syllabus"
+      - number: 8
+        chapter: "TODO: fill in from syllabus"
+      - number: 9
+        chapter: "TODO: fill in from syllabus"
+      - number: 10
+        chapter: "TODO: fill in from syllabus"
+
+  - id: cost-budgets
+    name: Cost & Budgets
+    total_sessions: 10
+    calendar_match:
+      - "cost & budget"
+      - "cost and budget"
+      - "cost & budgets"
+    sessions:
+      - number: 1
+        chapter: "TODO: fill in from syllabus"
+      - number: 2
+        chapter: "TODO: fill in from syllabus"
+      - number: 3
+        chapter: "TODO: fill in from syllabus"
+      - number: 4
+        chapter: "TODO: fill in from syllabus"
+      - number: 5
+        chapter: "TODO: fill in from syllabus"
+      - number: 6
+        chapter: "TODO: fill in from syllabus"
+      - number: 7
+        chapter: "TODO: fill in from syllabus"
+      - number: 8
+        chapter: "TODO: fill in from syllabus"
+      - number: 9
+        chapter: "TODO: fill in from syllabus"
+      - number: 10
+        chapter: "TODO: fill in from syllabus"
+
+  - id: international-economics
+    name: International Economics
+    total_sessions: 10
+    calendar_match:
+      - "international economics"
+    sessions:
+      - number: 1
+        chapter: "TODO: fill in from syllabus"
+      - number: 2
+        chapter: "TODO: fill in from syllabus"
+      - number: 3
+        chapter: "TODO: fill in from syllabus"
+      - number: 4
+        chapter: "TODO: fill in from syllabus"
+      - number: 5
+        chapter: "TODO: fill in from syllabus"
+      - number: 6
+        chapter: "TODO: fill in from syllabus"
+      - number: 7
+        chapter: "TODO: fill in from syllabus"
+      - number: 8
+        chapter: "TODO: fill in from syllabus"
+      - number: 9
+        chapter: "TODO: fill in from syllabus"
+      - number: 10
+        chapter: "TODO: fill in from syllabus"
+
+  - id: marketing-research
+    name: Marketing Research
+    total_sessions: 10
+    calendar_match:
+      - "marketing research"
+    sessions:
+      - number: 1
+        chapter: "TODO: fill in from syllabus"
+      - number: 2
+        chapter: "TODO: fill in from syllabus"
+      - number: 3
+        chapter: "TODO: fill in from syllabus"
+      - number: 4
+        chapter: "TODO: fill in from syllabus"
+      - number: 5
+        chapter: "TODO: fill in from syllabus"
+      - number: 6
+        chapter: "TODO: fill in from syllabus"
+      - number: 7
+        chapter: "TODO: fill in from syllabus"
+      - number: 8
+        chapter: "TODO: fill in from syllabus"
+      - number: 9
+        chapter: "TODO: fill in from syllabus"
+      - number: 10
+        chapter: "TODO: fill in from syllabus"
