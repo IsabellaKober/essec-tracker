@@ -15,6 +15,8 @@
 # - Business Law group presentation (50%) and final exam (50%): no syllabus
 #   PDF was found for this course (only Session 1-2 lesson slides), so
 #   neither a date nor a session number is known yet.
+# - Communication Skills: individual participation (20%) has no single due
+#   date, so it isn't listed as a deadline.
 # Add each once ESSEC/Moodle confirms it - same shape as the entries below.
 
 deadlines:
@@ -72,7 +74,25 @@ deadlines:
     due_date: "2026-11-26"
     weight_pct: 22.5
 
-  # Not one of the 5 tracked courses (Field Experience / Operational
+  - id: comms-oral-assignment
+    course: communication-skills
+    name: "Individual Oral Assignment Presentation"
+    due_date: "2026-10-06"
+    weight_pct: 25
+
+  - id: comms-written-assignment
+    course: communication-skills
+    name: "Individual Written Assignment"
+    due_date: "2026-11-03"
+    weight_pct: 15
+
+  - id: comms-group-presentation
+    course: communication-skills
+    name: "Group Presentation (Communicating with Impact and Empathy)"
+    due_date: "2026-11-24"
+    weight_pct: 40
+
+  # Not one of the 6 tracked courses (Field Experience / Operational
   # Internship reflection, not Business Law/Finance/Cost & Budgets/Intl
   # Econ/Marketing Research) - kept here since you asked for it by name.
   # Weight is a placeholder: no grading weight for this was found in any

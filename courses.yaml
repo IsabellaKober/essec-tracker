@@ -10,6 +10,12 @@
 # - Business Law: no separate syllabus PDF was found; the 10-topic list
 #   below comes from the "Course syllabus" slide in the Session 1 deck,
 #   with sessions 1-2 mapped to the actual lesson pptx titles.
+#
+# 6th course added 2026-09-13: Communication Skills (a.k.a. "Professional
+# Comm" on the calendar) wasn't in the original 5-course scope, but its full
+# syllabus was provided, and its calendar events already appear in the ICS
+# feed as "Professional Comm Group 2 - Sheila Esther WEE" - tracked the same
+# way as the other 5.
 
 courses:
   - id: business-law
@@ -148,3 +154,30 @@ courses:
         chapter: "TODO: fill in from syllabus (materials not found)"
       - number: 10
         chapter: "Group Project Part 3 due (peer review, analysis, final recommendations) - 45% of project grade"
+
+  - id: communication-skills
+    name: Communication Skills
+    total_sessions: 10
+    calendar_match:
+      - "professional comm"
+    sessions:
+      - number: 1
+        chapter: "Communicating with Impact (\"Sticky\" Communication)"
+      - number: 2
+        chapter: "Communicating with Impact (\"Sticky\" Communication)"
+      - number: 3
+        chapter: "Communicating with Impact (\"Sticky\" Communication)"
+      - number: 4
+        chapter: "Communicating with Impact - Individual Oral Assignment Presentations"
+      - number: 5
+        chapter: "Ethics of Communication"
+      - number: 6
+        chapter: "Ethics of Communication - Individual Written Assignment due"
+      - number: 7
+        chapter: "Communicating with Empathy"
+      - number: 8
+        chapter: "Communicating with Empathy"
+      - number: 9
+        chapter: "Communicating with Impact and Empathy - Group Presentations"
+      - number: 10
+        chapter: "Communicating with Impact and Empathy - Group Presentations"

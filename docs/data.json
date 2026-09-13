@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-13T06:47:04Z",
+  "generated_at": "2026-09-13T06:59:51Z",
   "courses": [
     {
       "id": "business-law",
@@ -372,6 +372,81 @@
           "status": "not_started"
         }
       ]
+    },
+    {
+      "id": "communication-skills",
+      "name": "Communication Skills",
+      "total_sessions": 10,
+      "done_sessions": 0,
+      "pending_count": 1,
+      "next_up": {
+        "session_number": 1,
+        "chapter": "Communicating with Impact (\"Sticky\" Communication)",
+        "outstanding": [
+          "Read next chapter",
+          "Review today's notes",
+          "Write a summary",
+          "Do practice questions"
+        ]
+      },
+      "sessions": [
+        {
+          "number": 1,
+          "chapter": "Communicating with Impact (\"Sticky\" Communication)",
+          "status": "pending_review",
+          "checklist": {
+            "read_chapter": false,
+            "review_notes": false,
+            "write_summary": false,
+            "practice_questions": false
+          }
+        },
+        {
+          "number": 2,
+          "chapter": "Communicating with Impact (\"Sticky\" Communication)",
+          "status": "not_started"
+        },
+        {
+          "number": 3,
+          "chapter": "Communicating with Impact (\"Sticky\" Communication)",
+          "status": "not_started"
+        },
+        {
+          "number": 4,
+          "chapter": "Communicating with Impact - Individual Oral Assignment Presentations",
+          "status": "not_started"
+        },
+        {
+          "number": 5,
+          "chapter": "Ethics of Communication",
+          "status": "not_started"
+        },
+        {
+          "number": 6,
+          "chapter": "Ethics of Communication - Individual Written Assignment due",
+          "status": "not_started"
+        },
+        {
+          "number": 7,
+          "chapter": "Communicating with Empathy",
+          "status": "not_started"
+        },
+        {
+          "number": 8,
+          "chapter": "Communicating with Empathy",
+          "status": "not_started"
+        },
+        {
+          "number": 9,
+          "chapter": "Communicating with Impact and Empathy - Group Presentations",
+          "status": "not_started"
+        },
+        {
+          "number": 10,
+          "chapter": "Communicating with Impact and Empathy - Group Presentations",
+          "status": "not_started"
+        }
+      ]
     }
   ],
   "deadlines": [
@@ -403,6 +478,16 @@
       "due_date": "2026-10-05",
       "weight_pct": 30.0,
       "days_remaining": 22,
+      "color": "yellow"
+    },
+    {
+      "id": "comms-oral-assignment",
+      "name": "Individual Oral Assignment Presentation",
+      "course": "communication-skills",
+      "course_name": "Communication Skills",
+      "due_date": "2026-10-06",
+      "weight_pct": 25.0,
+      "days_remaining": 23,
       "color": "yellow"
     },
     {
@@ -444,6 +529,26 @@
       "weight_pct": 25.0,
       "days_remaining": 40,
       "color": "green"
+    },
+    {
+      "id": "comms-written-assignment",
+      "name": "Individual Written Assignment",
+      "course": "communication-skills",
+      "course_name": "Communication Skills",
+      "due_date": "2026-11-03",
+      "weight_pct": 15.0,
+      "days_remaining": 51,
+      "color": "green"
+    },
+    {
+      "id": "comms-group-presentation",
+      "name": "Group Presentation (Communicating with Impact and Empathy)",
+      "course": "communication-skills",
+      "course_name": "Communication Skills",
+      "due_date": "2026-11-24",
+      "weight_pct": 40.0,
+      "days_remaining": 72,
+      "color": "yellow"
     },
     {
       "id": "mktg-group-project-part3",
