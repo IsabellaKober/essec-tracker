@@ -27,6 +27,13 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
+      - name: DEBUG direct ntfy (no relay)
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: |
+          echo "--- GET topic/json direct ---"
+          curl -sS -i "https://ntfy.sh/$NTFY_TOPIC/json?poll=1&since=all"
+
       - name: Check ICS feed for ended sessions
         env:
           ICS_URL: ${{ secrets.ICS_URL }}
