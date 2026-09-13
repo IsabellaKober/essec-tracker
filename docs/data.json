@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-13T07:09:12Z",
+  "generated_at": "2026-09-13T07:09:59Z",
   "courses": [
     {
       "id": "business-law",
@@ -453,18 +453,39 @@
       "name": "Spanish",
       "total_sessions": 10,
       "done_sessions": 0,
-      "pending_count": 0,
-      "next_up": null,
+      "pending_count": 2,
+      "next_up": {
+        "session_number": 1,
+        "chapter": "TODO: fill in from syllabus (only grading policy provided, no session topics)",
+        "outstanding": [
+          "Read next chapter",
+          "Review today's notes",
+          "Write a summary",
+          "Do practice questions"
+        ]
+      },
       "sessions": [
         {
           "number": 1,
           "chapter": "TODO: fill in from syllabus (only grading policy provided, no session topics)",
-          "status": "not_started"
+          "status": "pending_review",
+          "checklist": {
+            "read_chapter": false,
+            "review_notes": false,
+            "write_summary": false,
+            "practice_questions": false
+          }
         },
         {
           "number": 2,
           "chapter": "TODO: fill in from syllabus (only grading policy provided, no session topics)",
-          "status": "not_started"
+          "status": "pending_review",
+          "checklist": {
+            "read_chapter": false,
+            "review_notes": false,
+            "write_summary": false,
+            "practice_questions": false
+          }
         },
         {
           "number": 3,
@@ -513,13 +534,28 @@
       "name": "Chinese",
       "total_sessions": 10,
       "done_sessions": 0,
-      "pending_count": 0,
-      "next_up": null,
+      "pending_count": 1,
+      "next_up": {
+        "session_number": 1,
+        "chapter": "HSK2 Lessons 46-49 (video lessons + quizzes watched in advance)",
+        "outstanding": [
+          "Read next chapter",
+          "Review today's notes",
+          "Write a summary",
+          "Do practice questions"
+        ]
+      },
       "sessions": [
         {
           "number": 1,
           "chapter": "HSK2 Lessons 46-49 (video lessons + quizzes watched in advance)",
-          "status": "not_started"
+          "status": "pending_review",
+          "checklist": {
+            "read_chapter": false,
+            "review_notes": false,
+            "write_summary": false,
+            "practice_questions": false
+          }
         },
         {
           "number": 2,
