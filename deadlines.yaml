@@ -17,6 +17,13 @@
 #   neither a date nor a session number is known yet.
 # - Communication Skills: individual participation (20%) has no single due
 #   date, so it isn't listed as a deadline.
+# - Spanish: midterm exam is known to fall during Session 5, but its weight
+#   isn't broken out separately - it's folded into the 60% "Control
+#   Continuo" bucket along with ongoing projects and participation across
+#   the whole semester, so no clean single weight_pct exists for it alone.
+#   Final exam (40%: 20% individual project + 20% written) has no date.
+# - Chinese: midterm (20%, oral+written) and final exam (40%, oral+written)
+#   are both mentioned but no session number or date was given for either.
 # Add each once ESSEC/Moodle confirms it - same shape as the entries below.
 
 deadlines:

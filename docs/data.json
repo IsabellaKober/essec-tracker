@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-13T06:59:51Z",
+  "generated_at": "2026-09-13T07:09:12Z",
   "courses": [
     {
       "id": "business-law",
@@ -444,6 +444,126 @@
         {
           "number": 10,
           "chapter": "Communicating with Impact and Empathy - Group Presentations",
+          "status": "not_started"
+        }
+      ]
+    },
+    {
+      "id": "spanish",
+      "name": "Spanish",
+      "total_sessions": 10,
+      "done_sessions": 0,
+      "pending_count": 0,
+      "next_up": null,
+      "sessions": [
+        {
+          "number": 1,
+          "chapter": "TODO: fill in from syllabus (only grading policy provided, no session topics)",
+          "status": "not_started"
+        },
+        {
+          "number": 2,
+          "chapter": "TODO: fill in from syllabus (only grading policy provided, no session topics)",
+          "status": "not_started"
+        },
+        {
+          "number": 3,
+          "chapter": "TODO: fill in from syllabus (only grading policy provided, no session topics)",
+          "status": "not_started"
+        },
+        {
+          "number": 4,
+          "chapter": "TODO: fill in from syllabus (only grading policy provided, no session topics)",
+          "status": "not_started"
+        },
+        {
+          "number": 5,
+          "chapter": "Midterm Exam (part of Control Continuo); recommended start of individual final project",
+          "status": "not_started"
+        },
+        {
+          "number": 6,
+          "chapter": "TODO: fill in from syllabus (only grading policy provided, no session topics)",
+          "status": "not_started"
+        },
+        {
+          "number": 7,
+          "chapter": "TODO: fill in from syllabus (only grading policy provided, no session topics)",
+          "status": "not_started"
+        },
+        {
+          "number": 8,
+          "chapter": "TODO: fill in from syllabus (only grading policy provided, no session topics)",
+          "status": "not_started"
+        },
+        {
+          "number": 9,
+          "chapter": "TODO: fill in from syllabus (only grading policy provided, no session topics)",
+          "status": "not_started"
+        },
+        {
+          "number": 10,
+          "chapter": "TODO: fill in from syllabus (only grading policy provided, no session topics)",
+          "status": "not_started"
+        }
+      ]
+    },
+    {
+      "id": "chinese",
+      "name": "Chinese",
+      "total_sessions": 10,
+      "done_sessions": 0,
+      "pending_count": 0,
+      "next_up": null,
+      "sessions": [
+        {
+          "number": 1,
+          "chapter": "HSK2 Lessons 46-49 (video lessons + quizzes watched in advance)",
+          "status": "not_started"
+        },
+        {
+          "number": 2,
+          "chapter": "TODO: fill in from syllabus (Lessons 46-73 span this term; exact per-session split not given)",
+          "status": "not_started"
+        },
+        {
+          "number": 3,
+          "chapter": "TODO: fill in from syllabus (Lessons 46-73 span this term; exact per-session split not given)",
+          "status": "not_started"
+        },
+        {
+          "number": 4,
+          "chapter": "TODO: fill in from syllabus (Lessons 46-73 span this term; exact per-session split not given)",
+          "status": "not_started"
+        },
+        {
+          "number": 5,
+          "chapter": "TODO: fill in from syllabus (Lessons 46-73 span this term; exact per-session split not given)",
+          "status": "not_started"
+        },
+        {
+          "number": 6,
+          "chapter": "TODO: fill in from syllabus (Lessons 46-73 span this term; exact per-session split not given)",
+          "status": "not_started"
+        },
+        {
+          "number": 7,
+          "chapter": "TODO: fill in from syllabus (Lessons 46-73 span this term; exact per-session split not given)",
+          "status": "not_started"
+        },
+        {
+          "number": 8,
+          "chapter": "TODO: fill in from syllabus (Lessons 46-73 span this term; exact per-session split not given)",
+          "status": "not_started"
+        },
+        {
+          "number": 9,
+          "chapter": "TODO: fill in from syllabus (Lessons 46-73 span this term; exact per-session split not given)",
+          "status": "not_started"
+        },
+        {
+          "number": 10,
+          "chapter": "TODO: fill in from syllabus (Lessons 46-73 span this term; exact per-session split not given)",
           "status": "not_started"
         }
       ]

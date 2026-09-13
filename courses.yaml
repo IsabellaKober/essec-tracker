@@ -16,6 +16,10 @@
 # syllabus was provided, and its calendar events already appear in the ICS
 # feed as "Professional Comm Group 2 - Sheila Esther WEE" - tracked the same
 # way as the other 5.
+#
+# Spanish + Chinese added 2026-09-13: neither syllabus gives session-by-
+# session topics (only grading policy + a couple of dated notes), so most
+# sessions are still TODO. Confirmed 10 real sessions each on the calendar.
 
 courses:
   - id: business-law
@@ -181,3 +185,57 @@ courses:
         chapter: "Communicating with Impact and Empathy - Group Presentations"
       - number: 10
         chapter: "Communicating with Impact and Empathy - Group Presentations"
+
+  - id: spanish
+    name: Spanish
+    total_sessions: 10
+    calendar_match:
+      - "spanish"
+    sessions:
+      - number: 1
+        chapter: "TODO: fill in from syllabus (only grading policy provided, no session topics)"
+      - number: 2
+        chapter: "TODO: fill in from syllabus (only grading policy provided, no session topics)"
+      - number: 3
+        chapter: "TODO: fill in from syllabus (only grading policy provided, no session topics)"
+      - number: 4
+        chapter: "TODO: fill in from syllabus (only grading policy provided, no session topics)"
+      - number: 5
+        chapter: "Midterm Exam (part of Control Continuo); recommended start of individual final project"
+      - number: 6
+        chapter: "TODO: fill in from syllabus (only grading policy provided, no session topics)"
+      - number: 7
+        chapter: "TODO: fill in from syllabus (only grading policy provided, no session topics)"
+      - number: 8
+        chapter: "TODO: fill in from syllabus (only grading policy provided, no session topics)"
+      - number: 9
+        chapter: "TODO: fill in from syllabus (only grading policy provided, no session topics)"
+      - number: 10
+        chapter: "TODO: fill in from syllabus (only grading policy provided, no session topics)"
+
+  - id: chinese
+    name: Chinese
+    total_sessions: 10
+    calendar_match:
+      - "chinese"
+    sessions:
+      - number: 1
+        chapter: "HSK2 Lessons 46-49 (video lessons + quizzes watched in advance)"
+      - number: 2
+        chapter: "TODO: fill in from syllabus (Lessons 46-73 span this term; exact per-session split not given)"
+      - number: 3
+        chapter: "TODO: fill in from syllabus (Lessons 46-73 span this term; exact per-session split not given)"
+      - number: 4
+        chapter: "TODO: fill in from syllabus (Lessons 46-73 span this term; exact per-session split not given)"
+      - number: 5
+        chapter: "TODO: fill in from syllabus (Lessons 46-73 span this term; exact per-session split not given)"
+      - number: 6
+        chapter: "TODO: fill in from syllabus (Lessons 46-73 span this term; exact per-session split not given)"
+      - number: 7
+        chapter: "TODO: fill in from syllabus (Lessons 46-73 span this term; exact per-session split not given)"
+      - number: 8
+        chapter: "TODO: fill in from syllabus (Lessons 46-73 span this term; exact per-session split not given)"
+      - number: 9
+        chapter: "TODO: fill in from syllabus (Lessons 46-73 span this term; exact per-session split not given)"
+      - number: 10
+        chapter: "TODO: fill in from syllabus (Lessons 46-73 span this term; exact per-session split not given)"
