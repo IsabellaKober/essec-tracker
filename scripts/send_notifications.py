@@ -69,6 +69,7 @@ def main():
             "Title": f"ESSEC Tracker: {len(pending)} session(s) to review",
             "Priority": "default",
             "Tags": "books",
+            "User-Agent": "essec-tracker/1.0",
         },
         timeout=30,
     )

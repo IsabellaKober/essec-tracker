@@ -117,7 +117,7 @@ def main():
     courses = load_courses()
     processed = load_processed()
 
-    resp = requests.get(ics_url, timeout=30)
+    resp = requests.get(ics_url, timeout=30, headers={"User-Agent": "essec-tracker/1.0"})
     resp.raise_for_status()
     cal = Calendar.from_ical(resp.content)
 

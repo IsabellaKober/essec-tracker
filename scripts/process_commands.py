@@ -62,7 +62,9 @@ def main():
     since = load_cursor()
     url = f"https://ntfy.sh/{topic}-commands/json?poll=1&since={since}"
 
-    resp = requests.get(url, timeout=30)
+    resp = requests.get(url, timeout=30, headers={"User-Agent": "essec-tracker/1.0"})
+    if resp.status_code != 200:
+        print(f"ntfy poll failed: {resp.status_code} {resp.text[:500]!r}")
     resp.raise_for_status()
 
     last_id = None
