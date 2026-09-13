@@ -1,14 +1,84 @@
-# Assignments / exams. Add one entry per deadline, entered once by hand.
-# `weight_pct` = % of the course's final grade this item counts for.
-# Urgency (days remaining) is computed automatically from `due_date` on every
-# run; you never need to update urgency or color yourself.
+# Assignments / exams. Urgency (days remaining) and the red/yellow/green
+# color are computed automatically from `due_date` + `weight_pct` on every
+# run - never set those by hand.
 #
-# Example (delete or edit once you have real deadlines):
-# deadlines:
-#   - id: finance-midterm
-#     course: finance
-#     name: "Finance Midterm Exam"
-#     due_date: "2026-10-15"
-#     weight_pct: 30
+# Filled in 2026-09-13 from ESSEC syllabuses, the "Grading Breakdown per
+# class.docx" summary, and real session dates from the ICS calendar feed
+# (syllabuses give due dates as "Session N"; the calendar gives the actual
+# date for session N).
+#
+# Still missing / needs confirming once ESSEC publishes them:
+# - Cost & Budgets final exam: "early December", exact date TBD by admin.
+# - Finance final exam: "early December", exact date TBD by admin.
+# - International Economics MCQ final exam (20%): exam-period date TBD.
+# - Marketing Research final exam (30%): exam-period date TBD.
+# - Business Law group presentation (50%) and final exam (50%): no syllabus
+#   PDF was found for this course (only Session 1-2 lesson slides), so
+#   neither a date nor a session number is known yet.
+# Add each once ESSEC/Moodle confirms it - same shape as the entries below.
 
-deadlines: []
+deadlines:
+  - id: finance-midterm
+    course: finance
+    name: "Finance Midterm Exam"
+    due_date: "2026-10-05"
+    weight_pct: 30
+
+  - id: cost-budgets-midterm
+    course: cost-budgets
+    name: "Cost & Budgets Midterm Exam"
+    due_date: "2026-10-20"
+    weight_pct: 35
+
+  - id: intl-econ-memo1
+    course: international-economics
+    name: "“Data to Reality” Strategic Memo 1"
+    due_date: "2026-10-16"
+    weight_pct: 15
+
+  - id: intl-econ-real-asset-pitch
+    course: international-economics
+    name: "Real Asset Market Entry Pitch (group)"
+    due_date: "2026-10-23"
+    weight_pct: 25
+
+  - id: intl-econ-memo2
+    course: international-economics
+    name: "“Data to Reality” Strategic Memo 2"
+    due_date: "2026-12-01"
+    weight_pct: 15
+
+  - id: intl-econ-g20-simulation
+    course: international-economics
+    name: "G20 Summit Simulation (group)"
+    due_date: "2026-12-01"
+    weight_pct: 25
+
+  - id: mktg-group-project-part1
+    course: marketing-research
+    name: "Marketing Group Project - Part 1 (secondary research, focus group, interviews)"
+    due_date: "2026-10-01"
+    weight_pct: 25
+
+  - id: mktg-group-project-part2
+    course: marketing-research
+    name: "Marketing Group Project - Part 2 (hypotheses, sampling plan, Qualtrics survey)"
+    due_date: "2026-10-22"
+    weight_pct: 2.5
+
+  - id: mktg-group-project-part3
+    course: marketing-research
+    name: "Marketing Group Project - Part 3 (peer review, analysis, recommendations)"
+    due_date: "2026-11-26"
+    weight_pct: 22.5
+
+  # Not one of the 5 tracked courses (Field Experience / Operational
+  # Internship reflection, not Business Law/Finance/Cost & Budgets/Intl
+  # Econ/Marketing Research) - kept here since you asked for it by name.
+  # Weight is a placeholder: no grading weight for this was found in any
+  # of your files - confirm the real % and update it.
+  - id: pecha-kucha-field-experience
+    course: field-experience
+    name: "Pecha Kucha Presentation (Four-Week Field Experience)"
+    due_date: "2026-09-21"
+    weight_pct: 15  # UNCONFIRMED - replace with the real weight

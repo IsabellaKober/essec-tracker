@@ -68,24 +68,46 @@ run (within 3 hours) picks it up and stops re-notifying for it.
 Already enabled (branch `main`, folder `/docs`). Dashboard:
 https://isabellakober.github.io/essec-tracker/
 
-### 4. Fill in real data
+### 4. Real data - mostly done, some gaps left
 
-- **`courses.yaml`**: replace each `TODO: fill in from syllabus` with the
-  real chapter/topic for that session, per your syllabus. Adjust
-  `calendar_match` if your ICS event titles don't contain the plain course
-  name (e.g. if ESSEC labels events "FIN101 - Session 6").
-- **`deadlines.yaml`**: add one entry per assignment/exam:
-  ```yaml
-  deadlines:
-    - id: finance-midterm
-      course: finance
-      name: "Finance Midterm Exam"
-      due_date: "2026-10-15"
-      weight_pct: 30
-  ```
-  `course` must match a course `id` from `courses.yaml`. Urgency (days
-  remaining) and the red/yellow/green color are computed automatically on
-  every run — never set those by hand.
+`courses.yaml` and `deadlines.yaml` are filled in from your actual
+syllabuses, lecture slides, and the real ICS feed (session dates matched
+against "due at Session N" wording in each syllabus). `calendar_match` is
+already confirmed against your feed's real event titles (e.g. "Cost &
+Budgets Group A - Jee Huay TAN").
+
+What's still missing, flagged with comments in the files themselves:
+- **Marketing Research** sessions 3, 4, 6, 7, 9: no materials were found
+  for these, so their `chapter` is still `TODO`.
+- **Business Law**: no syllabus PDF exists in your folder yet, only
+  Session 1-2 lesson slides — sessions 3-10 topics come from that Session
+  1 slide's course outline, best-effort. Its group presentation (50%) and
+  final exam (50%) have no known date, so they're not in `deadlines.yaml`
+  yet.
+- **Final exam dates** for Finance, Cost & Budgets, International
+  Economics, and Marketing Research are all "exam period, TBD by admin" in
+  every syllabus — add them once ESSEC publishes the schedule.
+- **Pecha Kucha presentation** (Sept 21, 8:45am): added to
+  `deadlines.yaml`, but it isn't one of the 5 tracked courses (it's your
+  Field Experience reflection, not Business Law/Finance/Cost &
+  Budgets/Intl Econ/Marketing Research) and its grading weight wasn't
+  found anywhere in your files — the 15% in there is a placeholder,
+  confirm and update it.
+
+To add anything above once you know it, follow the existing entries'
+shape:
+```yaml
+deadlines:
+  - id: cost-budgets-final
+    course: cost-budgets
+    name: "Cost & Budgets Final Exam"
+    due_date: "2026-12-05"
+    weight_pct: 50
+```
+`course` must match a course `id` from `courses.yaml` (or omit/leave
+free-text for something outside the 5 tracked courses, like the Pecha
+Kucha entry). Urgency (days remaining) and the red/yellow/green color are
+computed automatically on every run — never set those by hand.
 
 ### 5. Run it once manually
 

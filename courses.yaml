@@ -1,8 +1,15 @@
 # Master course + syllabus definitions.
-# Fill in `chapter` under each session with the real topic from your syllabus.
-# `calendar_match`: lowercase substrings used to match this course against your
-# ICS calendar event titles (SUMMARY field). Add/adjust to match how ESSEC
-# actually labels these sessions in your calendar export.
+# Filled in from ESSEC syllabuses + lecture materials (2026-09-13).
+# `calendar_match`: lowercase substrings matched against your ICS event
+# titles - confirmed against the real feed (e.g. "Cost & Budgets Group A -
+# Jee Huay TAN", "Finance 1 Group A - Rick MARCHESE").
+#
+# Notes on gaps (fill in once known):
+# - Marketing Research sessions 3, 4, 6, 7, 9: topics not in the materials
+#   found (only sessions 1, 2, 5, 8, 10 had slide decks/syllabus detail).
+# - Business Law: no separate syllabus PDF was found; the 10-topic list
+#   below comes from the "Course syllabus" slide in the Session 1 deck,
+#   with sessions 1-2 mapped to the actual lesson pptx titles.
 
 courses:
   - id: business-law
@@ -12,25 +19,25 @@ courses:
       - "business law"
     sessions:
       - number: 1
-        chapter: "TODO: fill in from syllabus"
+        chapter: "Introduction: Offer and Acceptance (Law of Contract)"
       - number: 2
-        chapter: "TODO: fill in from syllabus"
+        chapter: "Offer and Acceptance (continued)"
       - number: 3
-        chapter: "TODO: fill in from syllabus"
+        chapter: "Consideration and Intention to Create Legal Relations"
       - number: 4
-        chapter: "TODO: fill in from syllabus"
+        chapter: "Terms of a Contract"
       - number: 5
-        chapter: "TODO: fill in from syllabus"
+        chapter: "Exclusion Clauses"
       - number: 6
-        chapter: "TODO: fill in from syllabus"
+        chapter: "Vitiating Factors - Part 1"
       - number: 7
-        chapter: "TODO: fill in from syllabus"
+        chapter: "Vitiating Factors - Part 2"
       - number: 8
-        chapter: "TODO: fill in from syllabus"
+        chapter: "Presentation"
       - number: 9
-        chapter: "TODO: fill in from syllabus"
+        chapter: "Presentation"
       - number: 10
-        chapter: "TODO: fill in from syllabus"
+        chapter: "Studying Samples of Contract"
 
   - id: finance
     name: Finance
@@ -39,25 +46,25 @@ courses:
       - "finance"
     sessions:
       - number: 1
-        chapter: "TODO: fill in from syllabus"
+        chapter: "Overview of Finance (Intro to finance, corporate financial management, financial markets) - BDM Ch.1"
       - number: 2
-        chapter: "TODO: fill in from syllabus"
+        chapter: "Financial Statement Analysis (1/2): accounting statements to cash flow - BDM Ch.2"
       - number: 3
-        chapter: "TODO: fill in from syllabus"
+        chapter: "Financial Statement Analysis (2/2): cash flow reconciliation, sources and uses of funds - BDM Ch.2"
       - number: 4
-        chapter: "TODO: fill in from syllabus"
+        chapter: "Time Value of Money and Investment Decision Rules (PV, NPV, IRR, payback) - BDM Ch.4, 7"
       - number: 5
-        chapter: "TODO: fill in from syllabus"
+        chapter: "Revision for Midterm; Midterm Exam"
       - number: 6
-        chapter: "TODO: fill in from syllabus"
+        chapter: "Capital Budgeting and Cash-Flow Planning - BDM Ch.8"
       - number: 7
-        chapter: "TODO: fill in from syllabus"
+        chapter: "Bond Valuation (cash flows, pricing, yields) - BDM Ch.6"
       - number: 8
-        chapter: "TODO: fill in from syllabus"
+        chapter: "Stock Valuation (dividend-discount model, equity comparables) - BDM Ch.9"
       - number: 9
-        chapter: "TODO: fill in from syllabus"
+        chapter: "Capital Structure and Financial Leverage (Modigliani-Miller) - BDM Ch.14, 15"
       - number: 10
-        chapter: "TODO: fill in from syllabus"
+        chapter: "Final Exam Revision; Final Exam"
 
   - id: cost-budgets
     name: Cost & Budgets
@@ -68,25 +75,25 @@ courses:
       - "cost & budgets"
     sessions:
       - number: 1
-        chapter: "TODO: fill in from syllabus"
+        chapter: "Introduction: financial accounting to management accounting; types of costs"
       - number: 2
-        chapter: "TODO: fill in from syllabus"
+        chapter: "Full costs (1/2)"
       - number: 3
-        chapter: "TODO: fill in from syllabus"
+        chapter: "Full costs (2/2); Activity-Based Costing (ABC)"
       - number: 4
-        chapter: "TODO: fill in from syllabus"
+        chapter: "Job costing; the Cost-Volume-Profit (CVP) model"
       - number: 5
-        chapter: "TODO: fill in from syllabus"
+        chapter: "Costs & Decisions; relevant costs"
       - number: 6
-        chapter: "TODO: fill in from syllabus"
+        chapter: "Introduction to the budget"
       - number: 7
-        chapter: "TODO: fill in from syllabus"
+        chapter: "Preparation of budgets: sales budget to cash flow budget"
       - number: 8
-        chapter: "TODO: fill in from syllabus"
+        chapter: "Standard costs and staff budgets"
       - number: 9
-        chapter: "TODO: fill in from syllabus"
+        chapter: "Variance analysis (1/2)"
       - number: 10
-        chapter: "TODO: fill in from syllabus"
+        chapter: "Variance analysis (2/2); conclusion; revisions for final exam"
 
   - id: international-economics
     name: International Economics
@@ -95,25 +102,25 @@ courses:
       - "international economics"
     sessions:
       - number: 1
-        chapter: "TODO: fill in from syllabus"
+        chapter: "Globalisation, the Gravity Model & Pluralist Perspectives (bullwhip game, ungraded)"
       - number: 2
-        chapter: "TODO: fill in from syllabus"
+        chapter: "Comparative Advantage, Technology & Strategic Offshoring"
       - number: 3
-        chapter: "TODO: fill in from syllabus"
+        chapter: "Increasing Returns, Firm Heterogeneity & Intra-Industry Trade (Memo 1 released)"
       - number: 4
-        chapter: "TODO: fill in from syllabus"
+        chapter: "Factor Movements: FDI, Migration & Global Capital"
       - number: 5
-        chapter: "TODO: fill in from syllabus"
+        chapter: "Trade Policy, Tariffs & the Political Economy of Protection (Memo 1 due)"
       - number: 6
-        chapter: "TODO: fill in from syllabus"
+        chapter: "Real Assets, Ports & Global Logistics (Real Asset Market Entry Pitch)"
       - number: 7
-        chapter: "TODO: fill in from syllabus"
+        chapter: "Exchange Rates & Currency Risk for the Firm"
       - number: 8
-        chapter: "TODO: fill in from syllabus"
+        chapter: "Open-Economy Macro, Global Imbalances & Institutions (Memo 2 released)"
       - number: 9
-        chapter: "TODO: fill in from syllabus"
+        chapter: "Emerging Markets, Country Risk & Institutional Quality"
       - number: 10
-        chapter: "TODO: fill in from syllabus"
+        chapter: "Geopolitics & the Future of Globalisation (Memo 2 due; G20 Summit Simulation)"
 
   - id: marketing-research
     name: Marketing Research
@@ -122,22 +129,22 @@ courses:
       - "marketing research"
     sessions:
       - number: 1
-        chapter: "TODO: fill in from syllabus"
+        chapter: "Course intro; the Market Research Process; secondary data (Deezer case)"
       - number: 2
-        chapter: "TODO: fill in from syllabus"
+        chapter: "Primary/Secondary/Panel Data; Group Project briefing & brand selection"
       - number: 3
-        chapter: "TODO: fill in from syllabus"
+        chapter: "TODO: fill in from syllabus (materials not found)"
       - number: 4
-        chapter: "TODO: fill in from syllabus"
+        chapter: "TODO: fill in from syllabus (materials not found)"
       - number: 5
-        chapter: "TODO: fill in from syllabus"
+        chapter: "Group Project Part 1 due (secondary research, focus group, interviews) - 50% of project grade"
       - number: 6
-        chapter: "TODO: fill in from syllabus"
+        chapter: "TODO: fill in from syllabus (materials not found)"
       - number: 7
-        chapter: "TODO: fill in from syllabus"
+        chapter: "TODO: fill in from syllabus (materials not found)"
       - number: 8
-        chapter: "TODO: fill in from syllabus"
+        chapter: "Group Project Part 2 due (hypotheses, sampling plan, Qualtrics survey) - 5% of project grade"
       - number: 9
-        chapter: "TODO: fill in from syllabus"
+        chapter: "TODO: fill in from syllabus (materials not found)"
       - number: 10
-        chapter: "TODO: fill in from syllabus"
+        chapter: "Group Project Part 3 due (peer review, analysis, final recommendations) - 45% of project grade"
