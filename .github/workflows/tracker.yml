@@ -27,6 +27,22 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
+      - name: DEBUG ntfy connectivity
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: |
+          echo "--- GET topic/json ---"
+          curl -sS -i "https://ntfy.sh/$NTFY_TOPIC/json?poll=1&since=all" || true
+          echo ""
+          echo "--- GET commands topic/json ---"
+          curl -sS -i "https://ntfy.sh/$NTFY_TOPIC-commands/json?poll=1&since=all" || true
+          echo ""
+          echo "--- POST plain ---"
+          curl -sS -i -d "debug test from actions" "https://ntfy.sh/$NTFY_TOPIC" || true
+          echo ""
+          echo "--- runner IP ---"
+          curl -sS https://ifconfig.me || true
+
       - name: Check ICS feed for ended sessions
         env:
           ICS_URL: ${{ secrets.ICS_URL }}
