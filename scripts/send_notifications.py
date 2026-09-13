@@ -66,17 +66,30 @@ def main():
         "to the '-commands' topic."
     )
 
-    resp = requests.post(
-        f"{ntfy_base()}/{topic}",
-        data=body.encode("utf-8"),
-        headers=ntfy_headers({
-            "Title": f"ESSEC Tracker: {len(pending)} session(s) to review",
-            "Priority": "default",
-            "Tags": "books",
-        }),
-        timeout=30,
-    )
-    resp.raise_for_status()
+    try:
+        resp = requests.post(
+            f"{ntfy_base()}/{topic}",
+            data=body.encode("utf-8"),
+            headers=ntfy_headers({
+                "Title": f"ESSEC Tracker: {len(pending)} session(s) to review",
+                "Priority": "default",
+                "Tags": "books",
+            }),
+            timeout=30,
+        )
+    except requests.RequestException as e:
+        print(f"ntfy publish failed (network error), will retry next scheduled run: {e}")
+        return
+
+    if resp.status_code != 200:
+        # Best-effort: ntfy.sh's free tier shares its daily quota across every
+        # visitor on the same egress IP (including, via the relay, unrelated
+        # Cloudflare Workers traffic), so an occasional failure here is
+        # expected. Don't fail the whole workflow run over it - the next
+        # scheduled run tries again and the session stays pending either way.
+        print(f"ntfy publish failed ({resp.status_code}), will retry next scheduled run: {resp.text[:300]!r}")
+        return
+
     print(f"Sent notification for {len(pending)} pending session(s).")
 
 

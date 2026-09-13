@@ -66,10 +66,19 @@ def main():
     since = load_cursor()
     url = f"{ntfy_base()}/{topic}-commands/json?poll=1&since={since}"
 
-    resp = requests.get(url, timeout=30, headers=ntfy_headers())
+    try:
+        resp = requests.get(url, timeout=30, headers=ntfy_headers())
+    except requests.RequestException as e:
+        print(f"ntfy poll failed (network error), will retry next scheduled run: {e}")
+        return
+
     if resp.status_code != 200:
-        print(f"ntfy poll failed: {resp.status_code} {resp.text[:500]!r}")
-    resp.raise_for_status()
+        # Best-effort: a transient ntfy.sh outage or quota hiccup shouldn't
+        # fail the whole workflow run. Any command sent meanwhile just gets
+        # picked up on the next scheduled run instead (the cursor isn't
+        # advanced, so nothing is lost).
+        print(f"ntfy poll failed ({resp.status_code}), will retry next scheduled run: {resp.text[:300]!r}")
+        return
 
     last_id = None
     any_done = False
