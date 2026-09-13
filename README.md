@@ -1,8 +1,8 @@
 # ESSEC Academic Tracker
 
-Automated tracker for 5 ESSEC courses (Business Law, Finance, Cost & Budgets,
-International Economics, Marketing Research). A GitHub Actions job runs every
-3 hours, with no laptop required:
+Automated tracker for 6 ESSEC courses (Business Law, Finance, Cost & Budgets,
+International Economics, Marketing Research, Communication Skills). A GitHub
+Actions job runs every 3 hours, with no laptop required:
 
 1. Fetches your ICS calendar feed and detects classes that have ended.
 2. Creates a `pending_review` session entry with a checklist (read next
@@ -88,10 +88,9 @@ What's still missing, flagged with comments in the files themselves:
   Economics, and Marketing Research are all "exam period, TBD by admin" in
   every syllabus — add them once ESSEC publishes the schedule.
 - **Pecha Kucha presentation** (Sept 21, 8:45am): added to
-  `deadlines.yaml`, but it isn't one of the 5 tracked courses (it's your
-  Field Experience reflection, not Business Law/Finance/Cost &
-  Budgets/Intl Econ/Marketing Research) and its grading weight wasn't
-  found anywhere in your files — the 15% in there is a placeholder,
+  `deadlines.yaml`, but it isn't one of the 6 tracked courses (it's your
+  Field Experience reflection, not a graded course) and its grading weight
+  wasn't found anywhere in your files — the 15% in there is a placeholder,
   confirm and update it.
 
 To add anything above once you know it, follow the existing entries'
@@ -104,8 +103,8 @@ deadlines:
     due_date: "2026-12-05"
     weight_pct: 50
 ```
-`course` must match a course `id` from `courses.yaml` (or omit/leave
-free-text for something outside the 5 tracked courses, like the Pecha
+`course` must match a course `id` from `courses.yaml` (or leave it
+free-text for something outside the 6 tracked courses, like the Pecha
 Kucha entry). Urgency (days remaining) and the red/yellow/green color are
 computed automatically on every run — never set those by hand.
 
