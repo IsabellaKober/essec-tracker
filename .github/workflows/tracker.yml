@@ -31,8 +31,8 @@ jobs:
         env:
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
         run: |
-          echo "--- GET topic/json direct ---"
-          curl -sS -i "https://ntfy.sh/$NTFY_TOPIC/json?poll=1&since=all"
+          echo "--- POST publish direct ---"
+          curl -sS -i -d "debug: direct POST from actions, no relay" "https://ntfy.sh/$NTFY_TOPIC"
 
       - name: Check ICS feed for ended sessions
         env:
