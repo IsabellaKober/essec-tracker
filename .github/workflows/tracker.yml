@@ -27,13 +27,6 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: DEBUG direct ntfy (no relay)
-        env:
-          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
-        run: |
-          echo "--- POST publish direct ---"
-          curl -sS -i -d "debug: direct POST from actions, no relay" "https://ntfy.sh/$NTFY_TOPIC"
-
       - name: Check ICS feed for ended sessions
         env:
           ICS_URL: ${{ secrets.ICS_URL }}
@@ -42,8 +35,6 @@ jobs:
       - name: Process done-commands from ntfy
         env:
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
-          NTFY_RELAY_URL: ${{ secrets.NTFY_RELAY_URL }}
-          NTFY_RELAY_SECRET: ${{ secrets.NTFY_RELAY_SECRET }}
         run: python scripts/process_commands.py
 
       - name: Rebuild dashboard data
@@ -65,6 +56,4 @@ jobs:
       - name: Send pending-review notification
         env:
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
-          NTFY_RELAY_URL: ${{ secrets.NTFY_RELAY_URL }}
-          NTFY_RELAY_SECRET: ${{ secrets.NTFY_RELAY_SECRET }}
         run: python scripts/send_notifications.py

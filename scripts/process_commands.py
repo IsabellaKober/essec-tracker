@@ -12,13 +12,9 @@ Reads:
 import json
 import os
 import re
-import sys
 
 import requests
 import yaml
-
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from ntfy_base import ntfy_base, ntfy_headers
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SESSIONS_DIR = os.path.join(ROOT, "sessions")
@@ -64,10 +60,10 @@ def main():
         return
 
     since = load_cursor()
-    url = f"{ntfy_base()}/{topic}-commands/json?poll=1&since={since}"
+    url = f"https://ntfy.sh/{topic}-commands/json?poll=1&since={since}"
 
     try:
-        resp = requests.get(url, timeout=30, headers=ntfy_headers())
+        resp = requests.get(url, timeout=30, headers={"User-Agent": "essec-tracker/1.0"})
     except requests.RequestException as e:
         print(f"ntfy poll failed (network error), will retry next scheduled run: {e}")
         return

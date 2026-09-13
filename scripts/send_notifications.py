@@ -6,13 +6,9 @@ Reads:
   NTFY_TOPIC   env var (required)
 """
 import os
-import sys
 
 import requests
 import yaml
-
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from ntfy_base import ntfy_base, ntfy_headers
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SESSIONS_DIR = os.path.join(ROOT, "sessions")
@@ -68,13 +64,14 @@ def main():
 
     try:
         resp = requests.post(
-            f"{ntfy_base()}/{topic}",
+            f"https://ntfy.sh/{topic}",
             data=body.encode("utf-8"),
-            headers=ntfy_headers({
+            headers={
                 "Title": f"ESSEC Tracker: {len(pending)} session(s) to review",
                 "Priority": "default",
                 "Tags": "books",
-            }),
+                "User-Agent": "essec-tracker/1.0",
+            },
             timeout=30,
         )
     except requests.RequestException as e:
@@ -82,11 +79,9 @@ def main():
         return
 
     if resp.status_code != 200:
-        # Best-effort: ntfy.sh's free tier shares its daily quota across every
-        # visitor on the same egress IP (including, via the relay, unrelated
-        # Cloudflare Workers traffic), so an occasional failure here is
-        # expected. Don't fail the whole workflow run over it - the next
-        # scheduled run tries again and the session stays pending either way.
+        # Best-effort: don't fail the whole workflow run over a transient
+        # ntfy.sh hiccup - the next scheduled run tries again and the
+        # session stays pending either way.
         print(f"ntfy publish failed ({resp.status_code}), will retry next scheduled run: {resp.text[:300]!r}")
         return
 
