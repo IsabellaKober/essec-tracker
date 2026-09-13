@@ -12,9 +12,13 @@ Reads:
 import json
 import os
 import re
+import sys
 
 import requests
 import yaml
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from ntfy_base import ntfy_base, ntfy_headers
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SESSIONS_DIR = os.path.join(ROOT, "sessions")
@@ -60,9 +64,9 @@ def main():
         return
 
     since = load_cursor()
-    url = f"https://ntfy.sh/{topic}-commands/json?poll=1&since={since}"
+    url = f"{ntfy_base()}/{topic}-commands/json?poll=1&since={since}"
 
-    resp = requests.get(url, timeout=30, headers={"User-Agent": "essec-tracker/1.0"})
+    resp = requests.get(url, timeout=30, headers=ntfy_headers())
     if resp.status_code != 200:
         print(f"ntfy poll failed: {resp.status_code} {resp.text[:500]!r}")
     resp.raise_for_status()

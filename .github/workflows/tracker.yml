@@ -27,22 +27,6 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: DEBUG ntfy connectivity
-        env:
-          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
-        run: |
-          echo "--- GET topic/json ---"
-          curl -sS -i "https://ntfy.sh/$NTFY_TOPIC/json?poll=1&since=all" || true
-          echo ""
-          echo "--- GET commands topic/json ---"
-          curl -sS -i "https://ntfy.sh/$NTFY_TOPIC-commands/json?poll=1&since=all" || true
-          echo ""
-          echo "--- POST plain ---"
-          curl -sS -i -d "debug test from actions" "https://ntfy.sh/$NTFY_TOPIC" || true
-          echo ""
-          echo "--- runner IP ---"
-          curl -sS https://ifconfig.me || true
-
       - name: Check ICS feed for ended sessions
         env:
           ICS_URL: ${{ secrets.ICS_URL }}
@@ -51,6 +35,8 @@ jobs:
       - name: Process done-commands from ntfy
         env:
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          NTFY_RELAY_URL: ${{ secrets.NTFY_RELAY_URL }}
+          NTFY_RELAY_SECRET: ${{ secrets.NTFY_RELAY_SECRET }}
         run: python scripts/process_commands.py
 
       - name: Rebuild dashboard data
@@ -71,4 +57,6 @@ jobs:
       - name: Send pending-review notification
         env:
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          NTFY_RELAY_URL: ${{ secrets.NTFY_RELAY_URL }}
+          NTFY_RELAY_SECRET: ${{ secrets.NTFY_RELAY_SECRET }}
         run: python scripts/send_notifications.py

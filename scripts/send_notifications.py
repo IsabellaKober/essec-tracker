@@ -6,9 +6,13 @@ Reads:
   NTFY_TOPIC   env var (required)
 """
 import os
+import sys
 
 import requests
 import yaml
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from ntfy_base import ntfy_base, ntfy_headers
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SESSIONS_DIR = os.path.join(ROOT, "sessions")
@@ -63,14 +67,13 @@ def main():
     )
 
     resp = requests.post(
-        f"https://ntfy.sh/{topic}",
+        f"{ntfy_base()}/{topic}",
         data=body.encode("utf-8"),
-        headers={
+        headers=ntfy_headers({
             "Title": f"ESSEC Tracker: {len(pending)} session(s) to review",
             "Priority": "default",
             "Tags": "books",
-            "User-Agent": "essec-tracker/1.0",
-        },
+        }),
         timeout=30,
     )
     resp.raise_for_status()
