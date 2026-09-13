@@ -1,62 +1,77 @@
 {
-  "generated_at": "2026-09-13T06:19:13Z",
+  "generated_at": "2026-09-13T06:44:50Z",
   "courses": [
     {
       "id": "business-law",
       "name": "Business Law",
       "total_sessions": 10,
       "done_sessions": 0,
-      "pending_count": 0,
-      "next_up": null,
+      "pending_count": 1,
+      "next_up": {
+        "session_number": 1,
+        "chapter": "Introduction: Offer and Acceptance (Law of Contract)",
+        "outstanding": [
+          "Read next chapter",
+          "Review today's notes",
+          "Write a summary",
+          "Do practice questions"
+        ]
+      },
       "sessions": [
         {
           "number": 1,
-          "chapter": "TODO: fill in from syllabus",
-          "status": "not_started"
+          "chapter": "Introduction: Offer and Acceptance (Law of Contract)",
+          "status": "pending_review",
+          "checklist": {
+            "read_chapter": false,
+            "review_notes": false,
+            "write_summary": false,
+            "practice_questions": false
+          }
         },
         {
           "number": 2,
-          "chapter": "TODO: fill in from syllabus",
+          "chapter": "Offer and Acceptance (continued)",
           "status": "not_started"
         },
         {
           "number": 3,
-          "chapter": "TODO: fill in from syllabus",
+          "chapter": "Consideration and Intention to Create Legal Relations",
           "status": "not_started"
         },
         {
           "number": 4,
-          "chapter": "TODO: fill in from syllabus",
+          "chapter": "Terms of a Contract",
           "status": "not_started"
         },
         {
           "number": 5,
-          "chapter": "TODO: fill in from syllabus",
+          "chapter": "Exclusion Clauses",
           "status": "not_started"
         },
         {
           "number": 6,
-          "chapter": "TODO: fill in from syllabus",
+          "chapter": "Vitiating Factors - Part 1",
           "status": "not_started"
         },
         {
           "number": 7,
-          "chapter": "TODO: fill in from syllabus",
+          "chapter": "Vitiating Factors - Part 2",
           "status": "not_started"
         },
         {
           "number": 8,
-          "chapter": "TODO: fill in from syllabus",
+          "chapter": "Presentation",
           "status": "not_started"
         },
         {
           "number": 9,
-          "chapter": "TODO: fill in from syllabus",
+          "chapter": "Presentation",
           "status": "not_started"
         },
         {
           "number": 10,
-          "chapter": "TODO: fill in from syllabus",
+          "chapter": "Studying Samples of Contract",
           "status": "not_started"
         }
       ]
@@ -71,52 +86,52 @@
       "sessions": [
         {
           "number": 1,
-          "chapter": "TODO: fill in from syllabus",
+          "chapter": "Overview of Finance (Intro to finance, corporate financial management, financial markets) - BDM Ch.1",
           "status": "not_started"
         },
         {
           "number": 2,
-          "chapter": "TODO: fill in from syllabus",
+          "chapter": "Financial Statement Analysis (1/2): accounting statements to cash flow - BDM Ch.2",
           "status": "not_started"
         },
         {
           "number": 3,
-          "chapter": "TODO: fill in from syllabus",
+          "chapter": "Financial Statement Analysis (2/2): cash flow reconciliation, sources and uses of funds - BDM Ch.2",
           "status": "not_started"
         },
         {
           "number": 4,
-          "chapter": "TODO: fill in from syllabus",
+          "chapter": "Time Value of Money and Investment Decision Rules (PV, NPV, IRR, payback) - BDM Ch.4, 7",
           "status": "not_started"
         },
         {
           "number": 5,
-          "chapter": "TODO: fill in from syllabus",
+          "chapter": "Revision for Midterm; Midterm Exam",
           "status": "not_started"
         },
         {
           "number": 6,
-          "chapter": "TODO: fill in from syllabus",
+          "chapter": "Capital Budgeting and Cash-Flow Planning - BDM Ch.8",
           "status": "not_started"
         },
         {
           "number": 7,
-          "chapter": "TODO: fill in from syllabus",
+          "chapter": "Bond Valuation (cash flows, pricing, yields) - BDM Ch.6",
           "status": "not_started"
         },
         {
           "number": 8,
-          "chapter": "TODO: fill in from syllabus",
+          "chapter": "Stock Valuation (dividend-discount model, equity comparables) - BDM Ch.9",
           "status": "not_started"
         },
         {
           "number": 9,
-          "chapter": "TODO: fill in from syllabus",
+          "chapter": "Capital Structure and Financial Leverage (Modigliani-Miller) - BDM Ch.14, 15",
           "status": "not_started"
         },
         {
           "number": 10,
-          "chapter": "TODO: fill in from syllabus",
+          "chapter": "Final Exam Revision; Final Exam",
           "status": "not_started"
         }
       ]
@@ -131,52 +146,52 @@
       "sessions": [
         {
           "number": 1,
-          "chapter": "TODO: fill in from syllabus",
+          "chapter": "Introduction: financial accounting to management accounting; types of costs",
           "status": "not_started"
         },
         {
           "number": 2,
-          "chapter": "TODO: fill in from syllabus",
+          "chapter": "Full costs (1/2)",
           "status": "not_started"
         },
         {
           "number": 3,
-          "chapter": "TODO: fill in from syllabus",
+          "chapter": "Full costs (2/2); Activity-Based Costing (ABC)",
           "status": "not_started"
         },
         {
           "number": 4,
-          "chapter": "TODO: fill in from syllabus",
+          "chapter": "Job costing; the Cost-Volume-Profit (CVP) model",
           "status": "not_started"
         },
         {
           "number": 5,
-          "chapter": "TODO: fill in from syllabus",
+          "chapter": "Costs & Decisions; relevant costs",
           "status": "not_started"
         },
         {
           "number": 6,
-          "chapter": "TODO: fill in from syllabus",
+          "chapter": "Introduction to the budget",
           "status": "not_started"
         },
         {
           "number": 7,
-          "chapter": "TODO: fill in from syllabus",
+          "chapter": "Preparation of budgets: sales budget to cash flow budget",
           "status": "not_started"
         },
         {
           "number": 8,
-          "chapter": "TODO: fill in from syllabus",
+          "chapter": "Standard costs and staff budgets",
           "status": "not_started"
         },
         {
           "number": 9,
-          "chapter": "TODO: fill in from syllabus",
+          "chapter": "Variance analysis (1/2)",
           "status": "not_started"
         },
         {
           "number": 10,
-          "chapter": "TODO: fill in from syllabus",
+          "chapter": "Variance analysis (2/2); conclusion; revisions for final exam",
           "status": "not_started"
         }
       ]
@@ -191,52 +206,52 @@
       "sessions": [
         {
           "number": 1,
-          "chapter": "TODO: fill in from syllabus",
+          "chapter": "Globalisation, the Gravity Model & Pluralist Perspectives (bullwhip game, ungraded)",
           "status": "not_started"
         },
         {
           "number": 2,
-          "chapter": "TODO: fill in from syllabus",
+          "chapter": "Comparative Advantage, Technology & Strategic Offshoring",
           "status": "not_started"
         },
         {
           "number": 3,
-          "chapter": "TODO: fill in from syllabus",
+          "chapter": "Increasing Returns, Firm Heterogeneity & Intra-Industry Trade (Memo 1 released)",
           "status": "not_started"
         },
         {
           "number": 4,
-          "chapter": "TODO: fill in from syllabus",
+          "chapter": "Factor Movements: FDI, Migration & Global Capital",
           "status": "not_started"
         },
         {
           "number": 5,
-          "chapter": "TODO: fill in from syllabus",
+          "chapter": "Trade Policy, Tariffs & the Political Economy of Protection (Memo 1 due)",
           "status": "not_started"
         },
         {
           "number": 6,
-          "chapter": "TODO: fill in from syllabus",
+          "chapter": "Real Assets, Ports & Global Logistics (Real Asset Market Entry Pitch)",
           "status": "not_started"
         },
         {
           "number": 7,
-          "chapter": "TODO: fill in from syllabus",
+          "chapter": "Exchange Rates & Currency Risk for the Firm",
           "status": "not_started"
         },
         {
           "number": 8,
-          "chapter": "TODO: fill in from syllabus",
+          "chapter": "Open-Economy Macro, Global Imbalances & Institutions (Memo 2 released)",
           "status": "not_started"
         },
         {
           "number": 9,
-          "chapter": "TODO: fill in from syllabus",
+          "chapter": "Emerging Markets, Country Risk & Institutional Quality",
           "status": "not_started"
         },
         {
           "number": 10,
-          "chapter": "TODO: fill in from syllabus",
+          "chapter": "Geopolitics & the Future of Globalisation (Memo 2 due; G20 Summit Simulation)",
           "status": "not_started"
         }
       ]
@@ -246,61 +261,177 @@
       "name": "Marketing Research",
       "total_sessions": 10,
       "done_sessions": 0,
-      "pending_count": 0,
-      "next_up": null,
+      "pending_count": 1,
+      "next_up": {
+        "session_number": 1,
+        "chapter": "Course intro; the Market Research Process; secondary data (Deezer case)",
+        "outstanding": [
+          "Read next chapter",
+          "Review today's notes",
+          "Write a summary",
+          "Do practice questions"
+        ]
+      },
       "sessions": [
         {
           "number": 1,
-          "chapter": "TODO: fill in from syllabus",
-          "status": "not_started"
+          "chapter": "Course intro; the Market Research Process; secondary data (Deezer case)",
+          "status": "pending_review",
+          "checklist": {
+            "read_chapter": false,
+            "review_notes": false,
+            "write_summary": false,
+            "practice_questions": false
+          }
         },
         {
           "number": 2,
-          "chapter": "TODO: fill in from syllabus",
+          "chapter": "Primary/Secondary/Panel Data; Group Project briefing & brand selection",
           "status": "not_started"
         },
         {
           "number": 3,
-          "chapter": "TODO: fill in from syllabus",
+          "chapter": "TODO: fill in from syllabus (materials not found)",
           "status": "not_started"
         },
         {
           "number": 4,
-          "chapter": "TODO: fill in from syllabus",
+          "chapter": "TODO: fill in from syllabus (materials not found)",
           "status": "not_started"
         },
         {
           "number": 5,
-          "chapter": "TODO: fill in from syllabus",
+          "chapter": "Group Project Part 1 due (secondary research, focus group, interviews) - 50% of project grade",
           "status": "not_started"
         },
         {
           "number": 6,
-          "chapter": "TODO: fill in from syllabus",
+          "chapter": "TODO: fill in from syllabus (materials not found)",
           "status": "not_started"
         },
         {
           "number": 7,
-          "chapter": "TODO: fill in from syllabus",
+          "chapter": "TODO: fill in from syllabus (materials not found)",
           "status": "not_started"
         },
         {
           "number": 8,
-          "chapter": "TODO: fill in from syllabus",
+          "chapter": "Group Project Part 2 due (hypotheses, sampling plan, Qualtrics survey) - 5% of project grade",
           "status": "not_started"
         },
         {
           "number": 9,
-          "chapter": "TODO: fill in from syllabus",
+          "chapter": "TODO: fill in from syllabus (materials not found)",
           "status": "not_started"
         },
         {
           "number": 10,
-          "chapter": "TODO: fill in from syllabus",
+          "chapter": "Group Project Part 3 due (peer review, analysis, final recommendations) - 45% of project grade",
           "status": "not_started"
         }
       ]
     }
   ],
-  "deadlines": []
+  "deadlines": [
+    {
+      "id": "pecha-kucha-field-experience",
+      "name": "Pecha Kucha Presentation (Four-Week Field Experience)",
+      "course": "field-experience",
+      "course_name": "field-experience",
+      "due_date": "2026-09-21",
+      "weight_pct": 15.0,
+      "days_remaining": 8,
+      "color": "yellow"
+    },
+    {
+      "id": "mktg-group-project-part1",
+      "name": "Marketing Group Project - Part 1 (secondary research, focus group, interviews)",
+      "course": "marketing-research",
+      "course_name": "Marketing Research",
+      "due_date": "2026-10-01",
+      "weight_pct": 25.0,
+      "days_remaining": 18,
+      "color": "yellow"
+    },
+    {
+      "id": "finance-midterm",
+      "name": "Finance Midterm Exam",
+      "course": "finance",
+      "course_name": "Finance",
+      "due_date": "2026-10-05",
+      "weight_pct": 30.0,
+      "days_remaining": 22,
+      "color": "yellow"
+    },
+    {
+      "id": "intl-econ-memo1",
+      "name": "\u201cData to Reality\u201d Strategic Memo 1",
+      "course": "international-economics",
+      "course_name": "International Economics",
+      "due_date": "2026-10-16",
+      "weight_pct": 15.0,
+      "days_remaining": 33,
+      "color": "green"
+    },
+    {
+      "id": "cost-budgets-midterm",
+      "name": "Cost & Budgets Midterm Exam",
+      "course": "cost-budgets",
+      "course_name": "Cost & Budgets",
+      "due_date": "2026-10-20",
+      "weight_pct": 35.0,
+      "days_remaining": 37,
+      "color": "green"
+    },
+    {
+      "id": "mktg-group-project-part2",
+      "name": "Marketing Group Project - Part 2 (hypotheses, sampling plan, Qualtrics survey)",
+      "course": "marketing-research",
+      "course_name": "Marketing Research",
+      "due_date": "2026-10-22",
+      "weight_pct": 2.5,
+      "days_remaining": 39,
+      "color": "green"
+    },
+    {
+      "id": "intl-econ-real-asset-pitch",
+      "name": "Real Asset Market Entry Pitch (group)",
+      "course": "international-economics",
+      "course_name": "International Economics",
+      "due_date": "2026-10-23",
+      "weight_pct": 25.0,
+      "days_remaining": 40,
+      "color": "green"
+    },
+    {
+      "id": "mktg-group-project-part3",
+      "name": "Marketing Group Project - Part 3 (peer review, analysis, recommendations)",
+      "course": "marketing-research",
+      "course_name": "Marketing Research",
+      "due_date": "2026-11-26",
+      "weight_pct": 22.5,
+      "days_remaining": 74,
+      "color": "green"
+    },
+    {
+      "id": "intl-econ-memo2",
+      "name": "\u201cData to Reality\u201d Strategic Memo 2",
+      "course": "international-economics",
+      "course_name": "International Economics",
+      "due_date": "2026-12-01",
+      "weight_pct": 15.0,
+      "days_remaining": 79,
+      "color": "green"
+    },
+    {
+      "id": "intl-econ-g20-simulation",
+      "name": "G20 Summit Simulation (group)",
+      "course": "international-economics",
+      "course_name": "International Economics",
+      "due_date": "2026-12-01",
+      "weight_pct": 25.0,
+      "days_remaining": 79,
+      "color": "green"
+    }
+  ]
 }
