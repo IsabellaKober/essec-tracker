@@ -136,25 +136,30 @@ already enter once.
 
 The dashboard used to show one flat "suggested order" combining every
 course's outstanding checklist items at once — unreviewable in one sitting,
-since a single session's write-up alone takes ~2h. It's now three
-calendar-aware lists instead, built by `build_dashboard_data.py`:
+since a single session's write-up alone takes ~2h. It's now three lists —
+today / tomorrow / the day after — built by `build_suggested_plan()` in
+`scripts/build_dashboard_data.py`, which *spreads* the backlog across those
+three days instead of dumping it all on today or requiring a literal class
+that day to show anything:
 
-- **Today**: a course only appears if something makes today the right day
-  for it — it met today or yesterday, its backlog has grown to 2+ un-reviewed
-  sessions, or it meets again within the next two days (clear the backlog
-  first). On a quiet day where nothing triggers, the single
-  nearest-upcoming-class course is shown instead, so the list is never
-  emptied out while work remains, but never dumps every course at once
-  either. Each item shows *why* it's there (e.g. "class today", "3 sessions
-  backing up", "next class coming up").
-- **Tomorrow** / **the day after**: just the courses that actually meet on
-  that day, with whatever checklist items are still outstanding — a heads-up
-  to clear the backlog before walking into that class, not a study plan.
+- Every course with outstanding checklist items gets a `latest_day` it must
+  be handled by: met today or yesterday → today or tomorrow (fresh material,
+  1-day slack); a class falls in the 3-day window → the day *before* that
+  class (day-0 if the class is later today); no signal either way → free to
+  land on whichever of the three days is currently lightest.
+- Courses are placed tightest-deadline-first, then heaviest-backlog-first,
+  each going into the lightest-loaded day within its allowed range (load =
+  sum of pending-session counts, a rough stand-in for the ~2h each session's
+  write-up takes) — so the three days end up close to even instead of one
+  being empty while another has everything.
+- Each item shows *why* it landed on that day (e.g. "class today", "3
+  sessions backing up", "spreading the workload evenly").
 
 This relies on `scripts/fetch_schedule.py` writing a `classes_by_date` map
 (today + the next two days → which courses meet) to
 `sessions/.state/schedule.yaml`, alongside the `next_session` data it already
-tracked.
+tracked. Until that's been fetched at least once, every course falls back to
+the "no signal" case and is placed purely by load-balancing.
 
 ## Repo layout
 

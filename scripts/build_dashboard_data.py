@@ -41,29 +41,37 @@ def _course_items(c):
     return list((c["next_up"] or {}).get("checklist_items") or [])
 
 
-def build_suggested_today(out_courses, pending_by_course, classes_by_date, next_session_by_course, now):
-    """Score each course for *today's* list instead of dumping every
-    course's backlog into one flat queue (that queue used to list all 8
-    courses at once, which is unreviewable in a single sitting when each
-    session's write-up takes ~2h on its own).
+def build_suggested_plan(out_courses, pending_by_course, classes_by_date, now):
+    """Spread every course's outstanding backlog across the next three days
+    (today / tomorrow / the day after) instead of dumping it all on today
+    while the other two sit empty, or requiring a literal class that day to
+    show anything at all.
 
-    A course only shows up here if something makes today the right day for
-    it: it met today or yesterday (material's still fresh), its backlog is
-    growing (2+ un-reviewed sessions), or its next class is in the next two
-    days (clear the backlog before it meets again). No signal -> not on
-    today's list, even if it has outstanding items - it'll surface on a day
-    that actually calls for it.
+    Each course gets a `latest_day` (0/1/2) it must be handled by:
+    - met today or yesterday: fresh material, so today or tomorrow (1).
+    - a class falls in the window: must finish the day *before* that class
+      (so you walk in caught up) - the day before a day-2 class is day 1,
+      the day before a day-1 class is day 0 (today), a day-0 class (later
+      today) also means today.
+    - no signal either way: no deadline, free to land on whichever of the
+      three days is currently lightest.
+
+    Courses are placed most-constrained-first (tightest deadline, then
+    biggest backlog), each going to the lightest-loaded day within its
+    allowed range - so the workload actually levels out across the window
+    rather than front-loading today.
     """
     today = now.date()
     yesterday_str = (today - dt.timedelta(days=1)).isoformat()
     today_str = today.isoformat()
-    soon_course_ids = {
-        e["course_id"]
-        for offset in (1, 2)
-        for e in classes_by_date.get((today + dt.timedelta(days=offset)).isoformat(), [])
-    }
+    window_dates = [today + dt.timedelta(days=offset) for offset in (0, 1, 2)]
 
-    scored = []
+    class_day_by_course = {}
+    for offset, d in enumerate(window_dates):
+        for e in classes_by_date.get(d.isoformat(), []):
+            class_day_by_course.setdefault(e["course_id"], offset)
+
+    entries = []
     for c in out_courses:
         items = _course_items(c)
         if not items:
@@ -72,60 +80,50 @@ def build_suggested_today(out_courses, pending_by_course, classes_by_date, next_
         pending_count = len(recs)
         class_today = any(r["class_date"] == today_str for r in recs)
         class_yesterday = any(r["class_date"] == yesterday_str for r in recs)
+        upcoming_day = class_day_by_course.get(c["id"])
 
-        score = 0
         reasons = []
         if class_today:
-            score += 100
+            latest_day = 1
             reasons.append("class today")
         elif class_yesterday:
-            score += 70
+            latest_day = 1
             reasons.append("class yesterday")
+        elif upcoming_day is not None:
+            latest_day = max(0, upcoming_day - 1)
+            day_label = ("today", "tomorrow", "the day after")[upcoming_day]
+            reasons.append(f"class {day_label}" if upcoming_day else "class today")
+        else:
+            latest_day = 2
+
         if pending_count >= 2:
-            score += 15 * (pending_count - 1)
             reasons.append(f"{pending_count} sessions backing up")
-        if c["id"] in soon_course_ids and pending_count >= 1:
-            score += 25
-            reasons.append("next class coming up")
+        if not reasons:
+            reasons.append("spreading the workload evenly")
 
-        if score:
-            scored.append({"course_id": c["id"], "course_name": c["name"], "reason": ", ".join(reasons), "items": items, "score": score})
+        entries.append(
+            {
+                "course_id": c["id"],
+                "course_name": c["name"],
+                "items": items,
+                "weight": max(pending_count, 1),
+                "latest_day": latest_day,
+                "reason": ", ".join(reasons),
+            }
+        )
 
-    if not scored:
-        # A quiet day: no course met recently, nothing's backing up, nothing
-        # meets soon. Still surface the single nearest-urgency course with
-        # outstanding items, so the list is never mysteriously empty while
-        # work remains - but only that one, not everything at once.
-        candidates = [c for c in out_courses if _course_items(c)]
-        if candidates:
-            def urgency(c):
-                next_start = next_session_by_course.get(c["id"], {}).get("start")
-                if not next_start:
-                    return (1, 0)
-                return (0, dt.datetime.strptime(next_start, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=dt.timezone.utc))
+    # Tightest deadline first, then heaviest backlog, so those get first
+    # pick of the lightest day before more flexible courses fill it up.
+    entries.sort(key=lambda e: (e["latest_day"], -e["weight"]))
 
-            nearest = min(candidates, key=urgency)
-            scored.append({"course_id": nearest["id"], "course_name": nearest["name"], "reason": "next up", "items": _course_items(nearest), "score": 1})
+    loads = [0, 0, 0]
+    buckets = {0: [], 1: [], 2: []}
+    for e in entries:
+        day = min(range(e["latest_day"] + 1), key=lambda d: (loads[d], d))
+        loads[day] += e["weight"]
+        buckets[day].append(e)
 
-    scored.sort(key=lambda s: -s["score"])
-    return scored
-
-
-def build_suggested_for_date(out_courses, date_str, classes_by_date):
-    """Courses meeting on `date_str` that still have outstanding checklist
-    items from an earlier session - a heads-up to clear the backlog before
-    walking into that class, not a full study plan.
-    """
-    meeting_ids = {e["course_id"] for e in classes_by_date.get(date_str, [])}
-    suggested = []
-    for c in out_courses:
-        if c["id"] not in meeting_ids:
-            continue
-        items = _course_items(c)
-        if not items:
-            continue
-        suggested.append({"course_id": c["id"], "course_name": c["name"], "items": items})
-    return suggested
+    return buckets
 
 
 def flatten(scored):
@@ -286,9 +284,10 @@ def build():
     tomorrow_str = (today_date + dt.timedelta(days=1)).isoformat()
     day_after_str = (today_date + dt.timedelta(days=2)).isoformat()
 
-    suggested_today = flatten(build_suggested_today(out_courses, pending_by_course, classes_by_date, next_session_by_course, now))
-    suggested_tomorrow = flatten(build_suggested_for_date(out_courses, tomorrow_str, classes_by_date))
-    suggested_day_after = flatten(build_suggested_for_date(out_courses, day_after_str, classes_by_date))
+    plan = build_suggested_plan(out_courses, pending_by_course, classes_by_date, now)
+    suggested_today = flatten(plan[0])
+    suggested_tomorrow = flatten(plan[1])
+    suggested_day_after = flatten(plan[2])
 
     today = dt.date.today()
     out_deadlines = []

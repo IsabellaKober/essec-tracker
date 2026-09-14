@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-14T13:09:12Z",
+  "generated_at": "2026-09-14T13:18:40Z",
   "courses": [
     {
       "id": "business-law",
@@ -974,6 +974,29 @@
       "reason": "class today"
     },
     {
+      "course_id": "spanish",
+      "course_name": "Spanish",
+      "key": "_done",
+      "label": "Mark sessions 1, 2 done",
+      "sessions": [
+        1,
+        2
+      ],
+      "reason": "2 sessions backing up"
+    },
+    {
+      "course_id": "communication-skills",
+      "course_name": "Communication Skills",
+      "key": "_done",
+      "label": "Mark done",
+      "sessions": [
+        1
+      ],
+      "reason": "spreading the workload evenly"
+    }
+  ],
+  "suggested_tomorrow": [
+    {
       "course_id": "business-law",
       "course_name": "Business Law",
       "key": "review_notes",
@@ -1006,6 +1029,59 @@
       ],
       "reason": "2 sessions backing up"
     },
+    {
+      "course_id": "cost-budgets",
+      "course_name": "Cost & Budgets",
+      "key": "review_notes",
+      "label": "Go over the lecture notes",
+      "sessions": [
+        1
+      ],
+      "reason": "spreading the workload evenly"
+    },
+    {
+      "course_id": "cost-budgets",
+      "course_name": "Cost & Budgets",
+      "key": "write_summary",
+      "label": "Write a summary",
+      "sessions": [
+        1
+      ],
+      "reason": "spreading the workload evenly"
+    },
+    {
+      "course_id": "cost-budgets",
+      "course_name": "Cost & Budgets",
+      "key": "practice_questions",
+      "label": "Write and answer practice questions",
+      "sessions": [
+        1
+      ],
+      "reason": "spreading the workload evenly"
+    },
+    {
+      "course_id": "chinese",
+      "course_name": "Chinese",
+      "key": "watch_next_lessons",
+      "label": "Finish the next 3 lessons before the next class",
+      "sessions": [
+        1
+      ],
+      "reason": "spreading the workload evenly"
+    },
+    {
+      "course_id": "chinese",
+      "course_name": "Chinese",
+      "key": "review_class_material",
+      "label": "Review this session's material (1-2x this week)",
+      "sessions": [
+        1
+      ],
+      "reason": "spreading the workload evenly"
+    }
+  ],
+  "suggested_tomorrow_date": "2026-09-15",
+  "suggested_day_after": [
     {
       "course_id": "marketing-research",
       "course_name": "Marketing Research",
@@ -1051,20 +1127,46 @@
       "reason": "2 sessions backing up"
     },
     {
-      "course_id": "spanish",
-      "course_name": "Spanish",
-      "key": "_done",
-      "label": "Mark sessions 1, 2 done",
+      "course_id": "international-economics",
+      "course_name": "International Economics",
+      "key": "read_chapter",
+      "label": "Read next chapter",
       "sessions": [
-        1,
-        2
+        1
       ],
-      "reason": "2 sessions backing up"
+      "reason": "spreading the workload evenly"
+    },
+    {
+      "course_id": "international-economics",
+      "course_name": "International Economics",
+      "key": "review_notes",
+      "label": "Go over the lecture notes",
+      "sessions": [
+        1
+      ],
+      "reason": "spreading the workload evenly"
+    },
+    {
+      "course_id": "international-economics",
+      "course_name": "International Economics",
+      "key": "write_summary",
+      "label": "Write a summary",
+      "sessions": [
+        1
+      ],
+      "reason": "spreading the workload evenly"
+    },
+    {
+      "course_id": "international-economics",
+      "course_name": "International Economics",
+      "key": "practice_questions",
+      "label": "Write and answer practice questions",
+      "sessions": [
+        1
+      ],
+      "reason": "spreading the workload evenly"
     }
   ],
-  "suggested_tomorrow": [],
-  "suggested_tomorrow_date": "2026-09-15",
-  "suggested_day_after": [],
   "suggested_day_after_date": "2026-09-16",
   "breaks": [
     {
@@ -1076,5 +1178,5 @@
       "before_course_name": "Cost & Budgets"
     }
   ],
-  "ntfy_commands_url": null
+  "ntfy_commands_url": "https://ntfy.sh/essec-tracker-0dabdbd2a4c35b35d502e94b-commands"
 }
