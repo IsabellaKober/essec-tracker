@@ -24,6 +24,15 @@ DEFAULT_CHECKLIST = {
     "practice_questions": "Do practice questions",
 }
 
+# How many of the real ~2h write-up sessions (review notes + write a summary
+# + practice questions) the suggested plan will place on any single day.
+# Confirmed with the user 2026-09-14: even after spreading the backlog
+# across today/tomorrow/day-after, 3-4 of those landing on one day was still
+# unrealistic - 1/day is the real ceiling. Quick items (a course with an
+# empty checklist, or Chinese's lighter watch/review checklist) don't count
+# against this - they take minutes, not hours.
+DAILY_HEAVY_CAP = 1
+
 
 def load_yaml(path):
     with open(path, encoding="utf-8") as f:
@@ -41,11 +50,23 @@ def _course_items(c):
     return list((c["next_up"] or {}).get("checklist_items") or [])
 
 
-def build_suggested_plan(out_courses, pending_by_course, classes_by_date, now):
+def _is_heavy(checklist_labels):
+    """A course counts as a real ~2h write-up session (and so counts against
+    DAILY_HEAVY_CAP) if its checklist includes writing a summary - the
+    specific task the 2h estimate is about. Spanish/Communication Skills
+    (empty checklist) and Chinese (watch-lessons/review-material checklist)
+    don't have this key, so they're exempt - a quick click, not a cap slot.
+    """
+    return "write_summary" in checklist_labels
+
+
+def build_suggested_plan(out_courses, pending_by_course, classes_by_date, now, checklist_labels_by_course):
     """Spread every course's outstanding backlog across the next three days
     (today / tomorrow / the day after) instead of dumping it all on today
     while the other two sit empty, or requiring a literal class that day to
-    show anything at all.
+    show anything at all - and cap the real write-up work at
+    DAILY_HEAVY_CAP/day so a day never ends up with more ~2h sessions than
+    are actually doable.
 
     Each course gets a `latest_day` (0/1/2) it must be handled by:
     - met today or yesterday: fresh material, so today or tomorrow (1).
@@ -56,10 +77,13 @@ def build_suggested_plan(out_courses, pending_by_course, classes_by_date, now):
     - no signal either way: no deadline, free to land on whichever of the
       three days is currently lightest.
 
-    Courses are placed most-constrained-first (tightest deadline, then
-    biggest backlog), each going to the lightest-loaded day within its
-    allowed range - so the workload actually levels out across the window
-    rather than front-loading today.
+    Heavy (write-up) courses are placed most-constrained-first into the
+    lightest-loaded day that still has a free cap slot within their allowed
+    range - falling back to *any* day in the window with a free slot if none
+    of the allowed days have room (better a day late than not shown), and
+    dropped from this 3-day window entirely only if all three days are
+    already full; they'll surface once the window rolls forward. Light
+    courses aren't capped and are spread the same way, minus the cap.
     """
     today = now.date()
     yesterday_str = (today - dt.timedelta(days=1)).isoformat()
@@ -108,7 +132,8 @@ def build_suggested_plan(out_courses, pending_by_course, classes_by_date, now):
                 "items": items,
                 "weight": max(pending_count, 1),
                 "latest_day": latest_day,
-                "reason": ", ".join(reasons),
+                "reasons": reasons,
+                "heavy": _is_heavy(checklist_labels_by_course.get(c["id"], DEFAULT_CHECKLIST)),
             }
         )
 
@@ -116,11 +141,29 @@ def build_suggested_plan(out_courses, pending_by_course, classes_by_date, now):
     # pick of the lightest day before more flexible courses fill it up.
     entries.sort(key=lambda e: (e["latest_day"], -e["weight"]))
 
-    loads = [0, 0, 0]
     buckets = {0: [], 1: [], 2: []}
-    for e in entries:
-        day = min(range(e["latest_day"] + 1), key=lambda d: (loads[d], d))
-        loads[day] += e["weight"]
+    heavy_count = [0, 0, 0]
+    light_loads = [0, 0, 0]
+
+    for e in [x for x in entries if x["heavy"]]:
+        allowed = [d for d in range(e["latest_day"] + 1) if heavy_count[d] < DAILY_HEAVY_CAP]
+        pushed_late = False
+        if not allowed:
+            allowed = [d for d in range(3) if heavy_count[d] < DAILY_HEAVY_CAP]
+            pushed_late = True
+        if not allowed:
+            continue  # no free slot anywhere in the window - resurfaces once it rolls forward
+        day = min(allowed, key=lambda d: (heavy_count[d], d))
+        heavy_count[day] += 1
+        if pushed_late:
+            e["reasons"].append("today/tomorrow already had a full write-up session")
+        e["reason"] = ", ".join(e["reasons"])
+        buckets[day].append(e)
+
+    for e in [x for x in entries if not x["heavy"]]:
+        day = min(range(e["latest_day"] + 1), key=lambda d: (light_loads[d], d))
+        light_loads[day] += e["weight"]
+        e["reason"] = ", ".join(e["reasons"])
         buckets[day].append(e)
 
     return buckets
@@ -224,8 +267,10 @@ def build():
 
     out_courses = []
     pending_by_course = {}
+    checklist_labels_by_course = {}
     for c in courses:
         checklist_labels = c.get("checklist", DEFAULT_CHECKLIST)
+        checklist_labels_by_course[c["id"]] = checklist_labels
         held = 0
         done = 0
         pending = []
@@ -284,7 +329,7 @@ def build():
     tomorrow_str = (today_date + dt.timedelta(days=1)).isoformat()
     day_after_str = (today_date + dt.timedelta(days=2)).isoformat()
 
-    plan = build_suggested_plan(out_courses, pending_by_course, classes_by_date, now)
+    plan = build_suggested_plan(out_courses, pending_by_course, classes_by_date, now, checklist_labels_by_course)
     suggested_today = flatten(plan[0])
     suggested_tomorrow = flatten(plan[1])
     suggested_day_after = flatten(plan[2])

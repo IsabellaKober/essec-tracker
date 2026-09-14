@@ -148,12 +148,20 @@ that day to show anything:
   class (day-0 if the class is later today); no signal either way → free to
   land on whichever of the three days is currently lightest.
 - Courses are placed tightest-deadline-first, then heaviest-backlog-first,
-  each going into the lightest-loaded day within its allowed range (load =
-  sum of pending-session counts, a rough stand-in for the ~2h each session's
-  write-up takes) — so the three days end up close to even instead of one
-  being empty while another has everything.
+  each going into the lightest-loaded day within its allowed range — so the
+  three days end up close to even instead of one being empty while another
+  has everything.
+- `DAILY_HEAVY_CAP` (currently 1, confirmed with the user 2026-09-14) caps
+  how many real ~2h write-up sessions (review notes + write a summary +
+  practice questions — `_is_heavy()` checks for the `write_summary` checklist
+  key) land on any single day, even after spreading. A capped-out course
+  spills to the next day with room, or - if all three days in the window are
+  already full - just doesn't appear yet; it'll surface once the window
+  rolls forward. Quick items (an empty checklist, or Chinese's lighter
+  watch/review one) aren't capped, since they take minutes, not hours.
 - Each item shows *why* it landed on that day (e.g. "class today", "3
-  sessions backing up", "spreading the workload evenly").
+  sessions backing up", "today/tomorrow already had a full write-up
+  session").
 
 This relies on `scripts/fetch_schedule.py` writing a `classes_by_date` map
 (today + the next two days → which courses meet) to
