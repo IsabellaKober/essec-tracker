@@ -25,6 +25,24 @@
 # - Chinese: midterm (20%, oral+written) and final exam (40%, oral+written)
 #   are both mentioned but no session number or date was given for either.
 # Add each once ESSEC/Moodle confirms it - same shape as the entries below.
+#
+# Spanish "Proyecto pequeño" added 2026-09-14: three 1-minute one-take
+# videos, one per thematic block, worth "20% de la nota de control
+# continuo" per the assignment brief. Since Control Continuo is itself 60%
+# of the overall course grade, 20% of it is 12% of the whole course - split
+# evenly across the 3 videos (confirmed 2026-09-14: equal split), so 4%
+# each, which is what's entered below. The brief gives "entrega orientativa"
+# as a 2-session range per video, not a hard date - due_date below uses the
+# later session in each range as the conservative deadline.
+#
+# Session -> date mapping checked 2026-09-14 against the real ICS feed
+# (not a weekly extrapolation - Spanish has real gaps: no class the week of
+# Sep 30, and a 3-week gap between Oct 14 and Nov 4):
+#   1: 2026-09-02   2: 2026-09-09   3: 2026-09-16   4: 2026-09-23
+#   5: 2026-10-07   6: 2026-10-14   7: 2026-11-04   8: 2026-11-11
+#   9: 2026-11-18   10: 2026-11-25
+# Re-verify sessions 7-10 against the calendar closer to the time in case
+# ESSEC still shifts anything in that stretch.
 
 deadlines:
   - id: finance-midterm
@@ -98,6 +116,58 @@ deadlines:
     name: "Group Presentation (Communicating with Impact and Empathy)"
     due_date: "2026-11-24"
     weight_pct: 40
+
+  # Proyecto pequeño - full brief, kept here so it isn't lost:
+  # One 1-minute video per block, single take (no cuts), phone-recorded,
+  # influencer/live style, face on screen the whole minute. Steps: record ->
+  # auto-generate captions (Instagram/TikTok built-in) -> manually correct
+  # the captions to match exactly what you said -> self-evaluate against the
+  # rubric using the self-eval prompt below (recommended, not graded) -> run
+  # the corrected transcript through the language-correction prompt below.
+  # Submit (in the session's doc tab): video link, corrected captions, and
+  # the link/export of both AI conversations (self-eval + correction).
+  #
+  # Rubric: Pertinencia temática 40% (uses the block's vocabulary/concepts
+  # precisely, concrete examples), Fluidez de la toma 30% (visible prep,
+  # fluent, few filler words, no long blocks), Precisión del subtitulado
+  # corregido 30% (captions match exactly what was said, careful correction
+  # incl. the AI work).
+  #
+  # Self-eval prompt (paste into Gemini with your corrected captions + the
+  # rubric above): "Te comparto la transcripción corregida de mi video de un
+  # minuto sobre [tema del bloque], y la rúbrica de evaluación de mi
+  # profesor. Por favor: Evalúa mi texto según los tres criterios de la
+  # rúbrica (pertinencia temática, fluidez del take único según lo que
+  # refleja el texto, precisión aparente del contenido). Para cada criterio,
+  # dime en qué nivel estaría (excelente, adecuado o insuficiente) y por
+  # qué. Señala qué cambiarías para subir de nivel en cada criterio, sin
+  # reescribir el texto completo por mí. No me des una nota numérica, solo
+  # el nivel cualitativo por criterio."
+  #
+  # Language-correction prompt: "Voy a compartirte la transcripción
+  # corregida de mi video de un minuto en español sobre [tema del bloque].
+  # Por favor: Señala cada error, pero no reescribas la frase completa,
+  # solo indica qué está mal. Explica brevemente la regla gramatical o de
+  # uso detrás de cada corrección. Revisa si usé bien el vocabulario
+  # específico del tema. No me des una versión corregida completa del
+  # texto, solo la lista de observaciones."
+  - id: spanish-video-project-1
+    course: spanish
+    name: "Proyecto pequeño - Video 1 (Comercio internacional, oferta y demanda)"
+    due_date: "2026-09-23"
+    weight_pct: 4
+
+  - id: spanish-video-project-2
+    course: spanish
+    name: "Proyecto pequeño - Video 2 (Tecnología y consumo)"
+    due_date: "2026-10-14"
+    weight_pct: 4
+
+  - id: spanish-video-project-3
+    course: spanish
+    name: "Proyecto pequeño - Video 3 (Energía y medioambiente)"
+    due_date: "2026-11-18"
+    weight_pct: 4
 
   # Not one of the 6 tracked courses (Field Experience / Operational
   # Internship reflection, not Business Law/Finance/Cost & Budgets/Intl

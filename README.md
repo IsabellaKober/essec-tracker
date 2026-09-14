@@ -138,14 +138,32 @@ already enter once.
 courses.yaml              course + syllabus definitions (edit by hand)
 deadlines.yaml            assignments/exams (edit by hand)
 sessions/<course>-<n>.yaml  auto-created/updated by the workflow
-sessions/.state/          bookkeeping (processed calendar events, command cursor)
+sessions/.state/          bookkeeping (processed calendar events, command cursor,
+                          last biweekly check-in per course)
 scripts/check_ics.py       step 1-2: detect ended classes, create session files
 scripts/process_commands.py  step 4: poll ntfy commands topic, mark sessions done
+scripts/send_deadline_checkins.py  biweekly nudge for courses with an empty checklist
 scripts/send_notifications.py  step 3: push pending sessions to ntfy
 scripts/build_dashboard_data.py  builds docs/data.json for the dashboard
 docs/index.html           the public dashboard (GitHub Pages)
 .github/workflows/tracker.yml  the scheduled job, every 3 hours
 ```
+
+## Per-course post-class checklist
+
+Each course in `courses.yaml` has its own `checklist:` mapping (item key ->
+label shown in notifications/dashboard) instead of one generic list - see
+the comment above `courses:` in that file for which courses get which
+tasks. A course can set `checklist: {}` deliberately (Communication Skills,
+Spanish): its sessions still go to `pending_review` so you can mark them
+done, there's just nothing to check off.
+
+Communication Skills and Spanish also set `checkin_interval_days: 14`: since
+their checklist is empty, nothing else prompts a periodic look at their
+deadlines, so `scripts/send_deadline_checkins.py` pushes a reminder every 2
+weeks listing that course's `deadlines.yaml` entries (with days
+left/overdue) so nothing gets missed. Any course can opt into this by
+adding the same field.
 
 ## Notes / limitations
 

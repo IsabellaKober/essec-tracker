@@ -20,6 +20,34 @@
 # Spanish + Chinese added 2026-09-13: neither syllabus gives session-by-
 # session topics (only grading policy + a couple of dated notes), so most
 # sessions are still TODO. Confirmed 10 real sessions each on the calendar.
+#
+# Post-class checklist, per course (added 2026-09-14, refined 2026-09-14
+# after confirming the real per-course tasks). Every course now sets its own
+# `checklist:` mapping (checklist item key -> label); check_ics.py falls back
+# to DEFAULT_CHECKLIST only if a course omits `checklist:` entirely - an
+# empty mapping (`checklist: {}`) is a deliberate "nothing to track, just
+# mark the session done" and is NOT treated as "use the default".
+#
+# - "Read next chapter": only Finance and International Economics assign
+#   textbook reading (BDM chapters / weekly readings).
+# - Going over lecture notes + writing/answering practice questions + writing
+#   a summary: applies to Business Law, Finance, Cost & Budgets,
+#   International Economics, Marketing Research. Does NOT apply to Spanish,
+#   Communication Skills, or Chinese.
+# - Marketing Research additionally has a practice quiz on Moodle after every
+#   class.
+# - Communication Skills and Spanish: no post-class task is tracked (confirmed
+#   2026-09-14) - sessions still go to pending_review so you can mark them
+#   done, just with an empty checklist.
+# - Chinese: no generic tasks; instead (a) finish the next 3 video lessons
+#   before the next class, and (b) review that session's material once
+#   (ideally twice) a week.
+#
+# Biweekly deadline check-in (added 2026-09-14): Communication Skills and
+# Spanish have an empty post-class checklist, so nothing else prompts a
+# periodic look at their upcoming deadlines - a `checkin_interval_days: 14`
+# field below makes scripts/send_deadline_checkins.py nudge you every 2
+# weeks to review that course's deadlines.yaml entries so none get missed.
 
 courses:
   - id: business-law
@@ -27,6 +55,10 @@ courses:
     total_sessions: 10
     calendar_match:
       - "business law"
+    checklist:
+      review_notes: "Go over the lecture notes"
+      write_summary: "Write a summary"
+      practice_questions: "Write and answer practice questions"
     sessions:
       - number: 1
         chapter: "Introduction: Offer and Acceptance (Law of Contract)"
@@ -54,6 +86,11 @@ courses:
     total_sessions: 10
     calendar_match:
       - "finance"
+    checklist:
+      read_chapter: "Read next chapter"
+      review_notes: "Go over the lecture notes"
+      write_summary: "Write a summary"
+      practice_questions: "Write and answer practice questions"
     sessions:
       - number: 1
         chapter: "Overview of Finance (Intro to finance, corporate financial management, financial markets) - BDM Ch.1"
@@ -83,6 +120,10 @@ courses:
       - "cost & budget"
       - "cost and budget"
       - "cost & budgets"
+    checklist:
+      review_notes: "Go over the lecture notes"
+      write_summary: "Write a summary"
+      practice_questions: "Write and answer practice questions"
     sessions:
       - number: 1
         chapter: "Introduction: financial accounting to management accounting; types of costs"
@@ -110,6 +151,11 @@ courses:
     total_sessions: 10
     calendar_match:
       - "international economics"
+    checklist:
+      read_chapter: "Read next chapter"
+      review_notes: "Go over the lecture notes"
+      write_summary: "Write a summary"
+      practice_questions: "Write and answer practice questions"
     sessions:
       - number: 1
         chapter: "Globalisation, the Gravity Model & Pluralist Perspectives (bullwhip game, ungraded)"
@@ -137,6 +183,11 @@ courses:
     total_sessions: 10
     calendar_match:
       - "marketing research"
+    checklist:
+      review_notes: "Go over the lecture notes"
+      write_summary: "Write a summary"
+      practice_questions: "Write and answer practice questions"
+      practice_quiz_moodle: "Complete the Moodle practice quiz"
     sessions:
       - number: 1
         chapter: "Course intro; the Market Research Process; secondary data (Deezer case)"
@@ -164,6 +215,8 @@ courses:
     total_sessions: 10
     calendar_match:
       - "professional comm"
+    checklist: {}
+    checkin_interval_days: 14
     sessions:
       - number: 1
         chapter: "Communicating with Impact (\"Sticky\" Communication)"
@@ -191,6 +244,8 @@ courses:
     total_sessions: 10
     calendar_match:
       - "spanish"
+    checklist: {}
+    checkin_interval_days: 14
     sessions:
       - number: 1
         chapter: "TODO: fill in from syllabus (only grading policy provided, no session topics)"
@@ -218,6 +273,9 @@ courses:
     total_sessions: 10
     calendar_match:
       - "chinese"
+    checklist:
+      watch_next_lessons: "Finish the next 3 lessons before the next class"
+      review_class_material: "Review this session's material (1-2x this week)"
     sessions:
       - number: 1
         chapter: "HSK2 Lessons 46-49 (video lessons + quizzes watched in advance)"

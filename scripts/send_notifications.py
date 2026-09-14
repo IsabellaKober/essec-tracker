@@ -12,13 +12,22 @@ import yaml
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SESSIONS_DIR = os.path.join(ROOT, "sessions")
+COURSES_PATH = os.path.join(ROOT, "courses.yaml")
 
-CHECKLIST_LABELS = {
+# Used for any course that doesn't define its own `checklist:` in
+# courses.yaml.
+DEFAULT_CHECKLIST = {
     "read_chapter": "read chapter",
     "review_notes": "review notes",
     "write_summary": "write summary",
     "practice_questions": "practice Qs",
 }
+
+
+def load_checklist_labels():
+    with open(COURSES_PATH, encoding="utf-8") as f:
+        courses = yaml.safe_load(f)["courses"]
+    return {c["id"]: c.get("checklist", DEFAULT_CHECKLIST) for c in courses}
 
 
 def load_pending():
@@ -35,11 +44,12 @@ def load_pending():
     return pending
 
 
-def format_line(rec):
+def format_line(rec, checklist_labels):
+    labels = checklist_labels.get(rec["course"], DEFAULT_CHECKLIST)
     outstanding = [
-        CHECKLIST_LABELS[k]
+        labels[k]
         for k, v in rec.get("checklist", {}).items()
-        if not v and k in CHECKLIST_LABELS
+        if not v and k in labels
     ]
     todo = ", ".join(outstanding) if outstanding else "all steps checked, send done to close it out"
     return f"{rec['course']}-{rec['session_number']} ({rec.get('chapter', '')}): {todo}"
@@ -56,7 +66,8 @@ def main():
         print("Nothing pending, no notification sent.")
         return
 
-    body = "\n".join(format_line(r) for r in pending)
+    checklist_labels = load_checklist_labels()
+    body = "\n".join(format_line(r, checklist_labels) for r in pending)
     body += (
         "\n\nTo close one out: in the ntfy app, publish 'done <course-id>-<n>' "
         "to the '-commands' topic."

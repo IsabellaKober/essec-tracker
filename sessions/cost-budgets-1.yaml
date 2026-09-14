@@ -5,7 +5,6 @@ status: pending_review
 class_date: '2026-09-08'
 detected_at: '2026-09-13T06:46:33Z'
 checklist:
-  read_chapter: false
   review_notes: false
   write_summary: false
   practice_questions: false

@@ -24,6 +24,15 @@ PROCESSED_EVENTS_PATH = os.path.join(STATE_DIR, "processed_events.yaml")
 
 LOOKBACK_HOURS = int(os.environ.get("LOOKBACK_HOURS", "72"))
 
+# Used for any course that doesn't define its own `checklist:` in
+# courses.yaml (e.g. Chinese overrides this with "watch the next 3 lessons").
+DEFAULT_CHECKLIST = {
+    "read_chapter": "Read next chapter",
+    "review_notes": "Review today's notes",
+    "write_summary": "Write a summary",
+    "practice_questions": "Do practice questions",
+}
+
 
 def load_courses():
     with open(COURSES_PATH, encoding="utf-8") as f:
@@ -77,6 +86,7 @@ def create_session(course, number, class_date):
             chapter = s["chapter"]
             break
 
+    checklist_template = course.get("checklist", DEFAULT_CHECKLIST)
     data = {
         "course": course["id"],
         "session_number": number,
@@ -84,12 +94,7 @@ def create_session(course, number, class_date):
         "status": "pending_review",
         "class_date": class_date,
         "detected_at": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-        "checklist": {
-            "read_chapter": False,
-            "review_notes": False,
-            "write_summary": False,
-            "practice_questions": False,
-        },
+        "checklist": {k: False for k in checklist_template},
         "notes_summary": "",
     }
     path = session_file_path(course["id"], number)

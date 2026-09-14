@@ -14,7 +14,9 @@ DEADLINES_PATH = os.path.join(ROOT, "deadlines.yaml")
 SESSIONS_DIR = os.path.join(ROOT, "sessions")
 OUT_PATH = os.path.join(ROOT, "docs", "data.json")
 
-CHECKLIST_LABELS = {
+# Used for any course that doesn't define its own `checklist:` in
+# courses.yaml.
+DEFAULT_CHECKLIST = {
     "read_chapter": "Read next chapter",
     "review_notes": "Review today's notes",
     "write_summary": "Write a summary",
@@ -69,12 +71,16 @@ def build():
 
     out_courses = []
     for c in courses:
+        checklist_labels = c.get("checklist", DEFAULT_CHECKLIST)
+        held = 0
         done = 0
         pending = []
         session_rows = []
         for s in c["sessions"]:
             rec = sessions.get((c["id"], s["number"]))
             status = rec["status"] if rec else "not_started"
+            if status in ("pending_review", "done"):
+                held += 1
             if status == "done":
                 done += 1
             row = {"number": s["number"], "chapter": s["chapter"], "status": status}
@@ -89,9 +95,9 @@ def build():
         if pending:
             rec = pending[0]
             outstanding = [
-                CHECKLIST_LABELS[k]
+                checklist_labels[k]
                 for k, v in rec.get("checklist", {}).items()
-                if not v and k in CHECKLIST_LABELS
+                if not v and k in checklist_labels
             ]
             next_up = {
                 "session_number": rec["session_number"],
@@ -104,6 +110,7 @@ def build():
                 "id": c["id"],
                 "name": c["name"],
                 "total_sessions": c["total_sessions"],
+                "held_sessions": held,
                 "done_sessions": done,
                 "pending_count": len(pending),
                 "next_up": next_up,

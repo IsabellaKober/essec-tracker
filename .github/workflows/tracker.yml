@@ -37,6 +37,11 @@ jobs:
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
         run: python scripts/process_commands.py
 
+      - name: Send biweekly deadline check-ins
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: python scripts/send_deadline_checkins.py
+
       - name: Rebuild dashboard data
         run: python scripts/build_dashboard_data.py
 

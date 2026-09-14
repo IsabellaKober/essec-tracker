@@ -228,7 +228,8 @@ function renderCourses(courses) {
   const root = document.getElementById("courses");
   root.innerHTML = "";
   for (const c of courses) {
-    const pct = c.total_sessions ? Math.round((c.done_sessions / c.total_sessions) * 100) : 0;
+    const held = c.held_sessions ?? c.done_sessions;
+    const pct = c.total_sessions ? Math.round((held / c.total_sessions) * 100) : 0;
     const card = document.createElement("div");
     card.className = "card";
 
@@ -242,7 +243,7 @@ function renderCourses(courses) {
           — ${escapeHtml(c.next_up.chapter)}
         </div>
         <div class="tag-list">${tags}</div>`;
-    } else if (c.done_sessions >= c.total_sessions && c.total_sessions > 0) {
+    } else if (held >= c.total_sessions && c.total_sessions > 0) {
       nextUpHtml = `<div class="next-up">All sessions complete.</div>`;
     } else {
       nextUpHtml = `<div class="next-up">No session pending review right now.</div>`;
@@ -251,7 +252,7 @@ function renderCourses(courses) {
     card.innerHTML = `
       <div class="course-row-top">
         <div class="course-name">${escapeHtml(c.name)}</div>
-        <div class="course-count">${c.done_sessions}/${c.total_sessions} sessions</div>
+        <div class="course-count">${held}/${c.total_sessions} sessions held</div>
       </div>
       <div class="progress-track">
         <div class="progress-fill" style="width:${pct}%"></div>

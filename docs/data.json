@@ -1,20 +1,20 @@
 {
-  "generated_at": "2026-09-14T06:17:18Z",
+  "generated_at": "2026-09-14T06:23:40Z",
   "courses": [
     {
       "id": "business-law",
       "name": "Business Law",
       "total_sessions": 10,
+      "held_sessions": 2,
       "done_sessions": 0,
-      "pending_count": 3,
+      "pending_count": 2,
       "next_up": {
         "session_number": 1,
         "chapter": "Introduction: Offer and Acceptance (Law of Contract)",
         "outstanding": [
-          "Read next chapter",
-          "Review today's notes",
+          "Go over the lecture notes",
           "Write a summary",
-          "Do practice questions"
+          "Write and answer practice questions"
         ]
       },
       "sessions": [
@@ -23,7 +23,6 @@
           "chapter": "Introduction: Offer and Acceptance (Law of Contract)",
           "status": "pending_review",
           "checklist": {
-            "read_chapter": false,
             "review_notes": false,
             "write_summary": false,
             "practice_questions": false
@@ -34,7 +33,6 @@
           "chapter": "Offer and Acceptance (continued)",
           "status": "pending_review",
           "checklist": {
-            "read_chapter": false,
             "review_notes": false,
             "write_summary": false,
             "practice_questions": false
@@ -43,13 +41,7 @@
         {
           "number": 3,
           "chapter": "Consideration and Intention to Create Legal Relations",
-          "status": "pending_review",
-          "checklist": {
-            "read_chapter": false,
-            "review_notes": false,
-            "write_summary": false,
-            "practice_questions": false
-          }
+          "status": "not_started"
         },
         {
           "number": 4,
@@ -92,6 +84,7 @@
       "id": "finance",
       "name": "Finance",
       "total_sessions": 10,
+      "held_sessions": 0,
       "done_sessions": 0,
       "pending_count": 0,
       "next_up": null,
@@ -152,16 +145,16 @@
       "id": "cost-budgets",
       "name": "Cost & Budgets",
       "total_sessions": 10,
+      "held_sessions": 1,
       "done_sessions": 0,
       "pending_count": 1,
       "next_up": {
         "session_number": 1,
         "chapter": "Introduction: financial accounting to management accounting; types of costs",
         "outstanding": [
-          "Read next chapter",
-          "Review today's notes",
+          "Go over the lecture notes",
           "Write a summary",
-          "Do practice questions"
+          "Write and answer practice questions"
         ]
       },
       "sessions": [
@@ -170,7 +163,6 @@
           "chapter": "Introduction: financial accounting to management accounting; types of costs",
           "status": "pending_review",
           "checklist": {
-            "read_chapter": false,
             "review_notes": false,
             "write_summary": false,
             "practice_questions": false
@@ -227,6 +219,7 @@
       "id": "international-economics",
       "name": "International Economics",
       "total_sessions": 10,
+      "held_sessions": 1,
       "done_sessions": 0,
       "pending_count": 1,
       "next_up": {
@@ -234,9 +227,9 @@
         "chapter": "Globalisation, the Gravity Model & Pluralist Perspectives (bullwhip game, ungraded)",
         "outstanding": [
           "Read next chapter",
-          "Review today's notes",
+          "Go over the lecture notes",
           "Write a summary",
-          "Do practice questions"
+          "Write and answer practice questions"
         ]
       },
       "sessions": [
@@ -302,16 +295,17 @@
       "id": "marketing-research",
       "name": "Marketing Research",
       "total_sessions": 10,
+      "held_sessions": 2,
       "done_sessions": 0,
       "pending_count": 2,
       "next_up": {
         "session_number": 1,
         "chapter": "Course intro; the Market Research Process; secondary data (Deezer case)",
         "outstanding": [
-          "Read next chapter",
-          "Review today's notes",
+          "Go over the lecture notes",
           "Write a summary",
-          "Do practice questions"
+          "Write and answer practice questions",
+          "Complete the Moodle practice quiz"
         ]
       },
       "sessions": [
@@ -320,10 +314,10 @@
           "chapter": "Course intro; the Market Research Process; secondary data (Deezer case)",
           "status": "pending_review",
           "checklist": {
-            "read_chapter": false,
             "review_notes": false,
             "write_summary": false,
-            "practice_questions": false
+            "practice_questions": false,
+            "practice_quiz_moodle": false
           }
         },
         {
@@ -331,10 +325,10 @@
           "chapter": "Primary/Secondary/Panel Data; Group Project briefing & brand selection",
           "status": "pending_review",
           "checklist": {
-            "read_chapter": false,
             "review_notes": false,
             "write_summary": false,
-            "practice_questions": false
+            "practice_questions": false,
+            "practice_quiz_moodle": false
           }
         },
         {
@@ -383,29 +377,20 @@
       "id": "communication-skills",
       "name": "Communication Skills",
       "total_sessions": 10,
+      "held_sessions": 1,
       "done_sessions": 0,
       "pending_count": 1,
       "next_up": {
         "session_number": 1,
         "chapter": "Communicating with Impact (\"Sticky\" Communication)",
-        "outstanding": [
-          "Read next chapter",
-          "Review today's notes",
-          "Write a summary",
-          "Do practice questions"
-        ]
+        "outstanding": []
       },
       "sessions": [
         {
           "number": 1,
           "chapter": "Communicating with Impact (\"Sticky\" Communication)",
           "status": "pending_review",
-          "checklist": {
-            "read_chapter": false,
-            "review_notes": false,
-            "write_summary": false,
-            "practice_questions": false
-          }
+          "checklist": {}
         },
         {
           "number": 2,
@@ -458,40 +443,26 @@
       "id": "spanish",
       "name": "Spanish",
       "total_sessions": 10,
+      "held_sessions": 2,
       "done_sessions": 0,
       "pending_count": 2,
       "next_up": {
         "session_number": 1,
         "chapter": "TODO: fill in from syllabus (only grading policy provided, no session topics)",
-        "outstanding": [
-          "Read next chapter",
-          "Review today's notes",
-          "Write a summary",
-          "Do practice questions"
-        ]
+        "outstanding": []
       },
       "sessions": [
         {
           "number": 1,
           "chapter": "TODO: fill in from syllabus (only grading policy provided, no session topics)",
           "status": "pending_review",
-          "checklist": {
-            "read_chapter": false,
-            "review_notes": false,
-            "write_summary": false,
-            "practice_questions": false
-          }
+          "checklist": {}
         },
         {
           "number": 2,
           "chapter": "TODO: fill in from syllabus (only grading policy provided, no session topics)",
           "status": "pending_review",
-          "checklist": {
-            "read_chapter": false,
-            "review_notes": false,
-            "write_summary": false,
-            "practice_questions": false
-          }
+          "checklist": {}
         },
         {
           "number": 3,
@@ -539,16 +510,15 @@
       "id": "chinese",
       "name": "Chinese",
       "total_sessions": 10,
+      "held_sessions": 1,
       "done_sessions": 0,
-      "pending_count": 2,
+      "pending_count": 1,
       "next_up": {
         "session_number": 1,
         "chapter": "HSK2 Lessons 46-49 (video lessons + quizzes watched in advance)",
         "outstanding": [
-          "Read next chapter",
-          "Review today's notes",
-          "Write a summary",
-          "Do practice questions"
+          "Finish the next 3 lessons before the next class",
+          "Review this session's material (1-2x this week)"
         ]
       },
       "sessions": [
@@ -557,22 +527,14 @@
           "chapter": "HSK2 Lessons 46-49 (video lessons + quizzes watched in advance)",
           "status": "pending_review",
           "checklist": {
-            "read_chapter": false,
-            "review_notes": false,
-            "write_summary": false,
-            "practice_questions": false
+            "watch_next_lessons": false,
+            "review_class_material": false
           }
         },
         {
           "number": 2,
           "chapter": "TODO: fill in from syllabus (Lessons 46-73 span this term; exact per-session split not given)",
-          "status": "pending_review",
-          "checklist": {
-            "read_chapter": false,
-            "review_notes": false,
-            "write_summary": false,
-            "practice_questions": false
-          }
+          "status": "not_started"
         },
         {
           "number": 3,
@@ -629,6 +591,16 @@
       "color": "yellow"
     },
     {
+      "id": "spanish-video-project-1",
+      "name": "Proyecto pequeño - Video 1 (Comercio internacional, oferta y demanda)",
+      "course": "spanish",
+      "course_name": "Spanish",
+      "due_date": "2026-09-23",
+      "weight_pct": 4.0,
+      "days_remaining": 9,
+      "color": "green"
+    },
+    {
       "id": "mktg-group-project-part1",
       "name": "Marketing Group Project - Part 1 (secondary research, focus group, interviews)",
       "course": "marketing-research",
@@ -657,6 +629,16 @@
       "weight_pct": 25.0,
       "days_remaining": 22,
       "color": "yellow"
+    },
+    {
+      "id": "spanish-video-project-2",
+      "name": "Proyecto pequeño - Video 2 (Tecnología y consumo)",
+      "course": "spanish",
+      "course_name": "Spanish",
+      "due_date": "2026-10-14",
+      "weight_pct": 4.0,
+      "days_remaining": 30,
+      "color": "green"
     },
     {
       "id": "intl-econ-memo1",
@@ -706,6 +688,16 @@
       "due_date": "2026-11-03",
       "weight_pct": 15.0,
       "days_remaining": 50,
+      "color": "green"
+    },
+    {
+      "id": "spanish-video-project-3",
+      "name": "Proyecto pequeño - Video 3 (Energía y medioambiente)",
+      "course": "spanish",
+      "course_name": "Spanish",
+      "due_date": "2026-11-18",
+      "weight_pct": 4.0,
+      "days_remaining": 65,
       "color": "green"
     },
     {
