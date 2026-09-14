@@ -98,6 +98,10 @@ What's still missing, flagged with comments in the files themselves:
 - **Spanish midterm** and **Chinese midterm/final**: mentioned in the
   syllabuses but without a clean single weight_pct or a known date/session
   respectively — see the comments in `deadlines.yaml` for the specifics.
+- **Holidays/breaks**: `holidays.yaml` is empty — they aren't calendar
+  events, so add each once you have it from the ESSEC academic calendar
+  (same shape as the commented-out example in the file). The dashboard's
+  "next break" widget shows "None added yet" until then.
 
 To add anything above once you know it, follow the existing entries'
 shape:
@@ -174,6 +178,7 @@ the "no signal" case and is placed purely by load-balancing.
 ```
 courses.yaml              course + syllabus definitions (edit by hand)
 deadlines.yaml            assignments/exams (edit by hand)
+holidays.yaml             breaks for the "next break" countdown (edit by hand)
 sessions/<course>-<n>.yaml  auto-created/updated by the workflow
 sessions/.state/          bookkeeping (processed calendar events, command cursor,
                           last biweekly check-in per course)

@@ -1,0 +1,19 @@
+# ESSEC academic-calendar breaks/holidays. Not represented as events in the
+# ICS feed (confirmed 2026-09-14 - they're just gaps in the class schedule,
+# not calendar entries), so tracked by hand here instead, the same way
+# deadlines.yaml tracks assignments the calendar doesn't carry.
+#
+# The dashboard's "next break" countdown reads whichever entry below starts
+# soonest (today or later) - entries fully in the past are ignored
+# automatically, no need to remove them. `end_date` may be omitted for a
+# single-day holiday (defaults to `start_date`).
+#
+# Empty for now - add each break once you have it from the ESSEC academic
+# calendar / school portal, same shape as this example:
+# holidays:
+#   - id: fall-break
+#     name: "Fall Break"
+#     start_date: "2026-10-24"
+#     end_date: "2026-11-01"
+
+holidays: []

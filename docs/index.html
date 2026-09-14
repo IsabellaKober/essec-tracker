@@ -70,6 +70,13 @@
     margin: 0 auto;
     padding: 32px 20px 8px;
   }
+  .header-top {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px 24px;
+  }
   h1 {
     font-size: 22px;
     margin: 0 0 4px;
@@ -78,6 +85,42 @@
     color: var(--ink-2);
     font-size: 13px;
     margin: 0;
+  }
+  .header-widgets {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    flex: 1 1 320px;
+    max-width: 480px;
+  }
+  .widget {
+    flex: 1 1 150px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 14px;
+    min-width: 0;
+  }
+  .widget-label {
+    color: var(--ink-muted);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 4px;
+  }
+  .quote-text {
+    font-size: 13px;
+    font-style: italic;
+    line-height: 1.4;
+  }
+  .holiday-name {
+    font-weight: 600;
+    font-size: 14px;
+  }
+  .holiday-countdown {
+    color: var(--ink-2);
+    font-size: 13px;
+    margin-top: 1px;
   }
   h2 {
     font-size: 15px;
@@ -278,8 +321,24 @@
 </head>
 <body>
 <header>
-  <h1>ESSEC Academic Tracker</h1>
-  <p class="subtitle" id="generated-at">Loading…</p>
+  <div class="header-top">
+    <div>
+      <h1>ESSEC Academic Tracker</h1>
+      <p class="subtitle" id="generated-at">Loading…</p>
+    </div>
+    <div class="header-widgets">
+      <div class="widget">
+        <div class="widget-label">Today</div>
+        <div class="quote-text" id="quote-text"></div>
+      </div>
+      <div class="widget" id="holiday-widget">
+        <div class="widget-label">Next break</div>
+        <div id="holiday-body">
+          <div class="holiday-name">Loading…</div>
+        </div>
+      </div>
+    </div>
+  </div>
 </header>
 <main>
   <section>
@@ -315,6 +374,72 @@ function escapeHtml(s) {
     "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
   }[c]));
 }
+
+// One quote per calendar day (viewer's local date), stable all day and
+// changing at local midnight - no server round-trip needed for this.
+const QUOTES = [
+  "The magic you are looking for is in the work you are avoiding.",
+  "Discipline is choosing between what you want now and what you want most.",
+  "You don't have to be great to start, but you have to start to be great.",
+  "Motivation gets you going; discipline keeps you going.",
+  "The pain of discipline weighs ounces; the pain of regret weighs tons.",
+  "Done is better than perfect.",
+  "Small daily improvements are the key to staggering long-term results.",
+  "Your future is created by what you do today, not tomorrow.",
+  "A little progress each day adds up to big results.",
+  "The expert in anything was once a beginner.",
+  "You won't always be motivated, so you must learn to be disciplined.",
+  "Action is the antidote to anxiety.",
+  "What you avoid controls you; what you face, you control.",
+  "The best time to start was yesterday. The next best time is now.",
+  "Hard choices, easy life. Easy choices, hard life.",
+  "You don't find time, you make it.",
+  "Procrastination is the thief of time.",
+  "Success is the sum of small efforts repeated day in and day out.",
+  "Do the hard things first.",
+  "Clarity comes from engagement, not thought.",
+  "Momentum builds by starting, not by waiting to feel ready.",
+  "The obstacle is the way.",
+  "Nothing changes if nothing changes.",
+  "Focus on being productive instead of busy.",
+  "You are one focused hour away from feeling in control again.",
+  "Slow progress is still progress.",
+  "Consistency beats intensity.",
+  "The work will teach you how to do it.",
+  "Future you is watching. Make them proud.",
+  "Comfort today is a debt you pay tomorrow.",
+];
+
+function pickDailyQuote() {
+  const now = new Date();
+  const startOfYear = new Date(now.getFullYear(), 0, 0);
+  const dayOfYear = Math.floor((now - startOfYear) / 86400000);
+  return QUOTES[dayOfYear % QUOTES.length];
+}
+
+function renderQuote() {
+  document.getElementById("quote-text").textContent = pickDailyQuote();
+}
+
+function renderHoliday(holiday) {
+  const body = document.getElementById("holiday-body");
+  if (!holiday) {
+    body.innerHTML = '<div class="holiday-name">None added yet</div>' +
+      '<div class="holiday-countdown">Add one to holidays.yaml</div>';
+    return;
+  }
+  const countdown = holiday.ongoing
+    ? "You're on break"
+    : holiday.days_remaining === 0
+      ? "Starts today"
+      : holiday.days_remaining === 1
+        ? "1 day away"
+        : `${holiday.days_remaining} days away`;
+  body.innerHTML = `<div class="holiday-name">${escapeHtml(holiday.name)}</div>` +
+    `<div class="holiday-countdown">${escapeHtml(countdown)}</div>`;
+}
+
+renderQuote(); // doesn't depend on data.json, so show it immediately
 
 // Clicking a checklist item can't update the source of truth directly (the
 // dashboard is static, read-only GitHub Pages). It publishes a command that
@@ -573,10 +698,13 @@ fetch("data.json", { cache: "no-store" })
     renderBreaks(data.breaks || []);
     renderCourses(courses, commandsUrl, sent);
     renderDeadlines(data.deadlines || []);
+    renderHoliday(data.next_holiday || null);
   })
   .catch(err => {
     document.getElementById("generated-at").textContent =
       "Could not load data.json — has the tracker workflow run yet?";
+    document.getElementById("holiday-body").innerHTML =
+      '<div class="holiday-name">—</div>';
     console.error(err);
   });
 </script>

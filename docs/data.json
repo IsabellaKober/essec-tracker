@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-14T13:33:44Z",
+  "generated_at": "2026-09-14T13:44:14Z",
   "courses": [
     {
       "id": "business-law",
@@ -932,6 +932,7 @@
       "color": "green"
     }
   ],
+  "next_holiday": null,
   "suggested_today": [
     {
       "course_id": "cost-budgets",

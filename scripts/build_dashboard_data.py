@@ -1,6 +1,6 @@
-"""Aggregate courses.yaml + sessions/*.yaml + deadlines.yaml into
-docs/data.json, which the static dashboard (docs/index.html) fetches at
-load time. Contains no secrets - safe to publish on GitHub Pages.
+"""Aggregate courses.yaml + sessions/*.yaml + deadlines.yaml + holidays.yaml
+into docs/data.json, which the static dashboard (docs/index.html) fetches
+at load time. Contains no secrets - safe to publish on GitHub Pages.
 """
 import datetime as dt
 import json
@@ -11,6 +11,7 @@ import yaml
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 COURSES_PATH = os.path.join(ROOT, "courses.yaml")
 DEADLINES_PATH = os.path.join(ROOT, "deadlines.yaml")
+HOLIDAYS_PATH = os.path.join(ROOT, "holidays.yaml")
 SESSIONS_DIR = os.path.join(ROOT, "sessions")
 SCHEDULE_PATH = os.path.join(SESSIONS_DIR, ".state", "schedule.yaml")
 OUT_PATH = os.path.join(ROOT, "docs", "data.json")
@@ -193,6 +194,40 @@ def load_sessions():
     return sessions
 
 
+def load_holidays():
+    if not os.path.exists(HOLIDAYS_PATH):
+        return []
+    return (load_yaml(HOLIDAYS_PATH) or {}).get("holidays") or []
+
+
+def build_next_holiday(holidays, today):
+    """The soonest holiday that hasn't ended yet - "ongoing" if today falls
+    inside its start/end range (e.g. already on break), otherwise a plain
+    days-until-it-starts countdown. Entries fully in the past are skipped;
+    they don't need to be removed from holidays.yaml by hand.
+    """
+    candidates = []
+    for h in holidays:
+        start = dt.date.fromisoformat(str(h["start_date"]))
+        end = dt.date.fromisoformat(str(h.get("end_date") or h["start_date"]))
+        if end < today:
+            continue
+        candidates.append(
+            {
+                "id": h.get("id"),
+                "name": h["name"],
+                "start_date": start.isoformat(),
+                "end_date": end.isoformat(),
+                "days_remaining": max((start - today).days, 0),
+                "ongoing": start <= today <= end,
+            }
+        )
+    if not candidates:
+        return None
+    candidates.sort(key=lambda h: h["start_date"])
+    return candidates[0]
+
+
 def deadline_color(days_remaining, weight_pct):
     if days_remaining < 0:
         return "red"
@@ -259,6 +294,7 @@ def build_checklist_items(pending, checklist_labels):
 def build():
     courses = load_yaml(COURSES_PATH)["courses"]
     deadlines = (load_yaml(DEADLINES_PATH) or {}).get("deadlines") or []
+    holidays = load_holidays()
     sessions = load_sessions()
     next_session_by_course, breaks, classes_by_date = load_schedule()
     course_by_id = {c["id"]: c for c in courses}
@@ -334,6 +370,8 @@ def build():
     suggested_tomorrow = flatten(plan[1])
     suggested_day_after = flatten(plan[2])
 
+    next_holiday = build_next_holiday(holidays, today_date)
+
     today = dt.date.today()
     out_deadlines = []
     for d in deadlines:
@@ -358,6 +396,7 @@ def build():
         "generated_at": now.strftime("%Y-%m-%dT%H:%M:%SZ"),
         "courses": out_courses,
         "deadlines": out_deadlines,
+        "next_holiday": next_holiday,
         "suggested_today": suggested_today,
         "suggested_tomorrow": suggested_tomorrow,
         "suggested_tomorrow_date": tomorrow_str,
