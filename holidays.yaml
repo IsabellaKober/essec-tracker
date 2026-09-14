@@ -8,12 +8,25 @@
 # automatically, no need to remove them. `end_date` may be omitted for a
 # single-day holiday (defaults to `start_date`).
 #
-# Empty for now - add each break once you have it from the ESSEC academic
-# calendar / school portal, same shape as this example:
-# holidays:
-#   - id: fall-break
-#     name: "Fall Break"
-#     start_date: "2026-10-24"
-#     end_date: "2026-11-01"
-
-holidays: []
+# Filled in 2026-09-14 from the school portal's academic calendar
+# screenshot. That screenshot labeled the current term "Semester 3: 08 Sep
+# to 17 Dec 2025" and the next one "Semester 4: 06 Jan to 24 Apr 2026" - a
+# year behind this tracker's actual dates (your Semester 3 courses are
+# already running now, in Sept 2026 - e.g. Finance session 1 is dated
+# 2026-09-14). Read as last year's printing of the same recurring template,
+# so every date below is shifted forward one year from what the screenshot
+# showed. Double-check against the portal if that assumption looks wrong.
+#
+# The screenshot also showed a "Spring Semester (S8/IBEA/Exchange)" term
+# break (25 Feb-12 Jun track) - left out since that's a different program
+# stage/exchange track, not necessarily yours; add it (shifted the same way)
+# if it does apply to you.
+holidays:
+  - id: semester-3-term-break
+    name: "Semester 3 Term Break"
+    start_date: "2026-10-20"
+    end_date: "2026-10-24"
+  - id: semester-4-term-break
+    name: "Semester 4 Term Break"
+    start_date: "2027-02-16"
+    end_date: "2027-02-20"

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-14T13:44:14Z",
+  "generated_at": "2026-09-14T13:53:35Z",
   "courses": [
     {
       "id": "business-law",
@@ -932,7 +932,14 @@
       "color": "green"
     }
   ],
-  "next_holiday": null,
+  "next_holiday": {
+    "id": "semester-3-term-break",
+    "name": "Semester 3 Term Break",
+    "start_date": "2026-10-20",
+    "end_date": "2026-10-24",
+    "days_remaining": 36,
+    "ongoing": false
+  },
   "suggested_today": [
     {
       "course_id": "cost-budgets",
