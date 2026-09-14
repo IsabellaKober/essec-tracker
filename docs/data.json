@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-14T09:14:18Z",
+  "generated_at": "2026-09-14T12:15:56Z",
   "courses": [
     {
       "id": "business-law",
@@ -109,19 +109,58 @@
       "id": "finance",
       "name": "Finance",
       "total_sessions": 10,
-      "held_sessions": 0,
+      "held_sessions": 1,
       "done_sessions": 0,
-      "pending_count": 0,
-      "next_up": null,
+      "pending_count": 1,
+      "next_up": {
+        "session_number": 1,
+        "chapter": "Overview of Finance (Intro to finance, corporate financial management, financial markets) - BDM Ch.1",
+        "checklist_items": [
+          {
+            "key": "read_chapter",
+            "label": "Read next chapter",
+            "sessions": [
+              1
+            ]
+          },
+          {
+            "key": "review_notes",
+            "label": "Go over the lecture notes",
+            "sessions": [
+              1
+            ]
+          },
+          {
+            "key": "write_summary",
+            "label": "Write a summary",
+            "sessions": [
+              1
+            ]
+          },
+          {
+            "key": "practice_questions",
+            "label": "Write and answer practice questions",
+            "sessions": [
+              1
+            ]
+          }
+        ]
+      },
       "next_session": {
-        "start": "2026-09-14T08:30:00Z",
-        "end": "2026-09-14T11:15:00Z"
+        "start": "2026-09-17T00:45:00Z",
+        "end": "2026-09-17T03:30:00Z"
       },
       "sessions": [
         {
           "number": 1,
           "chapter": "Overview of Finance (Intro to finance, corporate financial management, financial markets) - BDM Ch.1",
-          "status": "not_started"
+          "status": "pending_review",
+          "checklist": {
+            "read_chapter": false,
+            "review_notes": false,
+            "write_summary": false,
+            "practice_questions": false
+          }
         },
         {
           "number": 2,
@@ -933,6 +972,15 @@
       ]
     },
     {
+      "course_id": "finance",
+      "course_name": "Finance",
+      "key": "read_chapter",
+      "label": "Read next chapter",
+      "sessions": [
+        1
+      ]
+    },
+    {
       "course_id": "marketing-research",
       "course_name": "Marketing Research",
       "key": "review_notes",
@@ -977,6 +1025,15 @@
       "sessions": [
         1,
         2
+      ]
+    },
+    {
+      "course_id": "finance",
+      "course_name": "Finance",
+      "key": "review_notes",
+      "label": "Go over the lecture notes",
+      "sessions": [
+        1
       ]
     },
     {
@@ -1027,6 +1084,15 @@
       ]
     },
     {
+      "course_id": "finance",
+      "course_name": "Finance",
+      "key": "write_summary",
+      "label": "Write a summary",
+      "sessions": [
+        1
+      ]
+    },
+    {
       "course_id": "marketing-research",
       "course_name": "Marketing Research",
       "key": "practice_questions",
@@ -1041,6 +1107,15 @@
       "course_name": "International Economics",
       "key": "write_summary",
       "label": "Write a summary",
+      "sessions": [
+        1
+      ]
+    },
+    {
+      "course_id": "finance",
+      "course_name": "Finance",
+      "key": "practice_questions",
+      "label": "Write and answer practice questions",
       "sessions": [
         1
       ]
