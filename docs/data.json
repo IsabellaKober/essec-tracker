@@ -1,20 +1,41 @@
 {
-  "generated_at": "2026-09-14T06:55:35Z",
+  "generated_at": "2026-09-14T07:25:43Z",
   "courses": [
     {
       "id": "business-law",
       "name": "Business Law",
       "total_sessions": 10,
-      "held_sessions": 3,
+      "held_sessions": 2,
       "done_sessions": 0,
-      "pending_count": 3,
+      "pending_count": 2,
       "next_up": {
-        "session_number": 1,
-        "chapter": "Introduction: Offer and Acceptance (Law of Contract)",
-        "outstanding": [
-          "Go over the lecture notes",
-          "Write a summary",
-          "Write and answer practice questions"
+        "session_number": 2,
+        "chapter": "Offer and Acceptance (continued)",
+        "checklist_items": [
+          {
+            "key": "review_notes",
+            "label": "Go over the lecture notes (this class and session 1)",
+            "sessions": [
+              1,
+              2
+            ]
+          },
+          {
+            "key": "write_summary",
+            "label": "Write a summary (this class and session 1)",
+            "sessions": [
+              1,
+              2
+            ]
+          },
+          {
+            "key": "practice_questions",
+            "label": "Write and answer practice questions (this class and session 1)",
+            "sessions": [
+              1,
+              2
+            ]
+          }
         ]
       },
       "sessions": [
@@ -41,13 +62,7 @@
         {
           "number": 3,
           "chapter": "Consideration and Intention to Create Legal Relations",
-          "status": "pending_review",
-          "checklist": {
-            "read_chapter": false,
-            "review_notes": false,
-            "write_summary": false,
-            "practice_questions": false
-          }
+          "status": "not_started"
         },
         {
           "number": 4,
@@ -157,10 +172,28 @@
       "next_up": {
         "session_number": 1,
         "chapter": "Introduction: financial accounting to management accounting; types of costs",
-        "outstanding": [
-          "Go over the lecture notes",
-          "Write a summary",
-          "Write and answer practice questions"
+        "checklist_items": [
+          {
+            "key": "review_notes",
+            "label": "Go over the lecture notes",
+            "sessions": [
+              1
+            ]
+          },
+          {
+            "key": "write_summary",
+            "label": "Write a summary",
+            "sessions": [
+              1
+            ]
+          },
+          {
+            "key": "practice_questions",
+            "label": "Write and answer practice questions",
+            "sessions": [
+              1
+            ]
+          }
         ]
       },
       "sessions": [
@@ -231,11 +264,35 @@
       "next_up": {
         "session_number": 1,
         "chapter": "Globalisation, the Gravity Model & Pluralist Perspectives (bullwhip game, ungraded)",
-        "outstanding": [
-          "Read next chapter",
-          "Go over the lecture notes",
-          "Write a summary",
-          "Write and answer practice questions"
+        "checklist_items": [
+          {
+            "key": "read_chapter",
+            "label": "Read next chapter",
+            "sessions": [
+              1
+            ]
+          },
+          {
+            "key": "review_notes",
+            "label": "Go over the lecture notes",
+            "sessions": [
+              1
+            ]
+          },
+          {
+            "key": "write_summary",
+            "label": "Write a summary",
+            "sessions": [
+              1
+            ]
+          },
+          {
+            "key": "practice_questions",
+            "label": "Write and answer practice questions",
+            "sessions": [
+              1
+            ]
+          }
         ]
       },
       "sessions": [
@@ -305,13 +362,41 @@
       "done_sessions": 0,
       "pending_count": 2,
       "next_up": {
-        "session_number": 1,
-        "chapter": "Course intro; the Market Research Process; secondary data (Deezer case)",
-        "outstanding": [
-          "Go over the lecture notes",
-          "Write a summary",
-          "Write and answer practice questions",
-          "Complete the Moodle practice quiz"
+        "session_number": 2,
+        "chapter": "Primary/Secondary/Panel Data; Group Project briefing & brand selection",
+        "checklist_items": [
+          {
+            "key": "review_notes",
+            "label": "Go over the lecture notes (this class and session 1)",
+            "sessions": [
+              1,
+              2
+            ]
+          },
+          {
+            "key": "write_summary",
+            "label": "Write a summary (this class and session 1)",
+            "sessions": [
+              1,
+              2
+            ]
+          },
+          {
+            "key": "practice_questions",
+            "label": "Write and answer practice questions (this class and session 1)",
+            "sessions": [
+              1,
+              2
+            ]
+          },
+          {
+            "key": "practice_quiz_moodle",
+            "label": "Complete the Moodle practice quiz (this class and session 1)",
+            "sessions": [
+              1,
+              2
+            ]
+          }
         ]
       },
       "sessions": [
@@ -389,7 +474,15 @@
       "next_up": {
         "session_number": 1,
         "chapter": "Communicating with Impact (\"Sticky\" Communication)",
-        "outstanding": []
+        "checklist_items": [
+          {
+            "key": "_done",
+            "label": "Mark done",
+            "sessions": [
+              1
+            ]
+          }
+        ]
       },
       "sessions": [
         {
@@ -453,9 +546,18 @@
       "done_sessions": 0,
       "pending_count": 2,
       "next_up": {
-        "session_number": 1,
+        "session_number": 2,
         "chapter": "TODO: fill in from syllabus (only grading policy provided, no session topics)",
-        "outstanding": []
+        "checklist_items": [
+          {
+            "key": "_done",
+            "label": "Mark sessions 1, 2 done",
+            "sessions": [
+              1,
+              2
+            ]
+          }
+        ]
       },
       "sessions": [
         {
@@ -516,15 +618,27 @@
       "id": "chinese",
       "name": "Chinese",
       "total_sessions": 10,
-      "held_sessions": 2,
+      "held_sessions": 1,
       "done_sessions": 0,
-      "pending_count": 2,
+      "pending_count": 1,
       "next_up": {
         "session_number": 1,
         "chapter": "HSK2 Lessons 46-49 (video lessons + quizzes watched in advance)",
-        "outstanding": [
-          "Finish the next 3 lessons before the next class",
-          "Review this session's material (1-2x this week)"
+        "checklist_items": [
+          {
+            "key": "watch_next_lessons",
+            "label": "Finish the next 3 lessons before the next class",
+            "sessions": [
+              1
+            ]
+          },
+          {
+            "key": "review_class_material",
+            "label": "Review this session's material (1-2x this week)",
+            "sessions": [
+              1
+            ]
+          }
         ]
       },
       "sessions": [
@@ -540,13 +654,7 @@
         {
           "number": 2,
           "chapter": "TODO: fill in from syllabus (Lessons 46-73 span this term; exact per-session split not given)",
-          "status": "pending_review",
-          "checklist": {
-            "read_chapter": false,
-            "review_notes": false,
-            "write_summary": false,
-            "practice_questions": false
-          }
+          "status": "not_started"
         },
         {
           "number": 3,
@@ -752,5 +860,6 @@
       "days_remaining": 78,
       "color": "green"
     }
-  ]
+  ],
+  "ntfy_commands_url": "https://ntfy.sh/essec-tracker-0dabdbd2a4c35b35d502e94b-commands"
 }
