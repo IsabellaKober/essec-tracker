@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-14T13:20:32Z",
+  "generated_at": "2026-09-14T13:22:13Z",
   "courses": [
     {
       "id": "business-law",
@@ -934,6 +934,92 @@
   ],
   "suggested_today": [
     {
+      "course_id": "cost-budgets",
+      "course_name": "Cost & Budgets",
+      "key": "review_notes",
+      "label": "Go over the lecture notes",
+      "sessions": [
+        1
+      ],
+      "reason": "class tomorrow"
+    },
+    {
+      "course_id": "cost-budgets",
+      "course_name": "Cost & Budgets",
+      "key": "write_summary",
+      "label": "Write a summary",
+      "sessions": [
+        1
+      ],
+      "reason": "class tomorrow"
+    },
+    {
+      "course_id": "cost-budgets",
+      "course_name": "Cost & Budgets",
+      "key": "practice_questions",
+      "label": "Write and answer practice questions",
+      "sessions": [
+        1
+      ],
+      "reason": "class tomorrow"
+    },
+    {
+      "course_id": "communication-skills",
+      "course_name": "Communication Skills",
+      "key": "_done",
+      "label": "Mark done",
+      "sessions": [
+        1
+      ],
+      "reason": "class tomorrow"
+    },
+    {
+      "course_id": "spanish",
+      "course_name": "Spanish",
+      "key": "_done",
+      "label": "Mark sessions 1, 2 done",
+      "sessions": [
+        1,
+        2
+      ],
+      "reason": "class the day after, 2 sessions backing up"
+    }
+  ],
+  "suggested_tomorrow": [
+    {
+      "course_id": "business-law",
+      "course_name": "Business Law",
+      "key": "review_notes",
+      "label": "Go over the lecture notes (this class and session 1)",
+      "sessions": [
+        1,
+        2
+      ],
+      "reason": "class the day after, 2 sessions backing up"
+    },
+    {
+      "course_id": "business-law",
+      "course_name": "Business Law",
+      "key": "write_summary",
+      "label": "Write a summary (this class and session 1)",
+      "sessions": [
+        1,
+        2
+      ],
+      "reason": "class the day after, 2 sessions backing up"
+    },
+    {
+      "course_id": "business-law",
+      "course_name": "Business Law",
+      "key": "practice_questions",
+      "label": "Write and answer practice questions (this class and session 1)",
+      "sessions": [
+        1,
+        2
+      ],
+      "reason": "class the day after, 2 sessions backing up"
+    },
+    {
       "course_id": "finance",
       "course_name": "Finance",
       "key": "read_chapter",
@@ -972,92 +1058,6 @@
         1
       ],
       "reason": "class today"
-    },
-    {
-      "course_id": "spanish",
-      "course_name": "Spanish",
-      "key": "_done",
-      "label": "Mark sessions 1, 2 done",
-      "sessions": [
-        1,
-        2
-      ],
-      "reason": "2 sessions backing up"
-    },
-    {
-      "course_id": "communication-skills",
-      "course_name": "Communication Skills",
-      "key": "_done",
-      "label": "Mark done",
-      "sessions": [
-        1
-      ],
-      "reason": "spreading the workload evenly"
-    }
-  ],
-  "suggested_tomorrow": [
-    {
-      "course_id": "business-law",
-      "course_name": "Business Law",
-      "key": "review_notes",
-      "label": "Go over the lecture notes (this class and session 1)",
-      "sessions": [
-        1,
-        2
-      ],
-      "reason": "2 sessions backing up"
-    },
-    {
-      "course_id": "business-law",
-      "course_name": "Business Law",
-      "key": "write_summary",
-      "label": "Write a summary (this class and session 1)",
-      "sessions": [
-        1,
-        2
-      ],
-      "reason": "2 sessions backing up"
-    },
-    {
-      "course_id": "business-law",
-      "course_name": "Business Law",
-      "key": "practice_questions",
-      "label": "Write and answer practice questions (this class and session 1)",
-      "sessions": [
-        1,
-        2
-      ],
-      "reason": "2 sessions backing up"
-    },
-    {
-      "course_id": "cost-budgets",
-      "course_name": "Cost & Budgets",
-      "key": "review_notes",
-      "label": "Go over the lecture notes",
-      "sessions": [
-        1
-      ],
-      "reason": "spreading the workload evenly"
-    },
-    {
-      "course_id": "cost-budgets",
-      "course_name": "Cost & Budgets",
-      "key": "write_summary",
-      "label": "Write a summary",
-      "sessions": [
-        1
-      ],
-      "reason": "spreading the workload evenly"
-    },
-    {
-      "course_id": "cost-budgets",
-      "course_name": "Cost & Budgets",
-      "key": "practice_questions",
-      "label": "Write and answer practice questions",
-      "sessions": [
-        1
-      ],
-      "reason": "spreading the workload evenly"
     },
     {
       "course_id": "chinese",
