@@ -132,9 +132,10 @@ def main():
     relevant_dates = [today + dt.timedelta(days=offset) for offset in (0, 1, 2)]
     classes_by_date = {d.isoformat(): [] for d in relevant_dates}
     for e in matched:
-        if e["class_date"] not in classes_by_date:
+        key = e["class_date"].isoformat()
+        if key not in classes_by_date:
             continue
-        classes_by_date[e["class_date"].isoformat()].append(
+        classes_by_date[key].append(
             {
                 "course_id": e["course_id"],
                 "course_name": e["course_name"],
