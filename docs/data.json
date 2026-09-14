@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-09-14T06:23:40Z",
+  "generated_at": "2026-09-14T06:55:35Z",
   "courses": [
     {
       "id": "business-law",
       "name": "Business Law",
       "total_sessions": 10,
-      "held_sessions": 2,
+      "held_sessions": 3,
       "done_sessions": 0,
-      "pending_count": 2,
+      "pending_count": 3,
       "next_up": {
         "session_number": 1,
         "chapter": "Introduction: Offer and Acceptance (Law of Contract)",
@@ -41,7 +41,13 @@
         {
           "number": 3,
           "chapter": "Consideration and Intention to Create Legal Relations",
-          "status": "not_started"
+          "status": "pending_review",
+          "checklist": {
+            "read_chapter": false,
+            "review_notes": false,
+            "write_summary": false,
+            "practice_questions": false
+          }
         },
         {
           "number": 4,
@@ -510,9 +516,9 @@
       "id": "chinese",
       "name": "Chinese",
       "total_sessions": 10,
-      "held_sessions": 1,
+      "held_sessions": 2,
       "done_sessions": 0,
-      "pending_count": 1,
+      "pending_count": 2,
       "next_up": {
         "session_number": 1,
         "chapter": "HSK2 Lessons 46-49 (video lessons + quizzes watched in advance)",
@@ -534,7 +540,13 @@
         {
           "number": 2,
           "chapter": "TODO: fill in from syllabus (Lessons 46-73 span this term; exact per-session split not given)",
-          "status": "not_started"
+          "status": "pending_review",
+          "checklist": {
+            "read_chapter": false,
+            "review_notes": false,
+            "write_summary": false,
+            "practice_questions": false
+          }
         },
         {
           "number": 3,
@@ -592,7 +604,7 @@
     },
     {
       "id": "spanish-video-project-1",
-      "name": "Proyecto pequeño - Video 1 (Comercio internacional, oferta y demanda)",
+      "name": "Proyecto peque\u00f1o - Video 1 (Comercio internacional, oferta y demanda)",
       "course": "spanish",
       "course_name": "Spanish",
       "due_date": "2026-09-23",
@@ -632,7 +644,7 @@
     },
     {
       "id": "spanish-video-project-2",
-      "name": "Proyecto pequeño - Video 2 (Tecnología y consumo)",
+      "name": "Proyecto peque\u00f1o - Video 2 (Tecnolog\u00eda y consumo)",
       "course": "spanish",
       "course_name": "Spanish",
       "due_date": "2026-10-14",
@@ -692,7 +704,7 @@
     },
     {
       "id": "spanish-video-project-3",
-      "name": "Proyecto pequeño - Video 3 (Energía y medioambiente)",
+      "name": "Proyecto peque\u00f1o - Video 3 (Energ\u00eda y medioambiente)",
       "course": "spanish",
       "course_name": "Spanish",
       "due_date": "2026-11-18",
