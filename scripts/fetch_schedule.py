@@ -64,6 +64,18 @@ def normalize(value):
     return dt.datetime.combine(value, dt.time.min, tzinfo=dt.timezone.utc)
 
 
+def class_date(end_dt):
+    """Same date derivation check_ics.py uses for a session's class_date
+    (attach UTC only if naive, otherwise keep the event's own tzinfo) - kept
+    identical on purpose so a date here always matches the class_date a
+    pending session file ends up with, letting the dashboard compare them
+    directly.
+    """
+    if end_dt.tzinfo is None:
+        return end_dt.replace(tzinfo=dt.timezone.utc).date()
+    return end_dt.date()
+
+
 def iso(d):
     return d.strftime("%Y-%m-%dT%H:%M:%SZ")
 
@@ -80,7 +92,12 @@ def main():
     cal = Calendar.from_ical(resp.content)
 
     now = dt.datetime.now(dt.timezone.utc)
-    window_start = now - dt.timedelta(hours=6)  # a class already in progress still counts as "just met"
+    today = now.date()
+    # Reaches back to the start of today (not just 6h) so a class that
+    # already happened earlier today still shows up in classes_by_date -
+    # needed for the dashboard to know "you had a class today" even hours
+    # after it ended.
+    window_start = min(now - dt.timedelta(hours=6), dt.datetime.combine(today, dt.time.min, tzinfo=dt.timezone.utc))
     window_end = now + dt.timedelta(days=NEXT_SESSION_LOOKAHEAD_DAYS)
 
     raw_events = recurring_ical_events.of(cal).between(window_start, window_end)
@@ -96,9 +113,35 @@ def main():
         course = match_course(str(event.get("SUMMARY", "")), courses)
         if course is None:
             continue
-        matched.append({"course_id": course["id"], "course_name": course["name"], "start": start, "end": end})
+        matched.append(
+            {
+                "course_id": course["id"],
+                "course_name": course["name"],
+                "start": start,
+                "end": end,
+                "class_date": class_date(dtend.dt),
+            }
+        )
 
     matched.sort(key=lambda e: e["start"])
+
+    # Today, tomorrow, and the day after - the only three days the dashboard
+    # needs a per-day class list for (calendar_match dedup isn't needed here
+    # the way check_ics.py needs it: this is just "does this course meet
+    # that day", not session bookkeeping).
+    relevant_dates = [today + dt.timedelta(days=offset) for offset in (0, 1, 2)]
+    classes_by_date = {d.isoformat(): [] for d in relevant_dates}
+    for e in matched:
+        if e["class_date"] not in classes_by_date:
+            continue
+        classes_by_date[e["class_date"].isoformat()].append(
+            {
+                "course_id": e["course_id"],
+                "course_name": e["course_name"],
+                "start": iso(e["start"]),
+                "end": iso(e["end"]),
+            }
+        )
 
     next_session = {}
     for e in matched:
@@ -129,11 +172,19 @@ def main():
     os.makedirs(STATE_DIR, exist_ok=True)
     with open(OUT_PATH, "w", encoding="utf-8") as f:
         yaml.safe_dump(
-            {"generated_at": iso(now), "next_session": next_session, "breaks": breaks},
+            {
+                "generated_at": iso(now),
+                "next_session": next_session,
+                "breaks": breaks,
+                "classes_by_date": classes_by_date,
+            },
             f,
             sort_keys=False,
         )
-    print(f"Wrote {OUT_PATH}: {len(next_session)} course(s) with a next class, {len(breaks)} upcoming break(s).")
+    print(
+        f"Wrote {OUT_PATH}: {len(next_session)} course(s) with a next class, {len(breaks)} upcoming break(s), "
+        f"classes_by_date for {', '.join(classes_by_date)}."
+    )
 
 
 if __name__ == "__main__":

@@ -186,6 +186,12 @@
     color: var(--accent);
     margin-right: 6px;
   }
+  .reason {
+    font-weight: 400;
+    color: var(--ink-muted);
+    text-transform: none;
+    letter-spacing: normal;
+  }
   .break-card {
     background: var(--surface);
     border: 1px solid var(--border);
@@ -277,8 +283,16 @@
 </header>
 <main>
   <section>
-    <h2>Suggested order for today</h2>
-    <div id="suggested"></div>
+    <h2>Suggested for today</h2>
+    <div id="suggested-today"></div>
+  </section>
+  <section>
+    <h2 id="suggested-tomorrow-heading">Suggested for tomorrow</h2>
+    <div id="suggested-tomorrow"></div>
+  </section>
+  <section>
+    <h2 id="suggested-day-after-heading">Suggested for the day after</h2>
+    <div id="suggested-day-after"></div>
   </section>
   <section>
     <h2>Breaks in your schedule</h2>
@@ -345,10 +359,11 @@ function formatTime(iso) {
   return new Date(iso).toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" });
 }
 
-function checklistItemHtml(courseId, item, sent, courseBadge) {
+function checklistItemHtml(courseId, item, sent, courseBadge, reason) {
   const id = itemId(courseId, item);
   const isSent = !!sent[id];
-  const badge = courseBadge ? `<span class="course-badge">${escapeHtml(courseBadge)}</span>` : "";
+  const reasonHtml = reason ? ` <span class="reason">— ${escapeHtml(reason)}</span>` : "";
+  const badge = courseBadge ? `<span class="course-badge">${escapeHtml(courseBadge)}${reasonHtml}</span>` : "";
   return `<button type="button" class="checklist-item" data-item-id="${escapeHtml(id)}" ${isSent ? "disabled" : ""}>
     <span class="box"></span>
     <span class="item-label">${badge}${escapeHtml(item.label)}${isSent ? '<span class="sent-note">Sent — applies on next sync</span>' : ""}</span>
@@ -404,17 +419,25 @@ function pruneSent(courses) {
   return sent;
 }
 
-function renderSuggested(suggestedOrder, commandsUrl, sent) {
-  const root = document.getElementById("suggested");
+function formatDateHeading(dateStr) {
+  // Noon UTC avoids the date shifting a day when the viewer's local
+  // timezone is behind UTC.
+  return new Date(dateStr + "T12:00:00Z").toLocaleDateString(undefined, {
+    weekday: "long", month: "short", day: "numeric",
+  });
+}
+
+function renderSuggestedList(rootId, items, commandsUrl, sent, emptyMessage) {
+  const root = document.getElementById(rootId);
   root.innerHTML = "";
-  if (!suggestedOrder.length) {
-    root.innerHTML = '<div class="card empty">Nothing outstanding — you\'re caught up everywhere.</div>';
+  if (!items.length) {
+    root.innerHTML = `<div class="card empty">${escapeHtml(emptyMessage)}</div>`;
     return;
   }
   const card = document.createElement("div");
   card.className = "card";
   card.innerHTML = `<div class="checklist">${
-    suggestedOrder.map(item => checklistItemHtml(item.course_id, item, sent, item.course_name)).join("")
+    items.map(item => checklistItemHtml(item.course_id, item, sent, item.course_name, item.reason)).join("")
   }</div>`;
   root.appendChild(card);
   wireChecklistButtons(card, commandsUrl);
@@ -532,7 +555,21 @@ fetch("data.json", { cache: "no-store" })
     const courses = data.courses || [];
     const commandsUrl = data.ntfy_commands_url || null;
     const sent = pruneSent(courses);
-    renderSuggested(data.suggested_order || [], commandsUrl, sent);
+    renderSuggestedList("suggested-today", data.suggested_today || [], commandsUrl, sent,
+      "Nothing calls for attention today — you're caught up.");
+
+    const tomorrowHeading = document.getElementById("suggested-tomorrow-heading");
+    tomorrowHeading.textContent = "Suggested for tomorrow" +
+      (data.suggested_tomorrow_date ? ` (${formatDateHeading(data.suggested_tomorrow_date)})` : "");
+    renderSuggestedList("suggested-tomorrow", data.suggested_tomorrow || [], commandsUrl, sent,
+      "No classes tomorrow with notes still outstanding.");
+
+    const dayAfterHeading = document.getElementById("suggested-day-after-heading");
+    dayAfterHeading.textContent = "Suggested for the day after" +
+      (data.suggested_day_after_date ? ` (${formatDateHeading(data.suggested_day_after_date)})` : "");
+    renderSuggestedList("suggested-day-after", data.suggested_day_after || [], commandsUrl, sent,
+      "No classes that day with notes still outstanding.");
+
     renderBreaks(data.breaks || []);
     renderCourses(courses, commandsUrl, sent);
     renderDeadlines(data.deadlines || []);

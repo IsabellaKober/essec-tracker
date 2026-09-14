@@ -132,6 +132,30 @@ This means a 30%-of-grade exam turns red 3 weeks out, while a 5% quiz stays
 green until it's almost due — no manual tagging beyond the weight % you
 already enter once.
 
+## How the suggested lists are chosen
+
+The dashboard used to show one flat "suggested order" combining every
+course's outstanding checklist items at once — unreviewable in one sitting,
+since a single session's write-up alone takes ~2h. It's now three
+calendar-aware lists instead, built by `build_dashboard_data.py`:
+
+- **Today**: a course only appears if something makes today the right day
+  for it — it met today or yesterday, its backlog has grown to 2+ un-reviewed
+  sessions, or it meets again within the next two days (clear the backlog
+  first). On a quiet day where nothing triggers, the single
+  nearest-upcoming-class course is shown instead, so the list is never
+  emptied out while work remains, but never dumps every course at once
+  either. Each item shows *why* it's there (e.g. "class today", "3 sessions
+  backing up", "next class coming up").
+- **Tomorrow** / **the day after**: just the courses that actually meet on
+  that day, with whatever checklist items are still outstanding — a heads-up
+  to clear the backlog before walking into that class, not a study plan.
+
+This relies on `scripts/fetch_schedule.py` writing a `classes_by_date` map
+(today + the next two days → which courses meet) to
+`sessions/.state/schedule.yaml`, alongside the `next_session` data it already
+tracked.
+
 ## Repo layout
 
 ```

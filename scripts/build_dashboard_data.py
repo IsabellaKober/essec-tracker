@@ -32,41 +32,111 @@ def load_yaml(path):
 
 def load_schedule():
     if not os.path.exists(SCHEDULE_PATH):
-        return {}, []
+        return {}, [], {}
     data = load_yaml(SCHEDULE_PATH) or {}
-    return data.get("next_session") or {}, data.get("breaks") or []
+    return data.get("next_session") or {}, data.get("breaks") or [], data.get("classes_by_date") or {}
 
 
-def build_suggested_order(out_courses, next_session_by_course, now):
-    """Interleave every course's outstanding checklist items, most-urgent
-    course first each round, so a study session naturally rotates across
-    subjects instead of clearing one course before touching the next.
+def _course_items(c):
+    return list((c["next_up"] or {}).get("checklist_items") or [])
 
-    Urgency = time left until that course's next class (a course with no
-    known upcoming class, e.g. finished for the term, sorts last).
+
+def build_suggested_today(out_courses, pending_by_course, classes_by_date, next_session_by_course, now):
+    """Score each course for *today's* list instead of dumping every
+    course's backlog into one flat queue (that queue used to list all 8
+    courses at once, which is unreviewable in a single sitting when each
+    session's write-up takes ~2h on its own).
+
+    A course only shows up here if something makes today the right day for
+    it: it met today or yesterday (material's still fresh), its backlog is
+    growing (2+ un-reviewed sessions), or its next class is in the next two
+    days (clear the backlog before it meets again). No signal -> not on
+    today's list, even if it has outstanding items - it'll surface on a day
+    that actually calls for it.
     """
-    queues = []
+    today = now.date()
+    yesterday_str = (today - dt.timedelta(days=1)).isoformat()
+    today_str = today.isoformat()
+    soon_course_ids = {
+        e["course_id"]
+        for offset in (1, 2)
+        for e in classes_by_date.get((today + dt.timedelta(days=offset)).isoformat(), [])
+    }
+
+    scored = []
     for c in out_courses:
-        items = (c["next_up"] or {}).get("checklist_items") or []
+        items = _course_items(c)
         if not items:
             continue
-        next_start = next_session_by_course.get(c["id"], {}).get("start")
-        if next_start:
-            urgency = (dt.datetime.strptime(next_start, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=dt.timezone.utc) - now).total_seconds()
-            urgency = max(urgency, 0)
-        else:
-            urgency = None
-        queues.append({"course_id": c["id"], "course_name": c["name"], "urgency": urgency, "items": list(items)})
+        recs = pending_by_course.get(c["id"], [])
+        pending_count = len(recs)
+        class_today = any(r["class_date"] == today_str for r in recs)
+        class_yesterday = any(r["class_date"] == yesterday_str for r in recs)
 
-    queues.sort(key=lambda q: (q["urgency"] is None, q["urgency"]))
+        score = 0
+        reasons = []
+        if class_today:
+            score += 100
+            reasons.append("class today")
+        elif class_yesterday:
+            score += 70
+            reasons.append("class yesterday")
+        if pending_count >= 2:
+            score += 15 * (pending_count - 1)
+            reasons.append(f"{pending_count} sessions backing up")
+        if c["id"] in soon_course_ids and pending_count >= 1:
+            score += 25
+            reasons.append("next class coming up")
 
+        if score:
+            scored.append({"course_id": c["id"], "course_name": c["name"], "reason": ", ".join(reasons), "items": items, "score": score})
+
+    if not scored:
+        # A quiet day: no course met recently, nothing's backing up, nothing
+        # meets soon. Still surface the single nearest-urgency course with
+        # outstanding items, so the list is never mysteriously empty while
+        # work remains - but only that one, not everything at once.
+        candidates = [c for c in out_courses if _course_items(c)]
+        if candidates:
+            def urgency(c):
+                next_start = next_session_by_course.get(c["id"], {}).get("start")
+                if not next_start:
+                    return (1, 0)
+                return (0, dt.datetime.strptime(next_start, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=dt.timezone.utc))
+
+            nearest = min(candidates, key=urgency)
+            scored.append({"course_id": nearest["id"], "course_name": nearest["name"], "reason": "next up", "items": _course_items(nearest), "score": 1})
+
+    scored.sort(key=lambda s: -s["score"])
+    return scored
+
+
+def build_suggested_for_date(out_courses, date_str, classes_by_date):
+    """Courses meeting on `date_str` that still have outstanding checklist
+    items from an earlier session - a heads-up to clear the backlog before
+    walking into that class, not a full study plan.
+    """
+    meeting_ids = {e["course_id"] for e in classes_by_date.get(date_str, [])}
     suggested = []
-    while any(q["items"] for q in queues):
-        for q in queues:
-            if q["items"]:
-                item = q["items"].pop(0)
-                suggested.append({"course_id": q["course_id"], "course_name": q["course_name"], **item})
+    for c in out_courses:
+        if c["id"] not in meeting_ids:
+            continue
+        items = _course_items(c)
+        if not items:
+            continue
+        suggested.append({"course_id": c["id"], "course_name": c["name"], "items": items})
     return suggested
+
+
+def flatten(scored):
+    out = []
+    for s in scored:
+        for item in s["items"]:
+            entry = {"course_id": s["course_id"], "course_name": s["course_name"], **item}
+            if s.get("reason"):
+                entry["reason"] = s["reason"]
+            out.append(entry)
+    return out
 
 
 def load_sessions():
@@ -149,12 +219,13 @@ def build():
     courses = load_yaml(COURSES_PATH)["courses"]
     deadlines = (load_yaml(DEADLINES_PATH) or {}).get("deadlines") or []
     sessions = load_sessions()
-    next_session_by_course, breaks = load_schedule()
+    next_session_by_course, breaks, classes_by_date = load_schedule()
     course_by_id = {c["id"]: c for c in courses}
     ntfy_topic = os.environ.get("NTFY_TOPIC")
     now = dt.datetime.now(dt.timezone.utc)
 
     out_courses = []
+    pending_by_course = {}
     for c in courses:
         checklist_labels = c.get("checklist", DEFAULT_CHECKLIST)
         held = 0
@@ -176,6 +247,7 @@ def build():
                 pending.append(rec)
 
         pending.sort(key=lambda r: r["session_number"])
+        pending_by_course[c["id"]] = pending
         next_up = None
         if pending:
             rec = pending[-1]  # most recent pending session = the "current" one
@@ -210,7 +282,13 @@ def build():
             }
         )
 
-    suggested_order = build_suggested_order(out_courses, next_session_by_course, now)
+    today_date = now.date()
+    tomorrow_str = (today_date + dt.timedelta(days=1)).isoformat()
+    day_after_str = (today_date + dt.timedelta(days=2)).isoformat()
+
+    suggested_today = flatten(build_suggested_today(out_courses, pending_by_course, classes_by_date, next_session_by_course, now))
+    suggested_tomorrow = flatten(build_suggested_for_date(out_courses, tomorrow_str, classes_by_date))
+    suggested_day_after = flatten(build_suggested_for_date(out_courses, day_after_str, classes_by_date))
 
     today = dt.date.today()
     out_deadlines = []
@@ -236,7 +314,11 @@ def build():
         "generated_at": now.strftime("%Y-%m-%dT%H:%M:%SZ"),
         "courses": out_courses,
         "deadlines": out_deadlines,
-        "suggested_order": suggested_order,
+        "suggested_today": suggested_today,
+        "suggested_tomorrow": suggested_tomorrow,
+        "suggested_tomorrow_date": tomorrow_str,
+        "suggested_day_after": suggested_day_after,
+        "suggested_day_after_date": day_after_str,
         "breaks": breaks,
         # Publishing here is a deliberate tradeoff: it lets the dashboard send
         # "done"/"check" commands with one click instead of requiring the

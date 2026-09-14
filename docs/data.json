@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-14T12:15:56Z",
+  "generated_at": "2026-09-14T13:09:12Z",
   "courses": [
     {
       "id": "business-law",
@@ -932,24 +932,46 @@
       "color": "green"
     }
   ],
-  "suggested_order": [
+  "suggested_today": [
     {
-      "course_id": "communication-skills",
-      "course_name": "Communication Skills",
-      "key": "_done",
-      "label": "Mark done",
+      "course_id": "finance",
+      "course_name": "Finance",
+      "key": "read_chapter",
+      "label": "Read next chapter",
       "sessions": [
         1
-      ]
+      ],
+      "reason": "class today"
     },
     {
-      "course_id": "cost-budgets",
-      "course_name": "Cost & Budgets",
+      "course_id": "finance",
+      "course_name": "Finance",
       "key": "review_notes",
       "label": "Go over the lecture notes",
       "sessions": [
         1
-      ]
+      ],
+      "reason": "class today"
+    },
+    {
+      "course_id": "finance",
+      "course_name": "Finance",
+      "key": "write_summary",
+      "label": "Write a summary",
+      "sessions": [
+        1
+      ],
+      "reason": "class today"
+    },
+    {
+      "course_id": "finance",
+      "course_name": "Finance",
+      "key": "practice_questions",
+      "label": "Write and answer practice questions",
+      "sessions": [
+        1
+      ],
+      "reason": "class today"
     },
     {
       "course_id": "business-law",
@@ -959,26 +981,30 @@
       "sessions": [
         1,
         2
-      ]
+      ],
+      "reason": "2 sessions backing up"
     },
     {
-      "course_id": "spanish",
-      "course_name": "Spanish",
-      "key": "_done",
-      "label": "Mark sessions 1, 2 done",
+      "course_id": "business-law",
+      "course_name": "Business Law",
+      "key": "write_summary",
+      "label": "Write a summary (this class and session 1)",
       "sessions": [
         1,
         2
-      ]
+      ],
+      "reason": "2 sessions backing up"
     },
     {
-      "course_id": "finance",
-      "course_name": "Finance",
-      "key": "read_chapter",
-      "label": "Read next chapter",
+      "course_id": "business-law",
+      "course_name": "Business Law",
+      "key": "practice_questions",
+      "label": "Write and answer practice questions (this class and session 1)",
       "sessions": [
-        1
-      ]
+        1,
+        2
+      ],
+      "reason": "2 sessions backing up"
     },
     {
       "course_id": "marketing-research",
@@ -988,53 +1014,8 @@
       "sessions": [
         1,
         2
-      ]
-    },
-    {
-      "course_id": "chinese",
-      "course_name": "Chinese",
-      "key": "watch_next_lessons",
-      "label": "Finish the next 3 lessons before the next class",
-      "sessions": [
-        1
-      ]
-    },
-    {
-      "course_id": "international-economics",
-      "course_name": "International Economics",
-      "key": "read_chapter",
-      "label": "Read next chapter",
-      "sessions": [
-        1
-      ]
-    },
-    {
-      "course_id": "cost-budgets",
-      "course_name": "Cost & Budgets",
-      "key": "write_summary",
-      "label": "Write a summary",
-      "sessions": [
-        1
-      ]
-    },
-    {
-      "course_id": "business-law",
-      "course_name": "Business Law",
-      "key": "write_summary",
-      "label": "Write a summary (this class and session 1)",
-      "sessions": [
-        1,
-        2
-      ]
-    },
-    {
-      "course_id": "finance",
-      "course_name": "Finance",
-      "key": "review_notes",
-      "label": "Go over the lecture notes",
-      "sessions": [
-        1
-      ]
+      ],
+      "reason": "2 sessions backing up"
     },
     {
       "course_id": "marketing-research",
@@ -1044,53 +1025,8 @@
       "sessions": [
         1,
         2
-      ]
-    },
-    {
-      "course_id": "chinese",
-      "course_name": "Chinese",
-      "key": "review_class_material",
-      "label": "Review this session's material (1-2x this week)",
-      "sessions": [
-        1
-      ]
-    },
-    {
-      "course_id": "international-economics",
-      "course_name": "International Economics",
-      "key": "review_notes",
-      "label": "Go over the lecture notes",
-      "sessions": [
-        1
-      ]
-    },
-    {
-      "course_id": "cost-budgets",
-      "course_name": "Cost & Budgets",
-      "key": "practice_questions",
-      "label": "Write and answer practice questions",
-      "sessions": [
-        1
-      ]
-    },
-    {
-      "course_id": "business-law",
-      "course_name": "Business Law",
-      "key": "practice_questions",
-      "label": "Write and answer practice questions (this class and session 1)",
-      "sessions": [
-        1,
-        2
-      ]
-    },
-    {
-      "course_id": "finance",
-      "course_name": "Finance",
-      "key": "write_summary",
-      "label": "Write a summary",
-      "sessions": [
-        1
-      ]
+      ],
+      "reason": "2 sessions backing up"
     },
     {
       "course_id": "marketing-research",
@@ -1100,25 +1036,8 @@
       "sessions": [
         1,
         2
-      ]
-    },
-    {
-      "course_id": "international-economics",
-      "course_name": "International Economics",
-      "key": "write_summary",
-      "label": "Write a summary",
-      "sessions": [
-        1
-      ]
-    },
-    {
-      "course_id": "finance",
-      "course_name": "Finance",
-      "key": "practice_questions",
-      "label": "Write and answer practice questions",
-      "sessions": [
-        1
-      ]
+      ],
+      "reason": "2 sessions backing up"
     },
     {
       "course_id": "marketing-research",
@@ -1128,18 +1047,25 @@
       "sessions": [
         1,
         2
-      ]
+      ],
+      "reason": "2 sessions backing up"
     },
     {
-      "course_id": "international-economics",
-      "course_name": "International Economics",
-      "key": "practice_questions",
-      "label": "Write and answer practice questions",
+      "course_id": "spanish",
+      "course_name": "Spanish",
+      "key": "_done",
+      "label": "Mark sessions 1, 2 done",
       "sessions": [
-        1
-      ]
+        1,
+        2
+      ],
+      "reason": "2 sessions backing up"
     }
   ],
+  "suggested_tomorrow": [],
+  "suggested_tomorrow_date": "2026-09-15",
+  "suggested_day_after": [],
+  "suggested_day_after_date": "2026-09-16",
   "breaks": [
     {
       "start": "2026-09-15T03:30:00Z",
@@ -1150,5 +1076,5 @@
       "before_course_name": "Cost & Budgets"
     }
   ],
-  "ntfy_commands_url": "https://ntfy.sh/essec-tracker-0dabdbd2a4c35b35d502e94b-commands"
+  "ntfy_commands_url": null
 }
