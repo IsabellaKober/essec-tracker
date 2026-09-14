@@ -63,11 +63,54 @@ def deadline_color(days_remaining, weight_pct):
     return "green"
 
 
+def build_checklist_items(pending, checklist_labels):
+    """Roll all pending sessions' outstanding checklist items into one
+    clickable list, tied to the most recent (current) pending session.
+
+    An item still outstanding only in the current session is shown with its
+    plain label. One outstanding in the current session *and* one or more
+    older ones is annotated ("this class and session 2" / "... and sessions
+    2, 3"), since checking it off resolves the whole backlog for that item
+    in one click. One outstanding only in older sessions (already done for
+    the current class) is annotated with just those session numbers.
+    """
+    if not pending or not checklist_labels:
+        return []
+
+    current_number = pending[-1]["session_number"]
+    items = []
+    for key, label in checklist_labels.items():
+        outstanding_sessions = [
+            rec["session_number"] for rec in pending if not rec.get("checklist", {}).get(key, False)
+        ]
+        if not outstanding_sessions:
+            continue
+
+        older = [n for n in outstanding_sessions if n != current_number]
+        if current_number in outstanding_sessions:
+            if not older:
+                display_label = label
+            elif len(older) == 1:
+                display_label = f"{label} (this class and session {older[0]})"
+            else:
+                display_label = f"{label} (this class and sessions {', '.join(str(n) for n in older)})"
+        elif len(older) == 1:
+            display_label = f"{label} (session {older[0]})"
+        else:
+            display_label = f"{label} (sessions {', '.join(str(n) for n in older)})"
+
+        items.append({"key": key, "label": display_label, "sessions": outstanding_sessions})
+
+    items.sort(key=lambda it: it["sessions"][0])
+    return items
+
+
 def build():
     courses = load_yaml(COURSES_PATH)["courses"]
     deadlines = (load_yaml(DEADLINES_PATH) or {}).get("deadlines") or []
     sessions = load_sessions()
     course_by_id = {c["id"]: c for c in courses}
+    ntfy_topic = os.environ.get("NTFY_TOPIC")
 
     out_courses = []
     for c in courses:
@@ -93,16 +136,22 @@ def build():
         pending.sort(key=lambda r: r["session_number"])
         next_up = None
         if pending:
-            rec = pending[0]
-            outstanding = [
-                checklist_labels[k]
-                for k, v in rec.get("checklist", {}).items()
-                if not v and k in checklist_labels
-            ]
+            rec = pending[-1]  # most recent pending session = the "current" one
+            checklist_items = build_checklist_items(pending, checklist_labels)
+            if not checklist_items:
+                # Empty checklist course (Spanish, Communication Skills): one
+                # synthetic action to mark the backlog done, no items to tick.
+                checklist_items = [
+                    {
+                        "key": "_done",
+                        "label": "Mark done" if len(pending) == 1 else f"Mark sessions {', '.join(str(r['session_number']) for r in pending)} done",
+                        "sessions": [r["session_number"] for r in pending],
+                    }
+                ]
             next_up = {
                 "session_number": rec["session_number"],
                 "chapter": rec["chapter"],
-                "outstanding": outstanding,
+                "checklist_items": checklist_items,
             }
 
         out_courses.append(
@@ -142,6 +191,12 @@ def build():
         "generated_at": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "courses": out_courses,
         "deadlines": out_deadlines,
+        # Publishing here is a deliberate tradeoff: it lets the dashboard send
+        # "done"/"check" commands with one click instead of requiring the
+        # ntfy app, at the cost of this (public) page revealing the commands
+        # topic name to anyone who finds the URL. Omitted entirely if
+        # NTFY_TOPIC isn't configured, so the checklist just isn't clickable.
+        "ntfy_commands_url": f"https://ntfy.sh/{ntfy_topic}-commands" if ntfy_topic else None,
     }
 
     os.makedirs(os.path.dirname(OUT_PATH), exist_ok=True)

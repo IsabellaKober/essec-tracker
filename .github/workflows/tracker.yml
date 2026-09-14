@@ -43,6 +43,8 @@ jobs:
         run: python scripts/send_deadline_checkins.py
 
       - name: Rebuild dashboard data
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
         run: python scripts/build_dashboard_data.py
 
       - name: Commit changes

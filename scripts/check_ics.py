@@ -143,7 +143,13 @@ def main():
 
     events.sort(key=lambda pair: pair[0])  # chronological, so numbering stays in order
 
-    created = []
+    # Group matched, not-yet-processed events by (course, calendar day): the
+    # ESSEC feed sometimes lists the same physical class as more than one
+    # event (e.g. a duplicate/rescheduled entry) that both match the same
+    # course - without this, each one turned into its own session, inflating
+    # the held-session count for a class that only happened once that day.
+    groups = {}
+    group_order = []
     for end_dt, event in events:
         uid = str(event.get("UID", ""))
         summary = str(event.get("SUMMARY", ""))
@@ -155,16 +161,29 @@ def main():
         if event_key in processed:
             continue
 
+        group_key = (course["id"], end_dt.date())
+        if group_key not in groups:
+            groups[group_key] = {"course": course, "end_dt": end_dt, "event_keys": [], "summaries": []}
+            group_order.append(group_key)
+        groups[group_key]["event_keys"].append(event_key)
+        groups[group_key]["summaries"].append(summary)
+
+    created = []
+    for group_key in group_order:
+        g = groups[group_key]
+        course, end_dt, summaries = g["course"], g["end_dt"], g["summaries"]
+
         number = next_session_number(course["id"], course["total_sessions"])
         if number is None:
-            print(f"{course['id']}: all {course['total_sessions']} sessions already tracked, skipping '{summary}'")
-            processed.add(event_key)
+            print(f"{course['id']}: all {course['total_sessions']} sessions already tracked, skipping {summaries!r}")
+            processed.update(g["event_keys"])
             continue
 
         path = create_session(course, number, end_dt.date().isoformat())
-        processed.add(event_key)
+        processed.update(g["event_keys"])
         created.append(path)
-        print(f"Created {path} for event '{summary}' (ended {end_dt.isoformat()})")
+        note = "" if len(summaries) == 1 else f" ({len(summaries)} matching calendar events collapsed into 1 session)"
+        print(f"Created {path} for {summaries!r} (ended {end_dt.isoformat()}){note}")
 
     save_processed(processed)
 

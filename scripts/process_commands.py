@@ -1,7 +1,10 @@
-"""Poll the ntfy '<topic>-commands' topic for 'done <course-id>-<n>' messages
-and mark the matching session file as done.
+"""Poll the ntfy '<topic>-commands' topic for commands and apply them to the
+matching session file(s):
+  - 'done <course-id>-<n>'                 mark a whole session done
+  - 'check <course-id> <item-key> <n,n,…>' tick one checklist item (used by
+    the dashboard's clickable checklist - see build_dashboard_data.py)
 
-This is the no-webhook fallback: open the ntfy app, subscribe to
+This is also the no-webhook manual fallback: open the ntfy app, subscribe to
 '<topic>-commands' too, and use its "Publish message" screen to send a plain
 text message like 'done finance-6'. The next scheduled run picks it up.
 
@@ -22,6 +25,10 @@ STATE_DIR = os.path.join(SESSIONS_DIR, ".state")
 CURSOR_PATH = os.path.join(STATE_DIR, "command_cursor.txt")
 
 DONE_RE = re.compile(r"^\s*done\s+(.+?)-(\d+)\s*$", re.IGNORECASE)
+# From the dashboard's clickable checklist: "check <course-id> <item-key> <n1,n2,...>"
+# One click can cover more than one session number when an item was left
+# outstanding across a backlog (see build_dashboard_data.py's rollup).
+CHECK_RE = re.compile(r"^\s*check\s+([a-z0-9-]+)\s+([a-z0-9_]+)\s+([\d,\s]+)\s*$", re.IGNORECASE)
 
 
 def load_cursor():
@@ -50,6 +57,39 @@ def mark_done(course_id, number):
     with open(path, "w", encoding="utf-8") as f:
         yaml.safe_dump(data, f, sort_keys=False, allow_unicode=True)
     print(f"Marked {course_id}-{number} done.")
+    return True
+
+
+def mark_item(course_id, number, item_key):
+    """Tick a single checklist item for one session (from a dashboard click).
+
+    A session whose checklist is empty (e.g. Spanish, Communication Skills)
+    uses the synthetic key "_done" to mean "mark the whole session done" -
+    those courses have nothing to tick individually.
+    """
+    path = os.path.join(SESSIONS_DIR, f"{course_id}-{number}.yaml")
+    if not os.path.exists(path):
+        print(f"No session file for {course_id}-{number}, ignoring command.")
+        return False
+    with open(path, encoding="utf-8") as f:
+        data = yaml.safe_load(f)
+
+    if item_key == "_done":
+        data["status"] = "done"
+        for k in data.get("checklist", {}):
+            data["checklist"][k] = True
+    else:
+        checklist = data.setdefault("checklist", {})
+        if item_key not in checklist:
+            print(f"{course_id}-{number} has no checklist item '{item_key}', ignoring.")
+            return False
+        checklist[item_key] = True
+        if checklist and all(checklist.values()):
+            data["status"] = "done"
+
+    with open(path, "w", encoding="utf-8") as f:
+        yaml.safe_dump(data, f, sort_keys=False, allow_unicode=True)
+    print(f"Checked '{item_key}' on {course_id}-{number} (status={data['status']}).")
     return True
 
 
@@ -87,6 +127,17 @@ def main():
             continue
         last_id = msg.get("id", last_id)
         text = msg.get("message", "")
+
+        m = CHECK_RE.match(text)
+        if m:
+            course_id = m.group(1).strip().lower()
+            item_key = m.group(2).strip().lower()
+            numbers = [int(n) for n in re.findall(r"\d+", m.group(3))]
+            for number in numbers:
+                if mark_item(course_id, number, item_key):
+                    any_done = True
+            continue
+
         m = DONE_RE.match(text)
         if not m:
             print(f"Ignoring unrecognized command: {text!r}")
