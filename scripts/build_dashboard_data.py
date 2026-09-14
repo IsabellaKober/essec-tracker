@@ -1,12 +1,26 @@
 """Aggregate courses.yaml + sessions/*.yaml + deadlines.yaml + holidays.yaml
 into docs/data.json, which the static dashboard (docs/index.html) fetches
-at load time. Contains no secrets - safe to publish on GitHub Pages.
+at load time and decrypts client-side.
+
+docs/data.json holds real personal content (deadlines, backlog, holiday
+dates), and GitHub Pages has no private-site option outside Enterprise (a
+Pages site is publicly reachable at its URL even when the source repo is
+private, on every other plan) - so the payload is AES-256-GCM encrypted
+here with a key derived (PBKDF2-SHA256) from the DASHBOARD_PASSWORD secret,
+and only decrypted in the browser after the viewer enters that password.
+The salt/iv/iterations aren't secret (standard for this scheme) and are
+written alongside the ciphertext - only the password, which never leaves
+GitHub secrets and the viewer's memory, decrypts it.
 """
+import base64
 import datetime as dt
 import json
 import os
 
 import yaml
+from cryptography.hazmat.primitives import hashes
+from cryptography.hazmat.primitives.ciphers.aead import AESGCM
+from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 COURSES_PATH = os.path.join(ROOT, "courses.yaml")
@@ -15,6 +29,29 @@ HOLIDAYS_PATH = os.path.join(ROOT, "holidays.yaml")
 SESSIONS_DIR = os.path.join(ROOT, "sessions")
 SCHEDULE_PATH = os.path.join(SESSIONS_DIR, ".state", "schedule.yaml")
 OUT_PATH = os.path.join(ROOT, "docs", "data.json")
+
+# OWASP's 2023 minimum recommendation for PBKDF2-HMAC-SHA256. Must match the
+# iteration count docs/index.html uses when deriving the same key with
+# Web Crypto's PBKDF2 - it's written into the output precisely so the two
+# never need to be kept in sync by hand.
+PBKDF2_ITERATIONS = 600_000
+
+
+def encrypt_payload(plaintext_bytes, password):
+    salt = os.urandom(16)
+    key = PBKDF2HMAC(
+        algorithm=hashes.SHA256(), length=32, salt=salt, iterations=PBKDF2_ITERATIONS
+    ).derive(password.encode("utf-8"))
+    iv = os.urandom(12)
+    ciphertext = AESGCM(key).encrypt(iv, plaintext_bytes, None)
+    return {
+        "encrypted": True,
+        "kdf": "pbkdf2-sha256",
+        "iterations": PBKDF2_ITERATIONS,
+        "salt": base64.b64encode(salt).decode("ascii"),
+        "iv": base64.b64encode(iv).decode("ascii"),
+        "ciphertext": base64.b64encode(ciphertext).decode("ascii"),
+    }
 
 # Used for any course that doesn't define its own `checklist:` in
 # courses.yaml.
@@ -423,10 +460,22 @@ def build():
         "ntfy_commands_url": f"https://ntfy.sh/{ntfy_topic}-commands" if ntfy_topic else None,
     }
 
+    password = os.environ.get("DASHBOARD_PASSWORD")
+    if not password:
+        # Refuse rather than fall back to plaintext - a missing secret must
+        # never silently result in real content getting published in the
+        # open. build_dashboard_data.py has no other job than to produce
+        # this file, so failing the whole step is the correct behavior.
+        raise SystemExit(
+            "DASHBOARD_PASSWORD is not set - refusing to write docs/data.json "
+            "unencrypted. Set it as a repo secret (see README)."
+        )
+    out = encrypt_payload(json.dumps(data).encode("utf-8"), password)
+
     os.makedirs(os.path.dirname(OUT_PATH), exist_ok=True)
     with open(OUT_PATH, "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=2)
-    print(f"Wrote {OUT_PATH}")
+        json.dump(out, f, indent=2)
+    print(f"Wrote {OUT_PATH} (encrypted)")
 
 
 if __name__ == "__main__":

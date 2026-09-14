@@ -41,9 +41,10 @@ Repo → Settings → Secrets and variables → Actions:
 |---|---|---|
 | `NTFY_TOPIC` | Your private ntfy topic (see below) | ✅ already set |
 | `ICS_URL` | Your ESSEC calendar's ICS feed URL | ⬜ needs your real feed |
+| `DASHBOARD_PASSWORD` | The password that decrypts the dashboard (see below) | ✅ already set |
 
-Neither is committed to the repo, so neither appears on the public dashboard.
-If you ever set a secret yourself from PowerShell, use
+None of these are committed to the repo, so none appear on the public
+dashboard. If you ever set a secret yourself from PowerShell, use
 `gh secret set NAME --body "value"` rather than piping a string in — piping
 (`"value" | gh secret set NAME`) adds an invisible BOM character that
 corrupts the value (see above).
@@ -67,6 +68,31 @@ run (within 3 hours) picks it up and stops re-notifying for it.
 
 Already enabled (branch `main`, folder `/docs`). Dashboard:
 https://isabellakober.github.io/essec-tracker/
+
+GitHub Pages has no "private site" option outside GitHub Enterprise - a
+Pages site is publicly reachable at its URL even when the source repo is
+private, on every other plan. So instead of relying on repo visibility,
+`docs/data.json` itself is encrypted (AES-256-GCM, key derived via PBKDF2
+from `DASHBOARD_PASSWORD`) by `build_dashboard_data.py`, and only decrypted
+in the browser via the Web Crypto API after the password is entered on the
+lock screen. The page's own HTML/JS stays publicly loadable (it's just
+app code, nothing personal), but the real content - deadlines, backlog,
+holiday dates - is unreadable without the password.
+
+`build_dashboard_data.py` refuses to write `docs/data.json` at all if
+`DASHBOARD_PASSWORD` isn't set, rather than falling back to publishing it
+unencrypted. The password itself was generated and given to you directly
+(not written anywhere in this repo, including this file) - save it in a
+password manager. If you ever need to rotate it: set a new
+`DASHBOARD_PASSWORD` secret, then re-run the workflow manually (step 5
+below) so `docs/data.json` gets re-encrypted with the new one - every
+browser that had the old password cached will need it re-entered.
+
+By default the dashboard remembers the password for the current browser
+session only (`sessionStorage` - cleared when you close the tab/browser),
+so you'll re-enter it on your next visit. That's deliberate: convenient
+enough not to be annoying, without leaving it decryptable indefinitely on a
+device that isn't only yours.
 
 ### 4. Real data - mostly done, some gaps left
 
