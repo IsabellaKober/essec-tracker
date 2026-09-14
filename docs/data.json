@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-14T13:54:22Z",
+  "generated_at": "2026-09-14T14:02:06Z",
   "courses": [
     {
       "id": "business-law",
@@ -938,7 +938,8 @@
     "start_date": "2026-10-20",
     "end_date": "2026-10-24",
     "days_remaining": 36,
-    "ongoing": false
+    "ongoing": false,
+    "progress_pct": 14
   },
   "suggested_today": [
     {

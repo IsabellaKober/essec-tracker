@@ -98,10 +98,13 @@ What's still missing, flagged with comments in the files themselves:
 - **Spanish midterm** and **Chinese midterm/final**: mentioned in the
   syllabuses but without a clean single weight_pct or a known date/session
   respectively — see the comments in `deadlines.yaml` for the specifics.
-- **Holidays/breaks**: `holidays.yaml` is empty — they aren't calendar
-  events, so add each once you have it from the ESSEC academic calendar
-  (same shape as the commented-out example in the file). The dashboard's
-  "next break" widget shows "None added yet" until then.
+- **Holidays/breaks**: filled in 2026-09-14 from the school portal's
+  academic calendar (Semester 3 and 4 term breaks; see the dated comment in
+  `holidays.yaml` for the year-shift reasoning). The Spring
+  (S8/IBEA/Exchange) break was left out as a different program track — add
+  it the same way if it applies. Each entry's `count_from` (its term start)
+  drives the "next break" widget's progress bar; add that field to future
+  entries too, or leave it off for just the days-remaining text with no bar.
 
 To add anything above once you know it, follow the existing entries'
 shape:

@@ -122,6 +122,9 @@
     font-size: 13px;
     margin-top: 1px;
   }
+  .holiday-progress {
+    margin-top: 6px;
+  }
   h2 {
     font-size: 15px;
     text-transform: uppercase;
@@ -440,8 +443,18 @@ function renderHoliday(holiday) {
       : holiday.days_remaining === 1
         ? "1 day away"
         : `${holiday.days_remaining} days away`;
+
+  let progressHtml = "";
+  if (holiday.ongoing || typeof holiday.progress_pct === "number") {
+    const pct = holiday.ongoing ? 100 : holiday.progress_pct;
+    progressHtml = `<div class="progress-track holiday-progress">
+      <div class="progress-fill" style="width:${pct}%"></div>
+    </div>`;
+  }
+
   body.innerHTML = `<div class="holiday-name">${escapeHtml(holiday.name)}</div>` +
-    `<div class="holiday-countdown">${escapeHtml(countdown)}</div>`;
+    `<div class="holiday-countdown">${escapeHtml(countdown)}</div>` +
+    progressHtml;
 }
 
 renderQuote(); // doesn't depend on data.json, so show it immediately

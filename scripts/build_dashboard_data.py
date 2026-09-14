@@ -205,6 +205,12 @@ def build_next_holiday(holidays, today):
     inside its start/end range (e.g. already on break), otherwise a plain
     days-until-it-starts countdown. Entries fully in the past are skipped;
     they don't need to be removed from holidays.yaml by hand.
+
+    `progress_pct` drives the dashboard's progress bar: how far through the
+    wait (from the entry's optional `count_from` - typically the term start
+    - to the break's start) today falls. Left out entirely if `count_from`
+    is missing or isn't actually before `start_date`, so the bar just
+    doesn't render rather than showing a meaningless one.
     """
     candidates = []
     for h in holidays:
@@ -212,16 +218,22 @@ def build_next_holiday(holidays, today):
         end = dt.date.fromisoformat(str(h.get("end_date") or h["start_date"]))
         if end < today:
             continue
-        candidates.append(
-            {
-                "id": h.get("id"),
-                "name": h["name"],
-                "start_date": start.isoformat(),
-                "end_date": end.isoformat(),
-                "days_remaining": max((start - today).days, 0),
-                "ongoing": start <= today <= end,
-            }
-        )
+        entry = {
+            "id": h.get("id"),
+            "name": h["name"],
+            "start_date": start.isoformat(),
+            "end_date": end.isoformat(),
+            "days_remaining": max((start - today).days, 0),
+            "ongoing": start <= today <= end,
+        }
+        count_from = h.get("count_from")
+        if count_from:
+            count_from = dt.date.fromisoformat(str(count_from))
+            span = (start - count_from).days
+            if span > 0:
+                elapsed = (today - count_from).days
+                entry["progress_pct"] = round(max(0, min(elapsed, span)) / span * 100)
+        candidates.append(entry)
     if not candidates:
         return None
     candidates.sort(key=lambda h: h["start_date"])
