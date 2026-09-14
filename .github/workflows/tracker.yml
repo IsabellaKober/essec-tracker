@@ -32,6 +32,11 @@ jobs:
           ICS_URL: ${{ secrets.ICS_URL }}
         run: python scripts/check_ics.py
 
+      - name: Fetch upcoming schedule (next class, breaks between classes)
+        env:
+          ICS_URL: ${{ secrets.ICS_URL }}
+        run: python scripts/fetch_schedule.py
+
       - name: Process done-commands from ntfy
         env:
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}

@@ -12,6 +12,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 COURSES_PATH = os.path.join(ROOT, "courses.yaml")
 DEADLINES_PATH = os.path.join(ROOT, "deadlines.yaml")
 SESSIONS_DIR = os.path.join(ROOT, "sessions")
+SCHEDULE_PATH = os.path.join(SESSIONS_DIR, ".state", "schedule.yaml")
 OUT_PATH = os.path.join(ROOT, "docs", "data.json")
 
 # Used for any course that doesn't define its own `checklist:` in
@@ -27,6 +28,45 @@ DEFAULT_CHECKLIST = {
 def load_yaml(path):
     with open(path, encoding="utf-8") as f:
         return yaml.safe_load(f)
+
+
+def load_schedule():
+    if not os.path.exists(SCHEDULE_PATH):
+        return {}, []
+    data = load_yaml(SCHEDULE_PATH) or {}
+    return data.get("next_session") or {}, data.get("breaks") or []
+
+
+def build_suggested_order(out_courses, next_session_by_course, now):
+    """Interleave every course's outstanding checklist items, most-urgent
+    course first each round, so a study session naturally rotates across
+    subjects instead of clearing one course before touching the next.
+
+    Urgency = time left until that course's next class (a course with no
+    known upcoming class, e.g. finished for the term, sorts last).
+    """
+    queues = []
+    for c in out_courses:
+        items = (c["next_up"] or {}).get("checklist_items") or []
+        if not items:
+            continue
+        next_start = next_session_by_course.get(c["id"], {}).get("start")
+        if next_start:
+            urgency = (dt.datetime.strptime(next_start, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=dt.timezone.utc) - now).total_seconds()
+            urgency = max(urgency, 0)
+        else:
+            urgency = None
+        queues.append({"course_id": c["id"], "course_name": c["name"], "urgency": urgency, "items": list(items)})
+
+    queues.sort(key=lambda q: (q["urgency"] is None, q["urgency"]))
+
+    suggested = []
+    while any(q["items"] for q in queues):
+        for q in queues:
+            if q["items"]:
+                item = q["items"].pop(0)
+                suggested.append({"course_id": q["course_id"], "course_name": q["course_name"], **item})
+    return suggested
 
 
 def load_sessions():
@@ -109,8 +149,10 @@ def build():
     courses = load_yaml(COURSES_PATH)["courses"]
     deadlines = (load_yaml(DEADLINES_PATH) or {}).get("deadlines") or []
     sessions = load_sessions()
+    next_session_by_course, breaks = load_schedule()
     course_by_id = {c["id"]: c for c in courses}
     ntfy_topic = os.environ.get("NTFY_TOPIC")
+    now = dt.datetime.now(dt.timezone.utc)
 
     out_courses = []
     for c in courses:
@@ -163,9 +205,12 @@ def build():
                 "done_sessions": done,
                 "pending_count": len(pending),
                 "next_up": next_up,
+                "next_session": next_session_by_course.get(c["id"]),
                 "sessions": session_rows,
             }
         )
+
+    suggested_order = build_suggested_order(out_courses, next_session_by_course, now)
 
     today = dt.date.today()
     out_deadlines = []
@@ -188,9 +233,11 @@ def build():
     out_deadlines.sort(key=lambda d: d["days_remaining"])
 
     data = {
-        "generated_at": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "generated_at": now.strftime("%Y-%m-%dT%H:%M:%SZ"),
         "courses": out_courses,
         "deadlines": out_deadlines,
+        "suggested_order": suggested_order,
+        "breaks": breaks,
         # Publishing here is a deliberate tradeoff: it lets the dashboard send
         # "done"/"check" commands with one click instead of requiring the
         # ntfy app, at the cost of this (public) page revealing the commands

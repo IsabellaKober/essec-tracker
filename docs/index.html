@@ -174,6 +174,46 @@
     font-size: 11px;
     display: block;
   }
+  .next-session {
+    color: var(--ink-muted);
+    font-size: 12px;
+    margin-top: 2px;
+  }
+  .course-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--accent);
+    margin-right: 6px;
+  }
+  .break-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin-bottom: 10px;
+    font-size: 13px;
+  }
+  .break-card.now {
+    border-color: var(--accent);
+  }
+  .break-time {
+    font-weight: 600;
+    font-size: 13px;
+  }
+  .break-now-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin-left: 8px;
+  }
+  .break-suggestion {
+    color: var(--ink-2);
+    margin-top: 3px;
+  }
   .deadline-row {
     display: flex;
     align-items: center;
@@ -237,6 +277,14 @@
 </header>
 <main>
   <section>
+    <h2>Suggested order for today</h2>
+    <div id="suggested"></div>
+  </section>
+  <section>
+    <h2>Breaks in your schedule</h2>
+    <div id="breaks"></div>
+  </section>
+  <section>
     <h2>Progress by course</h2>
     <div id="courses"></div>
   </section>
@@ -287,27 +335,115 @@ async function sendCommand(commandsUrl, text) {
   if (!resp.ok) throw new Error(`ntfy publish failed: ${resp.status}`);
 }
 
-function renderCourses(courses, commandsUrl) {
-  const root = document.getElementById("courses");
-  root.innerHTML = "";
-  const sent = loadSent();
-  let sentChanged = false;
+function formatDateTime(iso) {
+  return new Date(iso).toLocaleString(undefined, {
+    weekday: "short", month: "short", day: "numeric", hour: "numeric", minute: "2-digit",
+  });
+}
 
-  // Drop anything marked "sent" that no longer appears in the fresh data -
-  // it synced, so there's nothing left to disable.
+function formatTime(iso) {
+  return new Date(iso).toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" });
+}
+
+function checklistItemHtml(courseId, item, sent, courseBadge) {
+  const id = itemId(courseId, item);
+  const isSent = !!sent[id];
+  const badge = courseBadge ? `<span class="course-badge">${escapeHtml(courseBadge)}</span>` : "";
+  return `<button type="button" class="checklist-item" data-item-id="${escapeHtml(id)}" ${isSent ? "disabled" : ""}>
+    <span class="box"></span>
+    <span class="item-label">${badge}${escapeHtml(item.label)}${isSent ? '<span class="sent-note">Sent — applies on next sync</span>' : ""}</span>
+  </button>`;
+}
+
+function wireChecklistButtons(root, commandsUrl) {
+  if (!commandsUrl) {
+    root.querySelectorAll(".checklist-item").forEach(btn => (btn.disabled = true));
+    return;
+  }
+  root.querySelectorAll(".checklist-item").forEach(btn => {
+    btn.addEventListener("click", async () => {
+      const id = btn.dataset.itemId;
+      const [courseId, key, sessionsCsv] = id.split("|");
+      const allCopies = document.querySelectorAll(`.checklist-item[data-item-id="${CSS.escape(id)}"]`);
+      allCopies.forEach(b => (b.disabled = true));
+      try {
+        await sendCommand(commandsUrl, `check ${courseId} ${key} ${sessionsCsv}`);
+        const current = loadSent();
+        current[id] = true;
+        saveSent(current);
+        allCopies.forEach(b => {
+          b.querySelector(".item-label").insertAdjacentHTML(
+            "beforeend", '<span class="sent-note">Sent — applies on next sync</span>'
+          );
+        });
+      } catch (err) {
+        console.error(err);
+        allCopies.forEach(b => (b.disabled = false));
+        alert("Couldn't send that — check your connection and try again.");
+      }
+    });
+  });
+}
+
+function pruneSent(courses) {
+  const sent = loadSent();
   const stillPresent = new Set();
   for (const c of courses) {
     for (const item of (c.next_up && c.next_up.checklist_items) || []) {
       stillPresent.add(itemId(c.id, item));
     }
   }
+  let changed = false;
   for (const id of Object.keys(sent)) {
     if (!stillPresent.has(id)) {
       delete sent[id];
-      sentChanged = true;
+      changed = true;
     }
   }
-  if (sentChanged) saveSent(sent);
+  if (changed) saveSent(sent);
+  return sent;
+}
+
+function renderSuggested(suggestedOrder, commandsUrl, sent) {
+  const root = document.getElementById("suggested");
+  root.innerHTML = "";
+  if (!suggestedOrder.length) {
+    root.innerHTML = '<div class="card empty">Nothing outstanding — you\'re caught up everywhere.</div>';
+    return;
+  }
+  const card = document.createElement("div");
+  card.className = "card";
+  card.innerHTML = `<div class="checklist">${
+    suggestedOrder.map(item => checklistItemHtml(item.course_id, item, sent, item.course_name)).join("")
+  }</div>`;
+  root.appendChild(card);
+  wireChecklistButtons(card, commandsUrl);
+}
+
+function renderBreaks(breaks) {
+  const root = document.getElementById("breaks");
+  root.innerHTML = "";
+  const now = new Date();
+  const upcoming = breaks.filter(b => new Date(b.end) > now);
+  if (!upcoming.length) {
+    root.innerHTML = '<div class="card empty">No breaks between classes detected in the next day or so.</div>';
+    return;
+  }
+  for (const b of upcoming) {
+    const isNow = new Date(b.start) <= now && now < new Date(b.end);
+    const card = document.createElement("div");
+    card.className = "break-card" + (isNow ? " now" : "");
+    card.innerHTML = `
+      <div class="break-time">${formatTime(b.start)} – ${formatTime(b.end)}${isNow ? '<span class="break-now-tag">Now</span>' : ""}</div>
+      <div class="break-suggestion">Good time to go through your notes from <strong>${escapeHtml(b.after_course_name)}</strong> before ${escapeHtml(b.before_course_name)}.</div>
+    `;
+    root.appendChild(card);
+  }
+}
+
+function renderCourses(courses, commandsUrl, sent) {
+  const root = document.getElementById("courses");
+  root.innerHTML = "";
 
   for (const c of courses) {
     const held = c.held_sessions ?? c.done_sessions;
@@ -315,18 +451,15 @@ function renderCourses(courses, commandsUrl) {
     const card = document.createElement("div");
     card.className = "card";
 
+    const nextSessionHtml = c.next_session
+      ? `<div class="next-session">Next class: ${formatDateTime(c.next_session.start)}</div>`
+      : "";
+
     let nextUpHtml = "";
     if (c.next_up) {
       const items = c.next_up.checklist_items || [];
       const checklistHtml = items.length
-        ? `<div class="checklist">${items.map(item => {
-            const id = itemId(c.id, item);
-            const isSent = !!sent[id];
-            return `<button type="button" class="checklist-item" data-item-id="${escapeHtml(id)}" ${isSent ? "disabled" : ""}>
-              <span class="box"></span>
-              <span>${escapeHtml(item.label)}${isSent ? '<span class="sent-note">Sent — applies on next sync</span>' : ""}</span>
-            </button>`;
-          }).join("")}</div>`
+        ? `<div class="checklist">${items.map(item => checklistItemHtml(c.id, item, sent)).join("")}</div>`
         : "";
       nextUpHtml = `
         <div class="next-up">
@@ -348,34 +481,11 @@ function renderCourses(courses, commandsUrl) {
       <div class="progress-track">
         <div class="progress-fill" style="width:${pct}%"></div>
       </div>
+      ${nextSessionHtml}
       ${nextUpHtml}
     `;
 
-    if (commandsUrl) {
-      card.querySelectorAll(".checklist-item").forEach(btn => {
-        btn.addEventListener("click", async () => {
-          const id = btn.dataset.itemId;
-          const [courseId, key, sessionsCsv] = id.split("|");
-          btn.disabled = true;
-          try {
-            await sendCommand(commandsUrl, `check ${courseId} ${key} ${sessionsCsv}`);
-            const current = loadSent();
-            current[id] = true;
-            saveSent(current);
-            btn.querySelector("span:last-child").insertAdjacentHTML(
-              "beforeend", '<span class="sent-note">Sent — applies on next sync</span>'
-            );
-          } catch (err) {
-            console.error(err);
-            btn.disabled = false;
-            alert("Couldn't send that — check your connection and try again.");
-          }
-        });
-      });
-    } else {
-      card.querySelectorAll(".checklist-item").forEach(btn => (btn.disabled = true));
-    }
-
+    wireChecklistButtons(card, commandsUrl);
     root.appendChild(card);
   }
 }
@@ -419,7 +529,12 @@ fetch("data.json", { cache: "no-store" })
   .then(data => {
     document.getElementById("generated-at").textContent =
       "Last updated " + new Date(data.generated_at).toLocaleString();
-    renderCourses(data.courses || [], data.ntfy_commands_url || null);
+    const courses = data.courses || [];
+    const commandsUrl = data.ntfy_commands_url || null;
+    const sent = pruneSent(courses);
+    renderSuggested(data.suggested_order || [], commandsUrl, sent);
+    renderBreaks(data.breaks || []);
+    renderCourses(courses, commandsUrl, sent);
     renderDeadlines(data.deadlines || []);
   })
   .catch(err => {
