@@ -50,6 +50,7 @@ jobs:
       - name: Rebuild dashboard data
         env:
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          DASHBOARD_PASSWORD: ${{ secrets.DASHBOARD_PASSWORD }}
         run: python scripts/build_dashboard_data.py
 
       - name: Commit changes
