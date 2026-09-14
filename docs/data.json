@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-14T07:25:43Z",
+  "generated_at": "2026-09-14T07:54:05Z",
   "courses": [
     {
       "id": "business-law",
@@ -37,6 +37,10 @@
             ]
           }
         ]
+      },
+      "next_session": {
+        "start": "2026-09-16T00:45:00Z",
+        "end": "2026-09-16T03:30:00Z"
       },
       "sessions": [
         {
@@ -109,6 +113,10 @@
       "done_sessions": 0,
       "pending_count": 0,
       "next_up": null,
+      "next_session": {
+        "start": "2026-09-14T08:30:00Z",
+        "end": "2026-09-14T11:15:00Z"
+      },
       "sessions": [
         {
           "number": 1,
@@ -195,6 +203,10 @@
             ]
           }
         ]
+      },
+      "next_session": {
+        "start": "2026-09-15T05:00:00Z",
+        "end": "2026-09-15T07:45:00Z"
       },
       "sessions": [
         {
@@ -294,6 +306,10 @@
             ]
           }
         ]
+      },
+      "next_session": {
+        "start": "2026-09-18T08:30:00Z",
+        "end": "2026-09-18T11:15:00Z"
       },
       "sessions": [
         {
@@ -399,6 +415,10 @@
           }
         ]
       },
+      "next_session": {
+        "start": "2026-09-17T05:00:00Z",
+        "end": "2026-09-17T07:45:00Z"
+      },
       "sessions": [
         {
           "number": 1,
@@ -484,6 +504,10 @@
           }
         ]
       },
+      "next_session": {
+        "start": "2026-09-15T00:45:00Z",
+        "end": "2026-09-15T03:30:00Z"
+      },
       "sessions": [
         {
           "number": 1,
@@ -558,6 +582,10 @@
             ]
           }
         ]
+      },
+      "next_session": {
+        "start": "2026-09-16T08:30:00Z",
+        "end": "2026-09-16T11:15:00Z"
       },
       "sessions": [
         {
@@ -640,6 +668,10 @@
             ]
           }
         ]
+      },
+      "next_session": {
+        "start": "2026-09-18T02:30:00Z",
+        "end": "2026-09-18T04:00:00Z"
       },
       "sessions": [
         {
@@ -859,6 +891,188 @@
       "weight_pct": 25.0,
       "days_remaining": 78,
       "color": "green"
+    }
+  ],
+  "suggested_order": [
+    {
+      "course_id": "communication-skills",
+      "course_name": "Communication Skills",
+      "key": "_done",
+      "label": "Mark done",
+      "sessions": [
+        1
+      ]
+    },
+    {
+      "course_id": "cost-budgets",
+      "course_name": "Cost & Budgets",
+      "key": "review_notes",
+      "label": "Go over the lecture notes",
+      "sessions": [
+        1
+      ]
+    },
+    {
+      "course_id": "business-law",
+      "course_name": "Business Law",
+      "key": "review_notes",
+      "label": "Go over the lecture notes (this class and session 1)",
+      "sessions": [
+        1,
+        2
+      ]
+    },
+    {
+      "course_id": "spanish",
+      "course_name": "Spanish",
+      "key": "_done",
+      "label": "Mark sessions 1, 2 done",
+      "sessions": [
+        1,
+        2
+      ]
+    },
+    {
+      "course_id": "marketing-research",
+      "course_name": "Marketing Research",
+      "key": "review_notes",
+      "label": "Go over the lecture notes (this class and session 1)",
+      "sessions": [
+        1,
+        2
+      ]
+    },
+    {
+      "course_id": "chinese",
+      "course_name": "Chinese",
+      "key": "watch_next_lessons",
+      "label": "Finish the next 3 lessons before the next class",
+      "sessions": [
+        1
+      ]
+    },
+    {
+      "course_id": "international-economics",
+      "course_name": "International Economics",
+      "key": "read_chapter",
+      "label": "Read next chapter",
+      "sessions": [
+        1
+      ]
+    },
+    {
+      "course_id": "cost-budgets",
+      "course_name": "Cost & Budgets",
+      "key": "write_summary",
+      "label": "Write a summary",
+      "sessions": [
+        1
+      ]
+    },
+    {
+      "course_id": "business-law",
+      "course_name": "Business Law",
+      "key": "write_summary",
+      "label": "Write a summary (this class and session 1)",
+      "sessions": [
+        1,
+        2
+      ]
+    },
+    {
+      "course_id": "marketing-research",
+      "course_name": "Marketing Research",
+      "key": "write_summary",
+      "label": "Write a summary (this class and session 1)",
+      "sessions": [
+        1,
+        2
+      ]
+    },
+    {
+      "course_id": "chinese",
+      "course_name": "Chinese",
+      "key": "review_class_material",
+      "label": "Review this session's material (1-2x this week)",
+      "sessions": [
+        1
+      ]
+    },
+    {
+      "course_id": "international-economics",
+      "course_name": "International Economics",
+      "key": "review_notes",
+      "label": "Go over the lecture notes",
+      "sessions": [
+        1
+      ]
+    },
+    {
+      "course_id": "cost-budgets",
+      "course_name": "Cost & Budgets",
+      "key": "practice_questions",
+      "label": "Write and answer practice questions",
+      "sessions": [
+        1
+      ]
+    },
+    {
+      "course_id": "business-law",
+      "course_name": "Business Law",
+      "key": "practice_questions",
+      "label": "Write and answer practice questions (this class and session 1)",
+      "sessions": [
+        1,
+        2
+      ]
+    },
+    {
+      "course_id": "marketing-research",
+      "course_name": "Marketing Research",
+      "key": "practice_questions",
+      "label": "Write and answer practice questions (this class and session 1)",
+      "sessions": [
+        1,
+        2
+      ]
+    },
+    {
+      "course_id": "international-economics",
+      "course_name": "International Economics",
+      "key": "write_summary",
+      "label": "Write a summary",
+      "sessions": [
+        1
+      ]
+    },
+    {
+      "course_id": "marketing-research",
+      "course_name": "Marketing Research",
+      "key": "practice_quiz_moodle",
+      "label": "Complete the Moodle practice quiz (this class and session 1)",
+      "sessions": [
+        1,
+        2
+      ]
+    },
+    {
+      "course_id": "international-economics",
+      "course_name": "International Economics",
+      "key": "practice_questions",
+      "label": "Write and answer practice questions",
+      "sessions": [
+        1
+      ]
+    }
+  ],
+  "breaks": [
+    {
+      "start": "2026-09-15T03:30:00Z",
+      "end": "2026-09-15T05:00:00Z",
+      "after_course_id": "communication-skills",
+      "after_course_name": "Communication Skills",
+      "before_course_id": "cost-budgets",
+      "before_course_name": "Cost & Budgets"
     }
   ],
   "ntfy_commands_url": "https://ntfy.sh/essec-tracker-0dabdbd2a4c35b35d502e94b-commands"
