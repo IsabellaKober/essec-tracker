@@ -1,8 +1,5 @@
-generated_at: '2026-09-15T03:13:25Z'
+generated_at: '2026-09-15T06:16:01Z'
 next_session:
-  communication-skills:
-    start: '2026-09-15T00:45:00Z'
-    end: '2026-09-15T03:30:00Z'
   cost-budgets:
     start: '2026-09-15T05:00:00Z'
     end: '2026-09-15T07:45:00Z'
@@ -24,13 +21,10 @@ next_session:
   international-economics:
     start: '2026-09-18T08:30:00Z'
     end: '2026-09-18T11:15:00Z'
-breaks:
-- start: '2026-09-15T03:30:00Z'
-  end: '2026-09-15T05:00:00Z'
-  after_course_id: communication-skills
-  after_course_name: Communication Skills
-  before_course_id: cost-budgets
-  before_course_name: Cost & Budgets
+  communication-skills:
+    start: '2026-09-29T00:45:00Z'
+    end: '2026-09-29T03:30:00Z'
+breaks: []
 classes_by_date:
   '2026-09-15':
   - course_id: communication-skills
