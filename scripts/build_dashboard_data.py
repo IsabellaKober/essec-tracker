@@ -28,7 +28,12 @@ DEADLINES_PATH = os.path.join(ROOT, "deadlines.yaml")
 HOLIDAYS_PATH = os.path.join(ROOT, "holidays.yaml")
 SESSIONS_DIR = os.path.join(ROOT, "sessions")
 SCHEDULE_PATH = os.path.join(SESSIONS_DIR, ".state", "schedule.yaml")
+DAY_OVERRIDES_PATH = os.path.join(SESSIONS_DIR, ".state", "day_overrides.yaml")
 OUT_PATH = os.path.join(ROOT, "docs", "data.json")
+
+# Maps the "move|<course-id>|<day>" dashboard command (see
+# process_commands.py) to a bucket index in build_suggested_plan().
+DAY_INDEX = {"today": 0, "tomorrow": 1, "day_after": 2}
 
 # OWASP's 2023 minimum recommendation for PBKDF2-HMAC-SHA256. Must match the
 # iteration count docs/index.html uses when deriving the same key with
@@ -84,6 +89,18 @@ def load_schedule():
     return data.get("next_session") or {}, data.get("breaks") or [], data.get("classes_by_date") or {}
 
 
+def load_day_overrides():
+    if not os.path.exists(DAY_OVERRIDES_PATH):
+        return {}
+    return load_yaml(DAY_OVERRIDES_PATH) or {}
+
+
+def save_day_overrides(overrides):
+    os.makedirs(os.path.dirname(DAY_OVERRIDES_PATH), exist_ok=True)
+    with open(DAY_OVERRIDES_PATH, "w", encoding="utf-8") as f:
+        yaml.safe_dump(overrides, f, sort_keys=True, allow_unicode=True)
+
+
 def _course_items(c):
     return list((c["next_up"] or {}).get("checklist_items") or [])
 
@@ -98,7 +115,7 @@ def _is_heavy(checklist_labels):
     return "write_summary" in checklist_labels
 
 
-def build_suggested_plan(out_courses, pending_by_course, classes_by_date, now, checklist_labels_by_course):
+def build_suggested_plan(out_courses, pending_by_course, classes_by_date, now, checklist_labels_by_course, day_overrides):
     """Spread every course's outstanding backlog across the next three days
     (today / tomorrow / the day after) instead of dumping it all on today
     while the other two sit empty, or requiring a literal class that day to
@@ -122,6 +139,15 @@ def build_suggested_plan(out_courses, pending_by_course, classes_by_date, now, c
     dropped from this 3-day window entirely only if all three days are
     already full; they'll surface once the window rolls forward. Light
     courses aren't capped and are spread the same way, minus the cap.
+
+    `day_overrides` (course_id -> "today"/"tomorrow"/"day_after") comes from
+    the dashboard's "move to..." buttons (see process_commands.py's
+    'move|<course-id>|<day>' command) and takes priority over all of the
+    above for that course - it still counts toward the day's cap/load so the
+    rest of the algorithm places everything else around it. Entries for a
+    course with nothing outstanding any more are dropped here (stale, e.g.
+    the course got marked done since the override was set) and the pruned
+    map is written back so it doesn't grow unbounded.
     """
     today = now.date()
     yesterday_str = (today - dt.timedelta(days=1)).isoformat()
@@ -175,15 +201,39 @@ def build_suggested_plan(out_courses, pending_by_course, classes_by_date, now, c
             }
         )
 
+    # Drop overrides for courses with nothing outstanding any more, and
+    # persist the cleanup so the file doesn't accumulate stale entries.
+    valid_course_ids = {e["course_id"] for e in entries}
+    pruned_overrides = {
+        cid: day for cid, day in day_overrides.items()
+        if cid in valid_course_ids and day in DAY_INDEX
+    }
+    if pruned_overrides != day_overrides:
+        save_day_overrides(pruned_overrides)
+
+    overridden_ids = set(pruned_overrides.keys())
+    override_entries = [e for e in entries if e["course_id"] in overridden_ids]
+    normal_entries = [e for e in entries if e["course_id"] not in overridden_ids]
+
     # Tightest deadline first, then heaviest backlog, so those get first
     # pick of the lightest day before more flexible courses fill it up.
-    entries.sort(key=lambda e: (e["latest_day"], -e["weight"]))
+    normal_entries.sort(key=lambda e: (e["latest_day"], -e["weight"]))
 
     buckets = {0: [], 1: [], 2: []}
     heavy_count = [0, 0, 0]
     light_loads = [0, 0, 0]
 
-    for e in [x for x in entries if x["heavy"]]:
+    for e in override_entries:
+        day = DAY_INDEX[pruned_overrides[e["course_id"]]]
+        if e["heavy"]:
+            heavy_count[day] += 1
+        else:
+            light_loads[day] += e["weight"]
+        e["reasons"] = e["reasons"] + ["moved here manually"]
+        e["reason"] = ", ".join(e["reasons"])
+        buckets[day].append(e)
+
+    for e in [x for x in normal_entries if x["heavy"]]:
         allowed = [d for d in range(e["latest_day"] + 1) if heavy_count[d] < DAILY_HEAVY_CAP]
         pushed_late = False
         if not allowed:
@@ -198,7 +248,7 @@ def build_suggested_plan(out_courses, pending_by_course, classes_by_date, now, c
         e["reason"] = ", ".join(e["reasons"])
         buckets[day].append(e)
 
-    for e in [x for x in entries if not x["heavy"]]:
+    for e in [x for x in normal_entries if not x["heavy"]]:
         day = min(range(e["latest_day"] + 1), key=lambda d: (light_loads[d], d))
         light_loads[day] += e["weight"]
         e["reason"] = ", ".join(e["reasons"])
@@ -358,6 +408,7 @@ def build():
         checklist_labels_by_course[c["id"]] = checklist_labels
         held = 0
         done = 0
+        last_done_session = None
         pending = []
         session_rows = []
         for s in c["sessions"]:
@@ -367,6 +418,8 @@ def build():
                 held += 1
             if status == "done":
                 done += 1
+                if last_done_session is None or s["number"] > last_done_session:
+                    last_done_session = s["number"]
             row = {"number": s["number"], "chapter": s["chapter"], "status": status}
             if rec:
                 row["checklist"] = rec.get("checklist", {})
@@ -403,6 +456,7 @@ def build():
                 "total_sessions": c["total_sessions"],
                 "held_sessions": held,
                 "done_sessions": done,
+                "last_done_session": last_done_session,
                 "pending_count": len(pending),
                 "next_up": next_up,
                 "next_session": next_session_by_course.get(c["id"]),
@@ -414,7 +468,8 @@ def build():
     tomorrow_str = (today_date + dt.timedelta(days=1)).isoformat()
     day_after_str = (today_date + dt.timedelta(days=2)).isoformat()
 
-    plan = build_suggested_plan(out_courses, pending_by_course, classes_by_date, now, checklist_labels_by_course)
+    day_overrides = load_day_overrides()
+    plan = build_suggested_plan(out_courses, pending_by_course, classes_by_date, now, checklist_labels_by_course, day_overrides)
     suggested_today = flatten(plan[0])
     suggested_tomorrow = flatten(plan[1])
     suggested_day_after = flatten(plan[2])

@@ -64,6 +64,33 @@ message" (the pencil/+ icon) → message body `done finance-6` (course id +
 session number, from the filename in `sessions/`) → Send. The next scheduled
 run (within 3 hours) picks it up and stops re-notifying for it.
 
+### Editing from the dashboard
+
+Everything below is optional manual editing on top of the automated flow
+above - the dashboard itself is still just static HTML on GitHub Pages, so
+each of these buttons publishes a plain-text command to the same ntfy
+commands topic the checklist already uses; `process_commands.py` applies it
+on the next scheduled or manual workflow run (so changes take up to 3 hours
+to show up, same as everything else here):
+
+- **↺ Undo** next to a checklist item you just clicked, or next to a
+  course's "Last completed: Session N" line - reverses a `check`/`done`
+  back to not-done. Sends `uncheck <course-id> <item-key> <n,n,…>` or
+  `undo <course-id>-<n>`.
+- **✎ (edit) on a deadline** - opens an inline form to change its name, due
+  date, or weight %. Sends `edit-deadline|<id>|<name>|<due_date>|<weight>`,
+  applied to the matching entry in `deadlines.yaml`.
+- **"→ tomorrow" / "→ the day after" on a suggested task** - pins that
+  course's whole suggested backlog to a different one of the three days,
+  overriding `build_suggested_plan()`'s automatic placement. Sends
+  `move|<course-id>|<today|tomorrow|day_after>`, stored in
+  `sessions/.state/day_overrides.yaml` until the course has nothing
+  outstanding any more (then it's dropped automatically).
+
+Same manual fallback applies as for `done`/`check`: any of these commands
+can also be typed by hand into the commands topic's "Publish message"
+screen if the dashboard itself isn't handy.
+
 ### 3. GitHub Pages
 
 Already enabled (branch `main`, folder `/docs`). Dashboard:
@@ -210,9 +237,10 @@ deadlines.yaml            assignments/exams (edit by hand)
 holidays.yaml             breaks for the "next break" countdown (edit by hand)
 sessions/<course>-<n>.yaml  auto-created/updated by the workflow
 sessions/.state/          bookkeeping (processed calendar events, command cursor,
-                          last biweekly check-in per course)
+                          last biweekly check-in per course, manual day overrides)
 scripts/check_ics.py       step 1-2: detect ended classes, create session files
-scripts/process_commands.py  step 4: poll ntfy commands topic, mark sessions done
+scripts/process_commands.py  step 4: poll ntfy commands topic, apply done/undo/
+                          check/uncheck/edit-deadline/move commands
 scripts/send_deadline_checkins.py  biweekly nudge for courses with an empty checklist
 scripts/send_notifications.py  step 3: push pending sessions to ntfy
 scripts/build_dashboard_data.py  builds docs/data.json for the dashboard
