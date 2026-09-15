@@ -1,8 +1,5 @@
-generated_at: '2026-09-15T06:16:01Z'
+generated_at: '2026-09-15T09:14:17Z'
 next_session:
-  cost-budgets:
-    start: '2026-09-15T05:00:00Z'
-    end: '2026-09-15T07:45:00Z'
   business-law:
     start: '2026-09-16T00:45:00Z'
     end: '2026-09-16T03:30:00Z'
@@ -21,6 +18,9 @@ next_session:
   international-economics:
     start: '2026-09-18T08:30:00Z'
     end: '2026-09-18T11:15:00Z'
+  cost-budgets:
+    start: '2026-09-22T05:00:00Z'
+    end: '2026-09-22T07:45:00Z'
   communication-skills:
     start: '2026-09-29T00:45:00Z'
     end: '2026-09-29T03:30:00Z'
