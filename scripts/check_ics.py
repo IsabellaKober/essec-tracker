@@ -62,16 +62,32 @@ def match_course(summary, courses):
     return None
 
 
-def next_session_number(course_id, total_sessions):
-    existing = []
+def existing_sessions(course_id):
+    """Numbers and class_dates already on disk for a course, read from the
+    session files themselves (not just filenames) so we can tell whether a
+    newly-matched calendar event is just another duplicate ICS entry for a
+    class day that already has a session - the ESSEC feed sometimes lists
+    one physical class as several events, and those duplicates can surface
+    across different workflow runs, not just within a single run's batch,
+    so the group-by-day dedup below isn't enough on its own.
+    """
+    numbers, dates = [], set()
     if os.path.isdir(SESSIONS_DIR):
         for fn in os.listdir(SESSIONS_DIR):
             if fn.startswith(course_id + "-") and fn.endswith(".yaml"):
                 try:
-                    existing.append(int(fn[len(course_id) + 1 : -len(".yaml")]))
+                    numbers.append(int(fn[len(course_id) + 1 : -len(".yaml")]))
                 except ValueError:
                     continue
-    number = max(existing, default=0) + 1
+                with open(os.path.join(SESSIONS_DIR, fn), encoding="utf-8") as f:
+                    existing_data = yaml.safe_load(f) or {}
+                if existing_data.get("class_date"):
+                    dates.add(str(existing_data["class_date"]))
+    return numbers, dates
+
+
+def next_session_number(numbers, total_sessions):
+    number = max(numbers, default=0) + 1
     return None if number > total_sessions else number
 
 
@@ -173,7 +189,13 @@ def main():
         g = groups[group_key]
         course, end_dt, summaries = g["course"], g["end_dt"], g["summaries"]
 
-        number = next_session_number(course["id"], course["total_sessions"])
+        numbers, dates = existing_sessions(course["id"])
+        if end_dt.date().isoformat() in dates:
+            print(f"{course['id']}: a session already exists for {end_dt.date().isoformat()}, skipping duplicate calendar event(s) {summaries!r}")
+            processed.update(g["event_keys"])
+            continue
+
+        number = next_session_number(numbers, course["total_sessions"])
         if number is None:
             print(f"{course['id']}: all {course['total_sessions']} sessions already tracked, skipping {summaries!r}")
             processed.update(g["event_keys"])
