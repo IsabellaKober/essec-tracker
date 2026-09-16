@@ -1,8 +1,5 @@
-generated_at: '2026-09-16T03:12:07Z'
+generated_at: '2026-09-16T05:53:45Z'
 next_session:
-  business-law:
-    start: '2026-09-16T00:45:00Z'
-    end: '2026-09-16T03:30:00Z'
   spanish:
     start: '2026-09-16T08:30:00Z'
     end: '2026-09-16T11:15:00Z'
@@ -21,6 +18,9 @@ next_session:
   cost-budgets:
     start: '2026-09-22T05:00:00Z'
     end: '2026-09-22T07:45:00Z'
+  business-law:
+    start: '2026-09-23T00:45:00Z'
+    end: '2026-09-23T03:30:00Z'
   communication-skills:
     start: '2026-09-29T00:45:00Z'
     end: '2026-09-29T03:30:00Z'
