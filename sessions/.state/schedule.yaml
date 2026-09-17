@@ -1,8 +1,5 @@
-generated_at: '2026-09-17T03:12:01Z'
+generated_at: '2026-09-17T06:16:15Z'
 next_session:
-  finance:
-    start: '2026-09-17T00:45:00Z'
-    end: '2026-09-17T03:30:00Z'
   marketing-research:
     start: '2026-09-17T05:00:00Z'
     end: '2026-09-17T07:45:00Z'
@@ -12,6 +9,9 @@ next_session:
   international-economics:
     start: '2026-09-18T08:30:00Z'
     end: '2026-09-18T11:15:00Z'
+  finance:
+    start: '2026-09-21T08:30:00Z'
+    end: '2026-09-21T11:15:00Z'
   cost-budgets:
     start: '2026-09-22T05:00:00Z'
     end: '2026-09-22T07:45:00Z'
@@ -24,13 +24,7 @@ next_session:
   communication-skills:
     start: '2026-09-29T00:45:00Z'
     end: '2026-09-29T03:30:00Z'
-breaks:
-- start: '2026-09-17T03:30:00Z'
-  end: '2026-09-17T05:00:00Z'
-  after_course_id: finance
-  after_course_name: Finance
-  before_course_id: marketing-research
-  before_course_name: Marketing Research
+breaks: []
 classes_by_date:
   '2026-09-17':
   - course_id: finance
