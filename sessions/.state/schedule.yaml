@@ -1,4 +1,4 @@
-generated_at: '2026-09-16T21:12:14Z'
+generated_at: '2026-09-17T00:15:48Z'
 next_session:
   finance:
     start: '2026-09-17T00:45:00Z'
@@ -32,15 +32,6 @@ breaks:
   before_course_id: marketing-research
   before_course_name: Marketing Research
 classes_by_date:
-  '2026-09-16':
-  - course_id: business-law
-    course_name: Business Law
-    start: '2026-09-16T00:45:00Z'
-    end: '2026-09-16T03:30:00Z'
-  - course_id: spanish
-    course_name: Spanish
-    start: '2026-09-16T08:30:00Z'
-    end: '2026-09-16T11:15:00Z'
   '2026-09-17':
   - course_id: finance
     course_name: Finance
@@ -59,3 +50,4 @@ classes_by_date:
     course_name: International Economics
     start: '2026-09-18T08:30:00Z'
     end: '2026-09-18T11:15:00Z'
+  '2026-09-19': []
