@@ -1,8 +1,5 @@
-generated_at: '2026-09-18T03:12:00Z'
+generated_at: '2026-09-18T06:15:26Z'
 next_session:
-  chinese:
-    start: '2026-09-18T02:30:00Z'
-    end: '2026-09-18T04:00:00Z'
   international-economics:
     start: '2026-09-18T08:30:00Z'
     end: '2026-09-18T11:15:00Z'
@@ -21,6 +18,9 @@ next_session:
   marketing-research:
     start: '2026-09-24T05:00:00Z'
     end: '2026-09-24T07:45:00Z'
+  chinese:
+    start: '2026-09-25T02:30:00Z'
+    end: '2026-09-25T04:00:00Z'
   communication-skills:
     start: '2026-09-29T00:45:00Z'
     end: '2026-09-29T03:30:00Z'
