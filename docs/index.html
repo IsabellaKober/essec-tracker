@@ -374,6 +374,12 @@
   .deadline-row {
     flex-wrap: wrap;
   }
+  .deadline-right-group {
+    flex: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
   .edit-btn {
     flex: none;
     background: none;
@@ -528,6 +534,40 @@
     color: var(--ink-muted);
     font-size: 12px;
   }
+  .notes-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 18px;
+  }
+  .notes-hint {
+    color: var(--ink-muted);
+    font-size: 12px;
+    margin: 0 0 10px;
+  }
+  .notes-textarea {
+    width: 100%;
+    min-height: 160px;
+    resize: vertical;
+    background: var(--page);
+    color: var(--ink);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px;
+    font: inherit;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .notes-textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+  .notes-status {
+    color: var(--ink-muted);
+    font-size: 11px;
+    margin-top: 6px;
+    min-height: 14px;
+  }
 </style>
 </head>
 <body>
@@ -585,6 +625,14 @@
     <section>
       <h2>Deadlines</h2>
       <div id="deadlines"></div>
+    </section>
+    <section>
+      <h2>Sticky notes</h2>
+      <div class="notes-card">
+        <p class="notes-hint">Jot down extra deadlines or class notes here. Saved only in this browser as you type.</p>
+        <textarea id="sticky-notes" class="notes-textarea" placeholder="e.g. Marketing case study due Oct 3 — check with study group first&#10;Ask professor about regrade policy"></textarea>
+        <div class="notes-status" id="notes-status"></div>
+      </div>
     </section>
   </div>
 </main>
@@ -1011,11 +1059,13 @@ function renderDeadlines(deadlines, commandsUrl) {
         <div class="deadline-name">${escapeHtml(d.name)}</div>
         <div class="deadline-meta">${escapeHtml(d.course_name || d.course)} · due ${escapeHtml(d.due_date)} · ${d.weight_pct}% of grade</div>
       </div>
-      <div class="deadline-right">
-        <div class="deadline-days">${daysText}</div>
-        <div class="deadline-label">${labelFor(d.color, d.days_remaining)}</div>
+      <div class="deadline-right-group">
+        <div class="deadline-right">
+          <div class="deadline-days">${daysText}</div>
+          <div class="deadline-label">${labelFor(d.color, d.days_remaining)}</div>
+        </div>
+        ${editBtnHtml}
       </div>
-      ${editBtnHtml}
     `;
     if (d.id && commandsUrl) wireDeadlineEdit(card, d, commandsUrl);
     root.appendChild(card);
@@ -1127,6 +1177,7 @@ function renderDashboard(data) {
 
   document.getElementById("lock-screen").hidden = true;
   document.getElementById("app-content").hidden = false;
+  initStickyNotes();
 }
 
 async function unlock(payload, password) {
@@ -1150,6 +1201,37 @@ function showLockScreen(errorMessage) {
   }
   document.getElementById("lock-screen").hidden = false;
   document.getElementById("lock-password").focus();
+}
+
+// Sticky notes: purely client-side scratch space, kept in localStorage so
+// it survives reloads but never round-trips through data.json or ntfy -
+// there's no backend field for freeform text, and this doesn't need one.
+const NOTES_KEY = "essec-tracker-notes-v1";
+
+function initStickyNotes() {
+  const textarea = document.getElementById("sticky-notes");
+  const status = document.getElementById("notes-status");
+  if (!textarea) return;
+
+  try {
+    textarea.value = localStorage.getItem(NOTES_KEY) || "";
+  } catch {
+    // private browsing / blocked storage - notes just won't persist
+  }
+
+  let saveTimer = null;
+  textarea.addEventListener("input", () => {
+    status.textContent = "";
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(() => {
+      try {
+        localStorage.setItem(NOTES_KEY, textarea.value);
+        status.textContent = "Saved";
+      } catch {
+        status.textContent = "Couldn't save — storage unavailable";
+      }
+    }, 400);
+  });
 }
 
 async function init() {
