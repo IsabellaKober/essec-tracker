@@ -1,4 +1,4 @@
-generated_at: '2026-09-18T21:10:45Z'
+generated_at: '2026-09-19T00:16:14Z'
 next_session:
   finance:
     start: '2026-09-21T08:30:00Z'
@@ -26,14 +26,10 @@ next_session:
     end: '2026-09-29T03:30:00Z'
 breaks: []
 classes_by_date:
-  '2026-09-18':
-  - course_id: chinese
-    course_name: Chinese
-    start: '2026-09-18T02:30:00Z'
-    end: '2026-09-18T04:00:00Z'
-  - course_id: international-economics
-    course_name: International Economics
-    start: '2026-09-18T08:30:00Z'
-    end: '2026-09-18T11:15:00Z'
   '2026-09-19': []
   '2026-09-20': []
+  '2026-09-21':
+  - course_id: finance
+    course_name: Finance
+    start: '2026-09-21T08:30:00Z'
+    end: '2026-09-21T11:15:00Z'
