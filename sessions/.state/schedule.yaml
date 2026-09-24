@@ -1,8 +1,5 @@
-generated_at: '2026-09-24T06:15:26Z'
+generated_at: '2026-09-24T09:12:45Z'
 next_session:
-  marketing-research:
-    start: '2026-09-24T05:00:00Z'
-    end: '2026-09-24T07:45:00Z'
   chinese:
     start: '2026-09-25T02:30:00Z'
     end: '2026-09-25T04:00:00Z'
@@ -18,6 +15,9 @@ next_session:
   cost-budgets:
     start: '2026-09-29T05:00:00Z'
     end: '2026-09-29T07:45:00Z'
+  marketing-research:
+    start: '2026-10-01T05:00:00Z'
+    end: '2026-10-01T07:45:00Z'
   business-law:
     start: '2026-10-02T08:30:00Z'
     end: '2026-10-02T11:15:00Z'
