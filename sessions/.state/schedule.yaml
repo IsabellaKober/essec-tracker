@@ -1,4 +1,4 @@
-generated_at: '2026-09-28T00:18:32Z'
+generated_at: '2026-09-28T03:13:01Z'
 next_session:
   finance:
     start: '2026-09-28T08:30:00Z'
@@ -31,6 +31,12 @@ breaks:
   after_course_name: Communication Skills
   before_course_id: cost-budgets
   before_course_name: Cost & Budgets
+- start: '2026-09-29T07:45:00Z'
+  end: '2026-09-29T08:30:00Z'
+  after_course_id: cost-budgets
+  after_course_name: Cost & Budgets
+  before_course_id: finance
+  before_course_name: Finance
 classes_by_date:
   '2026-09-28':
   - course_id: finance
