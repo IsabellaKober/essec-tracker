@@ -1,14 +1,14 @@
-generated_at: '2026-09-28T09:14:54Z'
+generated_at: '2026-09-28T12:16:16Z'
 next_session:
-  finance:
-    start: '2026-09-28T08:30:00Z'
-    end: '2026-09-28T11:15:00Z'
   communication-skills:
     start: '2026-09-29T00:45:00Z'
     end: '2026-09-29T03:30:00Z'
   cost-budgets:
     start: '2026-09-29T05:00:00Z'
     end: '2026-09-29T07:45:00Z'
+  finance:
+    start: '2026-09-29T08:30:00Z'
+    end: '2026-09-29T11:15:00Z'
   marketing-research:
     start: '2026-10-01T05:00:00Z'
     end: '2026-10-01T07:45:00Z'
