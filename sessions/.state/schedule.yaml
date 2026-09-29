@@ -1,4 +1,4 @@
-generated_at: '2026-09-28T21:12:16Z'
+generated_at: '2026-09-29T00:17:15Z'
 next_session:
   communication-skills:
     start: '2026-09-29T00:45:00Z'
@@ -38,11 +38,6 @@ breaks:
   before_course_id: finance
   before_course_name: Finance
 classes_by_date:
-  '2026-09-28':
-  - course_id: finance
-    course_name: Finance
-    start: '2026-09-28T08:30:00Z'
-    end: '2026-09-28T11:15:00Z'
   '2026-09-29':
   - course_id: communication-skills
     course_name: Communication Skills
@@ -57,3 +52,8 @@ classes_by_date:
     start: '2026-09-29T08:30:00Z'
     end: '2026-09-29T11:15:00Z'
   '2026-09-30': []
+  '2026-10-01':
+  - course_id: marketing-research
+    course_name: Marketing Research
+    start: '2026-10-01T05:00:00Z'
+    end: '2026-10-01T07:45:00Z'
