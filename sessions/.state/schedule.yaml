@@ -1,4 +1,4 @@
-generated_at: '2026-09-29T21:12:18Z'
+generated_at: '2026-09-30T00:18:01Z'
 next_session:
   marketing-research:
     start: '2026-10-01T05:00:00Z'
@@ -26,22 +26,18 @@ next_session:
     end: '2026-10-09T11:15:00Z'
 breaks: []
 classes_by_date:
-  '2026-09-29':
-  - course_id: communication-skills
-    course_name: Communication Skills
-    start: '2026-09-29T00:45:00Z'
-    end: '2026-09-29T03:30:00Z'
-  - course_id: cost-budgets
-    course_name: Cost & Budgets
-    start: '2026-09-29T05:00:00Z'
-    end: '2026-09-29T07:45:00Z'
-  - course_id: finance
-    course_name: Finance
-    start: '2026-09-29T08:30:00Z'
-    end: '2026-09-29T11:15:00Z'
   '2026-09-30': []
   '2026-10-01':
   - course_id: marketing-research
     course_name: Marketing Research
     start: '2026-10-01T05:00:00Z'
     end: '2026-10-01T07:45:00Z'
+  '2026-10-02':
+  - course_id: chinese
+    course_name: Chinese
+    start: '2026-10-02T02:30:00Z'
+    end: '2026-10-02T04:00:00Z'
+  - course_id: business-law
+    course_name: Business Law
+    start: '2026-10-02T08:30:00Z'
+    end: '2026-10-02T11:15:00Z'
