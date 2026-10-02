@@ -1,8 +1,5 @@
-generated_at: '2026-10-02T09:13:47Z'
+generated_at: '2026-10-02T12:15:49Z'
 next_session:
-  business-law:
-    start: '2026-10-02T08:30:00Z'
-    end: '2026-10-02T11:15:00Z'
   finance:
     start: '2026-10-05T08:30:00Z'
     end: '2026-10-05T11:15:00Z'
@@ -12,6 +9,9 @@ next_session:
   cost-budgets:
     start: '2026-10-06T05:00:00Z'
     end: '2026-10-06T07:45:00Z'
+  business-law:
+    start: '2026-10-07T00:45:00Z'
+    end: '2026-10-07T03:30:00Z'
   spanish:
     start: '2026-10-07T08:30:00Z'
     end: '2026-10-07T11:15:00Z'
