@@ -1,4 +1,4 @@
-generated_at: '2026-10-02T21:12:15Z'
+generated_at: '2026-10-03T00:16:58Z'
 next_session:
   finance:
     start: '2026-10-05T08:30:00Z'
@@ -26,14 +26,10 @@ next_session:
     end: '2026-10-09T11:15:00Z'
 breaks: []
 classes_by_date:
-  '2026-10-02':
-  - course_id: chinese
-    course_name: Chinese
-    start: '2026-10-02T02:30:00Z'
-    end: '2026-10-02T04:00:00Z'
-  - course_id: business-law
-    course_name: Business Law
-    start: '2026-10-02T08:30:00Z'
-    end: '2026-10-02T11:15:00Z'
   '2026-10-03': []
   '2026-10-04': []
+  '2026-10-05':
+  - course_id: finance
+    course_name: Finance
+    start: '2026-10-05T08:30:00Z'
+    end: '2026-10-05T11:15:00Z'
