@@ -1,4 +1,4 @@
-generated_at: '2026-10-11T21:11:36Z'
+generated_at: '2026-10-12T00:20:22Z'
 next_session:
   finance:
     start: '2026-10-12T08:30:00Z'
@@ -24,9 +24,14 @@ next_session:
   international-economics:
     start: '2026-10-16T08:30:00Z'
     end: '2026-10-16T11:15:00Z'
-breaks: []
+breaks:
+- start: '2026-10-13T03:30:00Z'
+  end: '2026-10-13T05:00:00Z'
+  after_course_id: communication-skills
+  after_course_name: Communication Skills
+  before_course_id: cost-budgets
+  before_course_name: Cost & Budgets
 classes_by_date:
-  '2026-10-11': []
   '2026-10-12':
   - course_id: finance
     course_name: Finance
@@ -41,3 +46,12 @@ classes_by_date:
     course_name: Cost & Budgets
     start: '2026-10-13T05:00:00Z'
     end: '2026-10-13T07:45:00Z'
+  '2026-10-14':
+  - course_id: business-law
+    course_name: Business Law
+    start: '2026-10-14T00:45:00Z'
+    end: '2026-10-14T03:30:00Z'
+  - course_id: spanish
+    course_name: Spanish
+    start: '2026-10-14T08:30:00Z'
+    end: '2026-10-14T11:15:00Z'
