@@ -1,4 +1,4 @@
-generated_at: '2026-10-12T15:16:41Z'
+generated_at: '2026-10-12T18:13:48Z'
 next_session:
   communication-skills:
     start: '2026-10-13T00:45:00Z'
@@ -21,6 +21,9 @@ next_session:
   international-economics:
     start: '2026-10-16T08:30:00Z'
     end: '2026-10-16T11:15:00Z'
+  finance:
+    start: '2026-10-21T08:30:00Z'
+    end: '2026-10-21T10:30:00Z'
 breaks:
 - start: '2026-10-13T03:30:00Z'
   end: '2026-10-13T05:00:00Z'
