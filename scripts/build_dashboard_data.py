@@ -327,7 +327,13 @@ def build_next_holiday(holidays, today):
     return candidates[0]
 
 
-def deadline_color(days_remaining, weight_pct):
+def deadline_color(days_remaining, weight_pct, done=False):
+    # A deadline marked done in deadlines.yaml (via the dashboard's "Mark
+    # done" button -> 'deadline-done|<id>') is finished business: it keeps
+    # its row for the record but drops out of the urgency colouring
+    # entirely, instead of sitting there red/overdue forever.
+    if done:
+        return "done"
     if days_remaining < 0:
         return "red"
     if days_remaining <= 3:
@@ -482,6 +488,7 @@ def build():
         due = dt.date.fromisoformat(str(d["due_date"]))
         days_remaining = (due - today).days
         weight = float(d.get("weight_pct", 0))
+        done = bool(d.get("done", False))
         out_deadlines.append(
             {
                 "id": d.get("id"),
@@ -491,10 +498,14 @@ def build():
                 "due_date": d["due_date"],
                 "weight_pct": weight,
                 "days_remaining": days_remaining,
-                "color": deadline_color(days_remaining, weight),
+                "done": done,
+                "done_on": str(d["done_on"]) if d.get("done_on") else None,
+                "color": deadline_color(days_remaining, weight, done),
             }
         )
-    out_deadlines.sort(key=lambda d: d["days_remaining"])
+    # Completed ones sink to the bottom, still soonest-first among themselves,
+    # so the list stays a to-do list and not a history page.
+    out_deadlines.sort(key=lambda d: (d["done"], d["days_remaining"]))
 
     data = {
         "generated_at": now.strftime("%Y-%m-%dT%H:%M:%SZ"),

@@ -80,6 +80,15 @@ to show up, same as everything else here):
 - **✎ (edit) on a deadline** - opens an inline form to change its name, due
   date, or weight %. Sends `edit-deadline|<id>|<name>|<due_date>|<weight>`,
   applied to the matching entry in `deadlines.yaml`.
+- **✓ Mark done under a deadline** - marks that assignment/exam completed:
+  sends `deadline-done|<id>`, which writes `done: true` + `done_on:
+  <today>` onto that entry in `deadlines.yaml`. A done deadline keeps its
+  row (struck through, grey dot, "Done") but is no longer coloured by
+  urgency, sinks to the bottom of the list, and is skipped by the deadline
+  check-in reminders - so a finished task stops showing up as overdue. The
+  button flips to **↺ Mark not done** (`deadline-undone|<id>`), which
+  removes both keys again. The card updates immediately in the browser;
+  the file itself changes on the next workflow run like everything else.
 - **"→ tomorrow" / "→ the day after" on a suggested task** - pins that
   course's whole suggested backlog to a different one of the three days,
   overriding `build_suggested_plan()`'s automatic placement. Sends
@@ -233,14 +242,15 @@ the "no signal" case and is placed purely by load-balancing.
 
 ```
 courses.yaml              course + syllabus definitions (edit by hand)
-deadlines.yaml            assignments/exams (edit by hand)
+deadlines.yaml            assignments/exams (edit by hand; `done: true` marks one
+                          completed - set from the dashboard or here)
 holidays.yaml             breaks for the "next break" countdown (edit by hand)
 sessions/<course>-<n>.yaml  auto-created/updated by the workflow
 sessions/.state/          bookkeeping (processed calendar events, command cursor,
                           last biweekly check-in per course, manual day overrides)
 scripts/check_ics.py       step 1-2: detect ended classes, create session files
 scripts/process_commands.py  step 4: poll ntfy commands topic, apply done/undo/
-                          check/uncheck/edit-deadline/move commands
+                          check/uncheck/edit-deadline/deadline-done/move commands
 scripts/send_deadline_checkins.py  biweekly nudge for courses with an empty checklist
 scripts/send_notifications.py  step 3: push pending sessions to ntfy
 scripts/build_dashboard_data.py  builds docs/data.json for the dashboard

@@ -50,11 +50,17 @@ def due_for_checkin(course, last_checkins, today):
 
 
 def format_course_deadlines(course, deadlines, today):
+    # Deadlines marked done (dashboard "Mark done" button -> `done: true` in
+    # deadlines.yaml) are finished, so the check-in shouldn't keep nagging
+    # about them as overdue.
+    for_course = [d for d in deadlines if d.get("course") == course["id"]]
     upcoming = sorted(
-        (d for d in deadlines if d.get("course") == course["id"]),
+        (d for d in for_course if not d.get("done")),
         key=lambda d: d["due_date"],
     )
     if not upcoming:
+        if for_course:
+            return f"{course['name']}: every deadline on file is marked done - add any new ones to deadlines.yaml."
         return f"{course['name']}: no deadlines on file - add any you know of to deadlines.yaml."
     lines = [f"{course['name']} deadlines:"]
     for d in upcoming:

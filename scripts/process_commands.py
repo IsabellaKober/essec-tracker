@@ -8,6 +8,10 @@ matching session/deadline files, or to the suggested-plan day overrides:
   - 'edit-deadline|<id>|<name>|<due_date>|<weight_pct>' update a deadline's
     fields in deadlines.yaml (any field left blank between the pipes is
     left unchanged - used by the dashboard's per-deadline edit form)
+  - 'deadline-done|<id>'                   mark a deadline completed, so it
+    stops being counted as upcoming/overdue (used by the dashboard's
+    per-deadline "Mark done" button)
+  - 'deadline-undone|<id>'                 reverse a 'deadline-done'
   - 'move|<course-id>|<today|tomorrow|day_after>' pin a course's suggested
     backlog to one of the three days, overriding the automatic placement
     build_suggested_plan() would otherwise pick (used by the dashboard's
@@ -48,6 +52,8 @@ UNCHECK_RE = re.compile(r"^\s*uncheck\s+([a-z0-9-]+)\s+([a-z0-9_]+)\s+([\d,\s]+)
 # Pipe-delimited (not space-delimited) since a deadline name has spaces.
 # Fields left empty between the pipes ('||') are left unchanged.
 EDIT_DEADLINE_RE = re.compile(r"^\s*edit-deadline\|([^|]+)\|([^|]*)\|([^|]*)\|([^|]*)\s*$", re.IGNORECASE)
+# From the dashboard's per-deadline "Mark done" / "Mark not done" button.
+DEADLINE_DONE_RE = re.compile(r"^\s*deadline-(done|undone)\|([^|]+)\s*$", re.IGNORECASE)
 MOVE_RE = re.compile(r"^\s*move\|([a-z0-9-]+)\|(today|tomorrow|day_after)\s*$", re.IGNORECASE)
 
 _yaml_rt = YAML()
@@ -215,6 +221,52 @@ def edit_deadline(deadline_id, name, due_date, weight_pct):
     return True
 
 
+def set_deadline_done(deadline_id, done):
+    """Flip one deadline's `done` flag in deadlines.yaml.
+
+    A done deadline keeps its due_date (the history is worth keeping) but
+    build_dashboard_data.py stops colouring it by urgency, so a finished
+    assignment no longer shows up as red/overdue forever. Same round-trip
+    loader as edit_deadline() so the file's comments survive.
+
+    Marking it not-done removes the keys again rather than writing
+    `done: false`, so an untouched deadline and an undone one look the same
+    in the file.
+    """
+    if not os.path.exists(DEADLINES_PATH):
+        print("deadlines.yaml not found, ignoring deadline-done command.")
+        return False
+    with open(DEADLINES_PATH, encoding="utf-8") as f:
+        doc = _yaml_rt.load(f)
+    target = None
+    for d in doc.get("deadlines") or []:
+        if d.get("id") == deadline_id:
+            target = d
+            break
+    if target is None:
+        print(f"No deadline with id '{deadline_id}', ignoring.")
+        return False
+
+    if done:
+        if target.get("done") is True:
+            print(f"Deadline '{deadline_id}' is already done, nothing to do.")
+            return False
+        target["done"] = True
+        target["done_on"] = dt.date.today().isoformat()
+    else:
+        if not target.get("done"):
+            print(f"Deadline '{deadline_id}' isn't marked done, nothing to do.")
+            return False
+        for key in ("done", "done_on"):
+            if key in target:
+                del target[key]
+
+    with open(DEADLINES_PATH, "w", encoding="utf-8") as f:
+        _yaml_rt.dump(doc, f)
+    print(f"Marked deadline '{deadline_id}' {'done' if done else 'not done'}.")
+    return True
+
+
 def load_day_overrides():
     if not os.path.exists(DAY_OVERRIDES_PATH):
         return {}
@@ -297,6 +349,13 @@ def main():
             for number in numbers:
                 if unmark_item(course_id, number, item_key):
                     any_done = True
+            continue
+
+        m = DEADLINE_DONE_RE.match(text)
+        if m:
+            deadline_id = m.group(2).strip()
+            if set_deadline_done(deadline_id, m.group(1).strip().lower() == "done"):
+                any_done = True
             continue
 
         m = EDIT_DEADLINE_RE.match(text)

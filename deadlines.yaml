@@ -2,6 +2,14 @@
 # color are computed automatically from `due_date` + `weight_pct` on every
 # run - never set those by hand.
 #
+# An entry can also carry `done: true` (plus `done_on: YYYY-MM-DD`): a
+# finished assignment keeps its row for the record but stops being coloured
+# by urgency, drops to the bottom of the dashboard list and is left out of
+# the deadline check-in reminders, instead of sitting there as "overdue"
+# forever. Both keys are normally written by the dashboard's per-deadline
+# "Mark done" button (command 'deadline-done|<id>'), but setting `done:
+# true` by hand here works exactly the same.
+#
 # Filled in 2026-09-13 from ESSEC syllabuses, the "Grading Breakdown per
 # class.docx" summary, and real session dates from the ICS calendar feed
 # (syllabuses give due dates as "Session N"; the calendar gives the actual
