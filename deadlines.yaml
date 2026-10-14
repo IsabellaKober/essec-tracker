@@ -53,77 +53,81 @@
 # ESSEC still shifts anything in that stretch.
 
 deadlines:
-  - id: finance-midterm
-    course: finance
-    name: "Finance Midterm Exam"
-    due_date: "2026-10-05"
-    weight_pct: 30
+- id: finance-midterm
+  course: finance
+  name: "Finance Midterm Exam"
+  due_date: "2026-10-21"
+  weight_pct: 30
 
-  - id: cost-budgets-midterm
-    course: cost-budgets
-    name: "Cost & Budgets Midterm Exam"
-    due_date: "2026-10-20"
-    weight_pct: 35
+- id: cost-budgets-midterm
+  course: cost-budgets
+  name: "Cost & Budgets Midterm Exam"
+  due_date: "2026-10-20"
+  weight_pct: 35
 
-  - id: intl-econ-memo1
-    course: international-economics
-    name: "“Data to Reality” Strategic Memo 1"
-    due_date: "2026-10-16"
-    weight_pct: 15
+- id: intl-econ-memo1
+  course: international-economics
+  name: "“Data to Reality” Strategic Memo 1"
+  due_date: "2026-10-16"
+  weight_pct: 15
 
-  - id: intl-econ-real-asset-pitch
-    course: international-economics
-    name: "Real Asset Market Entry Pitch (group)"
-    due_date: "2026-10-23"
-    weight_pct: 25
+- id: intl-econ-real-asset-pitch
+  course: international-economics
+  name: "Real Asset Market Entry Pitch (group)"
+  due_date: "2026-10-23"
+  weight_pct: 25
 
-  - id: intl-econ-memo2
-    course: international-economics
-    name: "“Data to Reality” Strategic Memo 2"
-    due_date: "2026-12-01"
-    weight_pct: 15
+- id: intl-econ-memo2
+  course: international-economics
+  name: "“Data to Reality” Strategic Memo 2"
+  due_date: "2026-12-01"
+  weight_pct: 15
 
-  - id: intl-econ-g20-simulation
-    course: international-economics
-    name: "G20 Summit Simulation (group)"
-    due_date: "2026-12-01"
-    weight_pct: 25
+- id: intl-econ-g20-simulation
+  course: international-economics
+  name: "G20 Summit Simulation (group)"
+  due_date: "2026-12-01"
+  weight_pct: 25
 
-  - id: mktg-group-project-part1
-    course: marketing-research
-    name: "Marketing Group Project - Part 1 (secondary research, focus group, interviews)"
-    due_date: "2026-10-01"
-    weight_pct: 25
+- id: mktg-group-project-part1
+  course: marketing-research
+  name: "Marketing Group Project - Part 1 (secondary research, focus group, interviews)"
+  due_date: "2026-10-01"
+  weight_pct: 25
 
-  - id: mktg-group-project-part2
-    course: marketing-research
-    name: "Marketing Group Project - Part 2 (hypotheses, sampling plan, Qualtrics survey)"
-    due_date: "2026-10-22"
-    weight_pct: 2.5
+  done: true
+  done_on: '2026-10-14'
+- id: mktg-group-project-part2
+  course: marketing-research
+  name: "Marketing Group Project - Part 2 (hypotheses, sampling plan, Qualtrics survey)"
+  due_date: "2026-10-22"
+  weight_pct: 2.5
 
-  - id: mktg-group-project-part3
-    course: marketing-research
-    name: "Marketing Group Project - Part 3 (peer review, analysis, recommendations)"
-    due_date: "2026-11-26"
-    weight_pct: 22.5
+- id: mktg-group-project-part3
+  course: marketing-research
+  name: "Marketing Group Project - Part 3 (peer review, analysis, recommendations)"
+  due_date: "2026-11-26"
+  weight_pct: 22.5
 
-  - id: comms-oral-assignment
-    course: communication-skills
-    name: "Individual Oral Assignment Presentation"
-    due_date: "2026-10-06"
-    weight_pct: 25
+- id: comms-oral-assignment
+  course: communication-skills
+  name: "Individual Oral Assignment Presentation"
+  due_date: "2026-10-06"
+  weight_pct: 25
 
-  - id: comms-written-assignment
-    course: communication-skills
-    name: "Individual Written Assignment"
-    due_date: "2026-11-03"
-    weight_pct: 15
+  done: true
+  done_on: '2026-10-14'
+- id: comms-written-assignment
+  course: communication-skills
+  name: "Individual Written Assignment"
+  due_date: "2026-11-03"
+  weight_pct: 15
 
-  - id: comms-group-presentation
-    course: communication-skills
-    name: "Group Presentation (Communicating with Impact and Empathy)"
-    due_date: "2026-11-24"
-    weight_pct: 40
+- id: comms-group-presentation
+  course: communication-skills
+  name: "Group Presentation (Communicating with Impact and Empathy)"
+  due_date: "2026-11-24"
+  weight_pct: 40
 
   # Proyecto pequeño - full brief, kept here so it isn't lost:
   # One 1-minute video per block, single take (no cuts), phone-recorded,
@@ -159,31 +163,35 @@ deadlines:
   # uso detrás de cada corrección. Revisa si usé bien el vocabulario
   # específico del tema. No me des una versión corregida completa del
   # texto, solo la lista de observaciones."
-  - id: spanish-video-project-1
-    course: spanish
-    name: "Proyecto pequeño - Video 1 (Comercio internacional, oferta y demanda)"
-    due_date: "2026-09-23"
-    weight_pct: 4
+- id: spanish-video-project-1
+  course: spanish
+  name: "Proyecto pequeño - Video 1 (Comercio internacional, oferta y demanda)"
+  due_date: "2026-09-23"
+  weight_pct: 4
 
-  - id: spanish-video-project-2
-    course: spanish
-    name: "Proyecto pequeño - Video 2 (Tecnología y consumo)"
-    due_date: "2026-10-14"
-    weight_pct: 4
+  done: true
+  done_on: '2026-10-14'
+- id: spanish-video-project-2
+  course: spanish
+  name: "Proyecto pequeño - Video 2 (Tecnología y consumo)"
+  due_date: "2026-10-14"
+  weight_pct: 4
 
-  - id: spanish-video-project-3
-    course: spanish
-    name: "Proyecto pequeño - Video 3 (Energía y medioambiente)"
-    due_date: "2026-11-18"
-    weight_pct: 4
+- id: spanish-video-project-3
+  course: spanish
+  name: "Proyecto pequeño - Video 3 (Energía y medioambiente)"
+  due_date: "2026-11-18"
+  weight_pct: 4
 
   # Not one of the 6 tracked courses (Field Experience / Operational
   # Internship reflection, not Business Law/Finance/Cost & Budgets/Intl
   # Econ/Marketing Research) - kept here since you asked for it by name.
   # Weight is a placeholder: no grading weight for this was found in any
   # of your files - confirm the real % and update it.
-  - id: pecha-kucha-field-experience
-    course: field-experience
-    name: "Pecha Kucha Presentation (Four-Week Field Experience)"
-    due_date: "2026-09-21"
-    weight_pct: 15  # UNCONFIRMED - replace with the real weight
+- id: pecha-kucha-field-experience
+  course: field-experience
+  name: "Pecha Kucha Presentation (Four-Week Field Experience)"
+  due_date: "2026-09-21"
+  weight_pct: 15    # UNCONFIRMED - replace with the real weight
+  done: true
+  done_on: '2026-10-14'
