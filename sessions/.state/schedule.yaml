@@ -1,4 +1,4 @@
-generated_at: '2026-10-14T21:20:52Z'
+generated_at: '2026-10-15T03:34:04Z'
 next_session:
   marketing-research:
     start: '2026-10-15T05:00:00Z'
@@ -26,15 +26,6 @@ next_session:
     end: '2026-11-04T11:15:00Z'
 breaks: []
 classes_by_date:
-  '2026-10-14':
-  - course_id: business-law
-    course_name: Business Law
-    start: '2026-10-14T00:45:00Z'
-    end: '2026-10-14T03:30:00Z'
-  - course_id: spanish
-    course_name: Spanish
-    start: '2026-10-14T08:30:00Z'
-    end: '2026-10-14T11:15:00Z'
   '2026-10-15':
   - course_id: marketing-research
     course_name: Marketing Research
@@ -49,3 +40,4 @@ classes_by_date:
     course_name: International Economics
     start: '2026-10-16T08:30:00Z'
     end: '2026-10-16T11:15:00Z'
+  '2026-10-17': []
