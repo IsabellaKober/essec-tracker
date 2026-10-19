@@ -1,4 +1,4 @@
-generated_at: '2026-10-18T22:49:31Z'
+generated_at: '2026-10-19T03:37:06Z'
 next_session:
   cost-budgets:
     start: '2026-10-20T08:30:00Z'
@@ -26,10 +26,14 @@ next_session:
     end: '2026-11-04T11:15:00Z'
 breaks: []
 classes_by_date:
-  '2026-10-18': []
   '2026-10-19': []
   '2026-10-20':
   - course_id: cost-budgets
     course_name: Cost & Budgets
     start: '2026-10-20T08:30:00Z'
     end: '2026-10-20T10:00:00Z'
+  '2026-10-21':
+  - course_id: finance
+    course_name: Finance
+    start: '2026-10-21T08:30:00Z'
+    end: '2026-10-21T10:30:00Z'
