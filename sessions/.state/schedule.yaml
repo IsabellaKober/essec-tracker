@@ -1,4 +1,4 @@
-generated_at: '2026-10-19T20:24:20Z'
+generated_at: '2026-10-20T00:07:50Z'
 next_session:
   cost-budgets:
     start: '2026-10-20T08:30:00Z'
@@ -26,7 +26,6 @@ next_session:
     end: '2026-11-04T11:15:00Z'
 breaks: []
 classes_by_date:
-  '2026-10-19': []
   '2026-10-20':
   - course_id: cost-budgets
     course_name: Cost & Budgets
@@ -37,3 +36,8 @@ classes_by_date:
     course_name: Finance
     start: '2026-10-21T08:30:00Z'
     end: '2026-10-21T10:30:00Z'
+  '2026-10-22':
+  - course_id: marketing-research
+    course_name: Marketing Research
+    start: '2026-10-22T05:00:00Z'
+    end: '2026-10-22T07:45:00Z'
