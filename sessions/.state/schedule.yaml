@@ -1,8 +1,5 @@
-generated_at: '2026-10-21T03:38:39Z'
+generated_at: '2026-10-21T11:18:49Z'
 next_session:
-  finance:
-    start: '2026-10-21T08:30:00Z'
-    end: '2026-10-21T10:30:00Z'
   marketing-research:
     start: '2026-10-22T05:00:00Z'
     end: '2026-10-22T07:45:00Z'
@@ -24,6 +21,9 @@ next_session:
   spanish:
     start: '2026-11-04T08:30:00Z'
     end: '2026-11-04T11:15:00Z'
+  finance:
+    start: '2026-11-16T08:30:00Z'
+    end: '2026-11-16T11:15:00Z'
 breaks: []
 classes_by_date:
   '2026-10-21':
