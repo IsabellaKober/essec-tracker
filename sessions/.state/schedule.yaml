@@ -1,8 +1,5 @@
-generated_at: '2026-10-23T11:09:00Z'
+generated_at: '2026-10-23T16:36:30Z'
 next_session:
-  international-economics:
-    start: '2026-10-23T08:30:00Z'
-    end: '2026-10-23T11:15:00Z'
   communication-skills:
     start: '2026-11-03T00:45:00Z'
     end: '2026-11-03T03:30:00Z'
@@ -21,6 +18,9 @@ next_session:
   chinese:
     start: '2026-11-06T02:30:00Z'
     end: '2026-11-06T04:00:00Z'
+  international-economics:
+    start: '2026-11-06T08:30:00Z'
+    end: '2026-11-06T11:15:00Z'
   finance:
     start: '2026-11-16T08:30:00Z'
     end: '2026-11-16T11:15:00Z'
