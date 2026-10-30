@@ -1,4 +1,4 @@
-generated_at: '2026-10-29T18:07:45Z'
+generated_at: '2026-10-30T00:38:52Z'
 next_session:
   communication-skills:
     start: '2026-11-03T00:45:00Z'
@@ -26,6 +26,6 @@ next_session:
     end: '2026-11-16T11:15:00Z'
 breaks: []
 classes_by_date:
-  '2026-10-29': []
   '2026-10-30': []
   '2026-10-31': []
+  '2026-11-01': []
