@@ -59,12 +59,16 @@ deadlines:
   due_date: "2026-10-21"
   weight_pct: 30
 
+  done: true
+  done_on: '2026-10-30'
 - id: cost-budgets-midterm
   course: cost-budgets
   name: "Cost & Budgets Midterm Exam"
   due_date: "2026-10-20"
   weight_pct: 35
 
+  done: true
+  done_on: '2026-10-30'
 - id: intl-econ-memo1
   course: international-economics
   name: "“Data to Reality” Strategic Memo 1"
@@ -103,6 +107,8 @@ deadlines:
   due_date: "2026-10-22"
   weight_pct: 2.5
 
+  done: true
+  done_on: '2026-10-30'
 - id: mktg-group-project-part3
   course: marketing-research
   name: "Marketing Group Project - Part 3 (peer review, analysis, recommendations)"
