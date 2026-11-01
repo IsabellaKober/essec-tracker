@@ -1,4 +1,4 @@
-generated_at: '2026-10-31T21:06:16Z'
+generated_at: '2026-11-01T04:48:11Z'
 next_session:
   communication-skills:
     start: '2026-11-03T00:45:00Z'
@@ -26,6 +26,14 @@ next_session:
     end: '2026-11-16T11:15:00Z'
 breaks: []
 classes_by_date:
-  '2026-10-31': []
   '2026-11-01': []
   '2026-11-02': []
+  '2026-11-03':
+  - course_id: communication-skills
+    course_name: Communication Skills
+    start: '2026-11-03T00:45:00Z'
+    end: '2026-11-03T03:30:00Z'
+  - course_id: cost-budgets
+    course_name: Cost & Budgets
+    start: '2026-11-03T05:00:00Z'
+    end: '2026-11-03T07:45:00Z'
