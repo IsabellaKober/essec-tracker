@@ -129,6 +129,8 @@ deadlines:
   due_date: "2026-11-03"
   weight_pct: 15
 
+  done: true
+  done_on: '2026-11-04'
 - id: comms-group-presentation
   course: communication-skills
   name: "Group Presentation (Communicating with Impact and Empathy)"
