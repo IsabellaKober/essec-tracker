@@ -1,8 +1,5 @@
-generated_at: '2026-11-05T01:19:50Z'
+generated_at: '2026-11-05T10:26:32Z'
 next_session:
-  marketing-research:
-    start: '2026-11-05T05:00:00Z'
-    end: '2026-11-05T07:45:00Z'
   chinese:
     start: '2026-11-06T02:30:00Z'
     end: '2026-11-06T04:00:00Z'
@@ -24,6 +21,9 @@ next_session:
   finance:
     start: '2026-11-16T08:30:00Z'
     end: '2026-11-16T11:15:00Z'
+  marketing-research:
+    start: '2026-11-26T05:00:00Z'
+    end: '2026-11-26T07:45:00Z'
 breaks: []
 classes_by_date:
   '2026-11-05':
