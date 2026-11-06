@@ -1,4 +1,4 @@
-generated_at: '2026-11-05T19:37:14Z'
+generated_at: '2026-11-06T01:24:24Z'
 next_session:
   chinese:
     start: '2026-11-06T02:30:00Z'
@@ -26,11 +26,6 @@ next_session:
     end: '2026-11-26T07:45:00Z'
 breaks: []
 classes_by_date:
-  '2026-11-05':
-  - course_id: marketing-research
-    course_name: Marketing Research
-    start: '2026-11-05T05:00:00Z'
-    end: '2026-11-05T07:45:00Z'
   '2026-11-06':
   - course_id: chinese
     course_name: Chinese
@@ -41,3 +36,4 @@ classes_by_date:
     start: '2026-11-06T08:30:00Z'
     end: '2026-11-06T11:15:00Z'
   '2026-11-07': []
+  '2026-11-08': []
