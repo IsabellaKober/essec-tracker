@@ -1,4 +1,4 @@
-generated_at: '2026-11-08T19:22:18Z'
+generated_at: '2026-11-09T00:35:56Z'
 next_session:
   communication-skills:
     start: '2026-11-10T00:45:00Z'
@@ -24,9 +24,14 @@ next_session:
   marketing-research:
     start: '2026-11-26T05:00:00Z'
     end: '2026-11-26T07:45:00Z'
-breaks: []
+breaks:
+- start: '2026-11-10T03:30:00Z'
+  end: '2026-11-10T05:00:00Z'
+  after_course_id: communication-skills
+  after_course_name: Communication Skills
+  before_course_id: cost-budgets
+  before_course_name: Cost & Budgets
 classes_by_date:
-  '2026-11-08': []
   '2026-11-09': []
   '2026-11-10':
   - course_id: communication-skills
@@ -37,3 +42,8 @@ classes_by_date:
     course_name: Cost & Budgets
     start: '2026-11-10T05:00:00Z'
     end: '2026-11-10T07:45:00Z'
+  '2026-11-11':
+  - course_id: spanish
+    course_name: Spanish
+    start: '2026-11-11T00:45:00Z'
+    end: '2026-11-11T03:30:00Z'
