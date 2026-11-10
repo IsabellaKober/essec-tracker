@@ -1,11 +1,11 @@
-generated_at: '2026-11-10T06:17:06Z'
+generated_at: '2026-11-10T16:49:44Z'
 next_session:
-  cost-budgets:
-    start: '2026-11-10T05:00:00Z'
-    end: '2026-11-10T07:45:00Z'
   spanish:
     start: '2026-11-11T00:45:00Z'
     end: '2026-11-11T03:30:00Z'
+  cost-budgets:
+    start: '2026-11-12T05:00:00Z'
+    end: '2026-11-12T07:45:00Z'
   chinese:
     start: '2026-11-13T02:30:00Z'
     end: '2026-11-13T04:00:00Z'
