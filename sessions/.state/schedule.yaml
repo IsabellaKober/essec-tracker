@@ -1,8 +1,5 @@
-generated_at: '2026-11-10T22:54:58Z'
+generated_at: '2026-11-11T05:01:38Z'
 next_session:
-  spanish:
-    start: '2026-11-11T00:45:00Z'
-    end: '2026-11-11T03:30:00Z'
   cost-budgets:
     start: '2026-11-12T05:00:00Z'
     end: '2026-11-12T07:45:00Z'
@@ -21,20 +18,14 @@ next_session:
   business-law:
     start: '2026-11-17T05:00:00Z'
     end: '2026-11-17T07:45:00Z'
+  spanish:
+    start: '2026-11-18T08:30:00Z'
+    end: '2026-11-18T11:15:00Z'
   marketing-research:
     start: '2026-11-26T05:00:00Z'
     end: '2026-11-26T07:45:00Z'
 breaks: []
 classes_by_date:
-  '2026-11-10':
-  - course_id: communication-skills
-    course_name: Communication Skills
-    start: '2026-11-10T00:45:00Z'
-    end: '2026-11-10T03:30:00Z'
-  - course_id: cost-budgets
-    course_name: Cost & Budgets
-    start: '2026-11-10T05:00:00Z'
-    end: '2026-11-10T07:45:00Z'
   '2026-11-11':
   - course_id: spanish
     course_name: Spanish
@@ -45,3 +36,12 @@ classes_by_date:
     course_name: Cost & Budgets
     start: '2026-11-12T05:00:00Z'
     end: '2026-11-12T07:45:00Z'
+  '2026-11-13':
+  - course_id: chinese
+    course_name: Chinese
+    start: '2026-11-13T02:30:00Z'
+    end: '2026-11-13T04:00:00Z'
+  - course_id: international-economics
+    course_name: International Economics
+    start: '2026-11-13T08:30:00Z'
+    end: '2026-11-13T11:15:00Z'
