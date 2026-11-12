@@ -1,8 +1,5 @@
-generated_at: '2026-11-12T06:05:33Z'
+generated_at: '2026-11-12T17:24:04Z'
 next_session:
-  cost-budgets:
-    start: '2026-11-12T05:00:00Z'
-    end: '2026-11-12T07:45:00Z'
   chinese:
     start: '2026-11-13T02:30:00Z'
     end: '2026-11-13T04:00:00Z'
@@ -21,6 +18,9 @@ next_session:
   spanish:
     start: '2026-11-18T08:30:00Z'
     end: '2026-11-18T11:15:00Z'
+  cost-budgets:
+    start: '2026-11-24T05:00:00Z'
+    end: '2026-11-24T07:45:00Z'
   marketing-research:
     start: '2026-11-26T05:00:00Z'
     end: '2026-11-26T07:45:00Z'
