@@ -1,4 +1,4 @@
-generated_at: '2026-11-11T21:45:51Z'
+generated_at: '2026-11-12T06:05:33Z'
 next_session:
   cost-budgets:
     start: '2026-11-12T05:00:00Z'
@@ -26,11 +26,6 @@ next_session:
     end: '2026-11-26T07:45:00Z'
 breaks: []
 classes_by_date:
-  '2026-11-11':
-  - course_id: spanish
-    course_name: Spanish
-    start: '2026-11-11T00:45:00Z'
-    end: '2026-11-11T03:30:00Z'
   '2026-11-12':
   - course_id: cost-budgets
     course_name: Cost & Budgets
@@ -45,3 +40,4 @@ classes_by_date:
     course_name: International Economics
     start: '2026-11-13T08:30:00Z'
     end: '2026-11-13T11:15:00Z'
+  '2026-11-14': []
