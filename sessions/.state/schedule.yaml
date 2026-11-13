@@ -1,8 +1,5 @@
-generated_at: '2026-11-12T23:16:03Z'
+generated_at: '2026-11-13T05:28:32Z'
 next_session:
-  chinese:
-    start: '2026-11-13T02:30:00Z'
-    end: '2026-11-13T04:00:00Z'
   international-economics:
     start: '2026-11-13T08:30:00Z'
     end: '2026-11-13T11:15:00Z'
@@ -24,13 +21,11 @@ next_session:
   marketing-research:
     start: '2026-11-26T05:00:00Z'
     end: '2026-11-26T07:45:00Z'
+  chinese:
+    start: '2026-11-27T02:30:00Z'
+    end: '2026-11-27T04:00:00Z'
 breaks: []
 classes_by_date:
-  '2026-11-12':
-  - course_id: cost-budgets
-    course_name: Cost & Budgets
-    start: '2026-11-12T05:00:00Z'
-    end: '2026-11-12T07:45:00Z'
   '2026-11-13':
   - course_id: chinese
     course_name: Chinese
@@ -41,3 +36,4 @@ classes_by_date:
     start: '2026-11-13T08:30:00Z'
     end: '2026-11-13T11:15:00Z'
   '2026-11-14': []
+  '2026-11-15': []
