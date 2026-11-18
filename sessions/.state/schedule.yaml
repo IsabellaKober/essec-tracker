@@ -1,11 +1,11 @@
-generated_at: '2026-11-18T02:45:03Z'
+generated_at: '2026-11-18T11:14:06Z'
 next_session:
-  finance:
-    start: '2026-11-18T00:45:00Z'
-    end: '2026-11-18T03:30:00Z'
   spanish:
     start: '2026-11-18T08:30:00Z'
     end: '2026-11-18T11:15:00Z'
+  finance:
+    start: '2026-11-23T08:30:00Z'
+    end: '2026-11-23T11:15:00Z'
   communication-skills:
     start: '2026-11-24T00:45:00Z'
     end: '2026-11-24T03:30:00Z'
