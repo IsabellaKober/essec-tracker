@@ -1,4 +1,4 @@
-generated_at: '2026-11-17T18:13:37Z'
+generated_at: '2026-11-18T02:45:03Z'
 next_session:
   finance:
     start: '2026-11-18T00:45:00Z'
@@ -26,15 +26,6 @@ next_session:
     end: '2026-11-27T11:15:00Z'
 breaks: []
 classes_by_date:
-  '2026-11-17':
-  - course_id: communication-skills
-    course_name: Communication Skills
-    start: '2026-11-17T00:45:00Z'
-    end: '2026-11-17T03:30:00Z'
-  - course_id: business-law
-    course_name: Business Law
-    start: '2026-11-17T05:00:00Z'
-    end: '2026-11-17T07:45:00Z'
   '2026-11-18':
   - course_id: finance
     course_name: Finance
@@ -45,3 +36,4 @@ classes_by_date:
     start: '2026-11-18T08:30:00Z'
     end: '2026-11-18T11:15:00Z'
   '2026-11-19': []
+  '2026-11-20': []
