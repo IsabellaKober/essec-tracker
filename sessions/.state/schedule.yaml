@@ -1,4 +1,4 @@
-generated_at: '2026-11-18T20:04:18Z'
+generated_at: '2026-11-19T02:19:12Z'
 next_session:
   finance:
     start: '2026-11-23T08:30:00Z'
@@ -26,14 +26,6 @@ next_session:
     end: '2026-11-27T11:15:00Z'
 breaks: []
 classes_by_date:
-  '2026-11-18':
-  - course_id: finance
-    course_name: Finance
-    start: '2026-11-18T00:45:00Z'
-    end: '2026-11-18T03:30:00Z'
-  - course_id: spanish
-    course_name: Spanish
-    start: '2026-11-18T08:30:00Z'
-    end: '2026-11-18T11:15:00Z'
   '2026-11-19': []
   '2026-11-20': []
+  '2026-11-21': []
