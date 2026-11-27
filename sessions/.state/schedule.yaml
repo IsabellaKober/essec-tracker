@@ -1,14 +1,14 @@
-generated_at: '2026-11-27T07:07:25Z'
+generated_at: '2026-11-27T18:43:11Z'
 next_session:
-  international-economics:
-    start: '2026-11-27T08:30:00Z'
-    end: '2026-11-27T11:15:00Z'
   finance:
     start: '2026-11-30T08:30:00Z'
     end: '2026-11-30T11:15:00Z'
   communication-skills:
     start: '2026-12-01T00:45:00Z'
     end: '2026-12-01T03:30:00Z'
+  international-economics:
+    start: '2026-12-01T08:30:00Z'
+    end: '2026-12-01T11:15:00Z'
   marketing-research:
     start: '2026-12-07T08:30:00Z'
     end: '2026-12-07T10:30:00Z'
