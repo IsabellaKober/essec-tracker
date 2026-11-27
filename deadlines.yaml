@@ -75,18 +75,24 @@ deadlines:
   due_date: "2026-10-16"
   weight_pct: 15
 
+  done: true
+  done_on: '2026-11-27'
 - id: intl-econ-real-asset-pitch
   course: international-economics
   name: "Real Asset Market Entry Pitch (group)"
   due_date: "2026-10-23"
   weight_pct: 25
 
+  done: true
+  done_on: '2026-11-27'
 - id: intl-econ-memo2
   course: international-economics
   name: "“Data to Reality” Strategic Memo 2"
   due_date: "2026-12-01"
   weight_pct: 15
 
+  done: true
+  done_on: '2026-11-27'
 - id: intl-econ-g20-simulation
   course: international-economics
   name: "G20 Summit Simulation (group)"
@@ -115,6 +121,8 @@ deadlines:
   due_date: "2026-11-26"
   weight_pct: 22.5
 
+  done: true
+  done_on: '2026-11-27'
 - id: comms-oral-assignment
   course: communication-skills
   name: "Individual Oral Assignment Presentation"
@@ -171,6 +179,8 @@ deadlines:
   # uso detrás de cada corrección. Revisa si usé bien el vocabulario
   # específico del tema. No me des una versión corregida completa del
   # texto, solo la lista de observaciones."
+  done: true
+  done_on: '2026-11-27'
 - id: spanish-video-project-1
   course: spanish
   name: "Proyecto pequeño - Video 1 (Comercio internacional, oferta y demanda)"
@@ -185,6 +195,8 @@ deadlines:
   due_date: "2026-10-14"
   weight_pct: 4
 
+  done: true
+  done_on: '2026-11-27'
 - id: spanish-video-project-3
   course: spanish
   name: "Proyecto pequeño - Video 3 (Energía y medioambiente)"
@@ -196,6 +208,8 @@ deadlines:
   # Econ/Marketing Research) - kept here since you asked for it by name.
   # Weight is a placeholder: no grading weight for this was found in any
   # of your files - confirm the real % and update it.
+  done: true
+  done_on: '2026-11-27'
 - id: pecha-kucha-field-experience
   course: field-experience
   name: "Pecha Kucha Presentation (Four-Week Field Experience)"

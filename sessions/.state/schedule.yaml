@@ -1,8 +1,5 @@
-generated_at: '2026-11-26T21:21:38Z'
+generated_at: '2026-11-27T07:07:25Z'
 next_session:
-  chinese:
-    start: '2026-11-27T02:30:00Z'
-    end: '2026-11-27T04:00:00Z'
   international-economics:
     start: '2026-11-27T08:30:00Z'
     end: '2026-11-27T11:15:00Z'
@@ -12,13 +9,17 @@ next_session:
   communication-skills:
     start: '2026-12-01T00:45:00Z'
     end: '2026-12-01T03:30:00Z'
+  marketing-research:
+    start: '2026-12-07T08:30:00Z'
+    end: '2026-12-07T10:30:00Z'
+  business-law:
+    start: '2026-12-08T05:00:00Z'
+    end: '2026-12-08T06:30:00Z'
+  cost-budgets:
+    start: '2026-12-09T08:30:00Z'
+    end: '2026-12-09T10:30:00Z'
 breaks: []
 classes_by_date:
-  '2026-11-26':
-  - course_id: marketing-research
-    course_name: Marketing Research
-    start: '2026-11-26T05:00:00Z'
-    end: '2026-11-26T07:45:00Z'
   '2026-11-27':
   - course_id: chinese
     course_name: Chinese
@@ -29,3 +30,4 @@ classes_by_date:
     start: '2026-11-27T08:30:00Z'
     end: '2026-11-27T11:15:00Z'
   '2026-11-28': []
+  '2026-11-29': []
